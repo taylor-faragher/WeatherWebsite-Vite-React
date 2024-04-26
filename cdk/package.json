@@ -1,0 +1,19 @@
+{
+    "name": "weatherwebsite-cdk",
+    "version": "1.0.0",
+    "description": "Infrastructure code to host this website in AWS",
+    "license": "UNLICENSED",
+    "scripts": {
+        "cdk": "cdk",
+        "deploy": "cdk deploy"
+    },
+    "devDependencies": {
+        "@types/node": "*",
+        "aws-cdk": "*",
+        "typescript": "*"
+    },
+    "dependencies": {
+        "aws-cdk-lib": "*",
+        "constructs": "*"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "app": "npx ts-node --prefer-ts-exts index.ts",
+    "context": {
+        "domain": "taylorsweatherwebsite.com",
+        "subdomain": "",
+        "requireApproval": "never"
+    }
+}

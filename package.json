@@ -1,0 +1,40 @@
+{
+  "name": "taylors-weather-website-using-vite-and-react",
+  "private": true,
+  "version": "1.0",
+  "description": "A website where Taylor can try out React stuff and frontend experiments",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --max-warnings 0",
+    "preview": "vite preview",
+    "format": "prettier --write \"./**\"",
+    "deploy": "yarn build && cd cdk && yarn cdk deploy",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.132.1",
+    "constructs": "^10.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "6.22.3",
+    "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.26",
+    "@types/react": "^18.2.59",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react": "^7.34.0",
+    "prettier": "^2.6.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  }
+}
