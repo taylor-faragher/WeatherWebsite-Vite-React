@@ -14,6 +14,7 @@ export const useWeatherApi = (zipCode?: string): {data: WeatherItem | undefined;
         const retrieveWeather = async () => {
             await fetchWeather(method, zipCode)
                 ?.then(content => {
+                    console.log('content: ', content);
                     setData(mapZipCodeData(content));
                     setLoaded(true);
                 })

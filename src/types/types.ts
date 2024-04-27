@@ -3,6 +3,12 @@ export type WeatherItem = {
     windSpeed: number;
     description: string;
     majorCity: string;
+    image: FullImage;
+};
+
+export type FullImage = {
+    image: string;
+    imageAltText: string;
 };
 
 type WeatherDescriptors = {
@@ -41,7 +47,7 @@ type SystemItem = {
 
 export type WeatherResults = {
     coord: GeolocationCoordinates;
-    weather: WeatherDescriptors;
+    weather: [WeatherDescriptors];
     base: string;
     main: WeatherInfo;
     visibility: number;
