@@ -2,6 +2,7 @@ import {useSearchParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {useWeatherApi} from '../../hooks/useWeatherApi';
 import {useState} from 'react';
+import ReturnHomeButton from '../shared/ReturnHomeButton';
 
 const ResultsSection = styled.div`
     display: flex;
@@ -50,6 +51,7 @@ const ResultPage = () => {
                         </div>
                     )}
                 </WeatherResultsSection>
+                <ReturnHomeButton />
             </ResultsSection>
         </>
     );
