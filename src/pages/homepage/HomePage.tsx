@@ -1,7 +1,8 @@
 import {ChangeEvent, useState} from 'react';
 import styled from 'styled-components';
-import {validateZipCode} from '../../utils/validateZipCode';
+import {validateInput} from '../../utils/validateInput';
 import {useNavigate} from 'react-router-dom';
+import {validateZipCode} from '../../utils/validateZipCode';
 
 const ZipCodeColumn = styled.div`
     display: flex;
@@ -29,6 +30,10 @@ const ZipCodeInput = styled.input`
     transition: border-color 0.2s;
 `;
 
+const StyledErrorMessage = styled.p`
+    font-size: 1.7rem;
+`;
+
 const ZipCodeButtonSearch = styled.button`
     min-height: 50px;
     width: 150px;
@@ -46,13 +51,20 @@ const ZipCodeButtonSearch = styled.button`
 
 const HomePage = () => {
     const [zipCode, setZipCode] = useState('');
+    const [displayError, setDisplayError] = useState(false);
     const navigate = useNavigate();
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setZipCode(validateZipCode(event));
+        setZipCode(validateInput(event));
     };
 
-    const getWeather = () => {
-        navigate(`/result?zipCode=${zipCode}`);
+    const getWeather = (zipCode: string) => {
+        if (validateZipCode(zipCode)) {
+            console.log('validation ', validateZipCode(zipCode));
+            setDisplayError(true);
+        } else {
+            console.log('validation ', validateZipCode(zipCode));
+            navigate(`/result?zipCode=${zipCode}`);
+        }
     };
 
     return (
@@ -65,9 +77,12 @@ const HomePage = () => {
                 placeholder='Enter 5-Digit Zip Code'
                 onChange={event => handleChange(event)}
             ></ZipCodeInput>
-            <div>
-                <ZipCodeButtonSearch onClick={getWeather}>Search</ZipCodeButtonSearch>
-            </div>
+            {displayError && (
+                <div>
+                    <StyledErrorMessage>Please Enter a Valid Zip Code.</StyledErrorMessage>
+                </div>
+            )}
+            <ZipCodeButtonSearch onClick={() => getWeather(zipCode)}>Search</ZipCodeButtonSearch>
         </ZipCodeColumn>
     );
 };
