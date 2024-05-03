@@ -59,10 +59,8 @@ const HomePage = () => {
 
     const getWeather = (zipCode: string) => {
         if (validateZipCode(zipCode)) {
-            console.log('validation ', validateZipCode(zipCode));
             setDisplayError(true);
         } else {
-            console.log('validation ', validateZipCode(zipCode));
             navigate(`/result?zipCode=${zipCode}`);
         }
     };
