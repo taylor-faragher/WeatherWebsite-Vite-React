@@ -42,16 +42,18 @@ const ResultPage = () => {
         <>
             <ResultsSection>
                 <ZipCodeTitle>Weather Results for {zipCode}</ZipCodeTitle>
-                <WeatherResultsSection>
-                    {loaded && (
-                        <div>
-                            <WeatherPic src={weatherPic}></WeatherPic>
-                            <div>{currentTemp} &deg;F</div>
-                            <div>{description}</div>
-                        </div>
-                    )}
-                </WeatherResultsSection>
-                <ReturnHomeButton />
+                {loaded && (
+                    <>
+                        <WeatherResultsSection>
+                            <div>
+                                <WeatherPic src={weatherPic}></WeatherPic>
+                                <div>{currentTemp} &deg;F</div>
+                                <div>{description}</div>
+                            </div>
+                        </WeatherResultsSection>
+                        <ReturnHomeButton />
+                    </>
+                )}
             </ResultsSection>
         </>
     );
