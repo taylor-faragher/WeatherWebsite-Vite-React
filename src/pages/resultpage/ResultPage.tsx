@@ -36,7 +36,7 @@ const ResultPage = () => {
     const {data, loaded} = useWeatherApi(zipCode);
     const currentTemp = Math.round(data?.currentTemp as number);
     const description = data?.description as string;
-    const weatherPic = `/public/assets/${data?.image.image}`;
+    const weatherPic = `/assets/${data?.image.image}`;
 
     return (
         <>
