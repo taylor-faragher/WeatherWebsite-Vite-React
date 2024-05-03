@@ -1,11 +1,12 @@
 import {WeatherItem, WeatherResults} from '../types/types';
-import {getWeatherPic} from './getWeatherPic';
+import {getPicAltText} from './getPicAltText';
 
 export const mapZipCodeData = (data: WeatherResults): WeatherItem | undefined => {
     if (!data) {
         return;
     }
-    const weatherPic = getWeatherPic(data.weather[0].description);
+    const picName = data.weather[0].icon;
+    const weatherPic = {image: `${picName}.png`, imageAltText: getPicAltText(picName)};
 
     return {
         currentTemp: data?.main.temp,
