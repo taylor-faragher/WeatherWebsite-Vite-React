@@ -46,7 +46,7 @@ const ResultPage = () => {
                     <>
                         <WeatherResultsSection>
                             <div>
-                                <WeatherPic src={weatherPic}></WeatherPic>
+                                <WeatherPic src={weatherPic} alt={data?.image.imageAltText}></WeatherPic>
                                 <div>{currentTemp} &deg;F</div>
                                 <div>{description}</div>
                             </div>
