@@ -9,6 +9,7 @@ export const fetchWeather = async (method: string, zipCode?: string): Promise<We
     if (method == WeatherMethods.cityLookup) {
         url = `https://api.taylorsweatherapi.com/`;
     }
+
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
@@ -18,6 +19,6 @@ export const fetchWeather = async (method: string, zipCode?: string): Promise<We
     if (!response.ok) {
         throw new Error(JSON.stringify(data.message));
     }
-    const weatherResponse: WeatherResults = await response.json();
-    return weatherResponse;
+
+    return data;
 };
