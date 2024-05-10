@@ -80,7 +80,9 @@ const HomePage = () => {
                     <StyledErrorMessage>Please Enter a Valid Zip Code.</StyledErrorMessage>
                 </div>
             )}
-            <ZipCodeButtonSearch onClick={() => getWeather(zipCode)}>Search</ZipCodeButtonSearch>
+            <ZipCodeButtonSearch type='submit' onClick={() => getWeather(zipCode)}>
+                Search
+            </ZipCodeButtonSearch>
         </ZipCodeColumn>
     );
 };
