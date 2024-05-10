@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
 import {validateInput} from '../../utils/validateInput';
 import {useNavigate} from 'react-router-dom';
@@ -16,6 +16,12 @@ const Title = styled.h1`
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
+`;
+
+const ZipCodeForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const ZipCodeInput = styled.input`
@@ -53,13 +59,14 @@ const HomePage = () => {
     const [zipCode, setZipCode] = useState('');
     const [displayError, setDisplayError] = useState(false);
     const navigate = useNavigate();
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = event => {
         setZipCode(validateInput(event));
     };
 
-    const getWeather = (zipCode: string) => {
+    const getWeather = event => {
         if (validateZipCode(zipCode)) {
             setDisplayError(true);
+            event.preventDefault();
         } else {
             navigate(`/result?zipCode=${zipCode}`);
         }
@@ -68,21 +75,23 @@ const HomePage = () => {
     return (
         <ZipCodeColumn>
             <Title>Welcome! Get your current weather below!</Title>
-            <ZipCodeInput
-                maxLength={5}
-                value={zipCode}
-                id='zipCode'
-                placeholder='Enter 5-Digit Zip Code'
-                onChange={event => handleChange(event)}
-            ></ZipCodeInput>
-            {displayError && (
-                <div>
-                    <StyledErrorMessage>Please Enter a Valid Zip Code.</StyledErrorMessage>
-                </div>
-            )}
-            <ZipCodeButtonSearch type='submit' onClick={() => getWeather(zipCode)}>
-                Search
-            </ZipCodeButtonSearch>
+            <ZipCodeForm onSubmit={e => getWeather(e)}>
+                <ZipCodeInput
+                    maxLength={5}
+                    value={zipCode}
+                    id='zipCode'
+                    placeholder='Enter 5-Digit Zip Code'
+                    onChange={event => handleChange(event)}
+                ></ZipCodeInput>
+                {displayError && (
+                    <div>
+                        <StyledErrorMessage>Please Enter a Valid Zip Code.</StyledErrorMessage>
+                    </div>
+                )}
+                <ZipCodeButtonSearch type='submit' onClick={e => getWeather(e)}>
+                    Search
+                </ZipCodeButtonSearch>
+            </ZipCodeForm>
         </ZipCodeColumn>
     );
 };
