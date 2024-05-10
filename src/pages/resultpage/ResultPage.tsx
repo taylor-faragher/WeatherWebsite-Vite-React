@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {useWeatherApi} from '../../hooks/useWeatherApi';
 import {useState} from 'react';
 import ReturnHomeButton from '../shared/ReturnHomeButton';
+import {Loader} from '../shared/Loader';
 
 const ResultsSection = styled.div`
     display: flex;
@@ -52,6 +53,11 @@ const ResultPage = () => {
                         </WeatherResultsSection>
                         <ReturnHomeButton />
                     </>
+                )}
+                {!loaded && (
+                    <div>
+                        <Loader />
+                    </div>
                 )}
             </ResultsSection>
         </>
