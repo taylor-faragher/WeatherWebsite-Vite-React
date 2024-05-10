@@ -17,8 +17,8 @@ export const useWeatherApi = (zipCode?: string): {data: WeatherItem | undefined;
                     setData(mapZipCodeData(content));
                     setLoaded(true);
                 })
-                .catch((e: Error) => {
-                    console.log(`There was an error getting the weather: ${e}`);
+                .catch(e => {
+                    console.log(e);
                     navigate('/error');
                 });
         };

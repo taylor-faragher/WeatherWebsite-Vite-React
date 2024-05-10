@@ -13,9 +13,10 @@ export const fetchWeather = async (method: string, zipCode?: string): Promise<We
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     const response: Response = await fetch(url);
+    const data = await response.json();
 
     if (!response.ok) {
-        throw new Error();
+        throw new Error(JSON.stringify(data.message));
     }
     const weatherResponse: WeatherResults = await response.json();
     return weatherResponse;
