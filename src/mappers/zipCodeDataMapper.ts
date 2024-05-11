@@ -1,5 +1,5 @@
 import {WeatherItem, WeatherResults} from '../types/types';
-import {capitalizeDescription} from '../utils/capitalizeDescription';
+import {capitalizeFirstLetter} from '../utils/capitalizeFirstLetter';
 import {getPicAltText} from './getPicAltText';
 
 export const mapZipCodeData = (data: WeatherResults): WeatherItem | undefined => {
@@ -8,12 +8,12 @@ export const mapZipCodeData = (data: WeatherResults): WeatherItem | undefined =>
     }
     const picName = data.weather[0].icon;
     const weatherPic = {image: `${picName}.png`, imageAltText: getPicAltText(picName)};
-    const description = capitalizeDescription(data.weather[0].description as string);
+    const description = capitalizeFirstLetter(data.weather[0].description as string);
 
     return {
         currentTemp: data?.main.temp,
         windSpeed: data?.wind.speed as number,
-        description: description,
+        description: description as string,
         majorCity: data.name as string,
         image: weatherPic,
     };

@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import styled from 'styled-components';
-import {validateInput} from '../../utils/validateInput';
+import {validateZipCodeInput} from '../../utils/validateZipCodeInput';
 import {useNavigate} from 'react-router-dom';
-import {validateZipCode} from '../../utils/validateZipCode';
+import {validateZipCodeLength} from '../../utils/validateZipCodeLength';
 
 const ZipCodeColumn = styled.div`
     display: flex;
@@ -60,11 +60,11 @@ const HomePage = () => {
     const [displayError, setDisplayError] = useState(false);
     const navigate = useNavigate();
     const handleChange = event => {
-        setZipCode(validateInput(event));
+        setZipCode(validateZipCodeInput(event));
     };
 
     const getWeather = event => {
-        if (validateZipCode(zipCode)) {
+        if (validateZipCodeLength(zipCode)) {
             setDisplayError(true);
             event.preventDefault();
         } else {
