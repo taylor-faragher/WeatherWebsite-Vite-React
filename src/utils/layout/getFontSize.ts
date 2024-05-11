@@ -1,9 +1,3 @@
-const fontWeights: Record<string, number> = {
-    feather: 300,
-    base: 400,
-    heavy: 700,
-};
-
 const fontSizes: Record<number, string> = {
     0: '0.75rem',
     1: '0.875rem',
@@ -16,9 +10,6 @@ const fontSizes: Record<number, string> = {
     8: '3.75rem',
 };
 
-export const getFontWeight = (weight: string): number => {
-    return fontWeights[weight];
-};
 export const getFontSize = (size: number): string => {
     return fontSizes[size];
 };
