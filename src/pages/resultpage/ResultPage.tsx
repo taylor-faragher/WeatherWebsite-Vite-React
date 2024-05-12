@@ -4,30 +4,50 @@ import {useWeatherApi} from '../../hooks/useWeatherApi';
 import {useState} from 'react';
 import ReturnHomeButton from '../shared/ReturnHomeButton';
 import {Loader} from '../shared/Loader';
+import {breakPoints} from '../../utils/layout/breakpoints';
+import {getFontSize} from '../../utils/layout/getFontSize';
 
 const ResultsSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 50vh;
+    height: 100vh;
 `;
 
 const ZipCodeTitle = styled.h1`
     text-align: center;
-    font-size: 5rem;
-    width: 700px;
-    height: 100px;
+    @media screen and ${breakPoints.mobileBig} {
+        font-size: ${getFontSize(12)};
+        width: 700px;
+        height: 400px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(9)};
+        height: 100px;
+    }
 `;
 
 const WeatherResultsSection = styled.div`
-    font-size: 5rem;
     text-align: center;
+    @media screen and ${breakPoints.mobileBig} {
+        font-size: ${getFontSize(12)};
+    }
+
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(9)};
+    }
 `;
 
 const WeatherPic = styled.img`
     align-self: center;
-    width: 200px;
-    height: 200px;
+    @media screen and ${breakPoints.mobileBig} {
+        width: 500px;
+        height: 500px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        width: 200px;
+        height: 200px;
+    }
 `;
 
 const ResultPage = () => {

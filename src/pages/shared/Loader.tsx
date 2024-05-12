@@ -1,8 +1,20 @@
+import styled from 'styled-components';
+
 const colors = ['#306cce', '#72a1ed'];
+
+const StyledSvg = styled.svg`
+    padding-top: 50px;
+`;
 
 export const Loader = () => {
     return (
-        <svg width={80} height={80} viewBox='0 0 350 350' aria-label={'hourglass-loading'} data-testid='loader-svg'>
+        <StyledSvg
+            width={80}
+            height={80}
+            viewBox='0 0 350 350'
+            aria-label={'hourglass-loading'}
+            data-testid='loader-svg'
+        >
             <animateTransform
                 attributeName='transform'
                 type='rotate'
@@ -68,6 +80,6 @@ export const Loader = () => {
                     />
                 </g>
             </g>
-        </svg>
+        </StyledSvg>
     );
 };
