@@ -49,7 +49,6 @@ const ZipCodeForm = styled.form`
 `;
 
 const ZipCodeInput = styled.input`
-    max-width: 400px;
     border: 0;
     border-bottom: 2px solid #9b9b9b;
     outline: 0;
