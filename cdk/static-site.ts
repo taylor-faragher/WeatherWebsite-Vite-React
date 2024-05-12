@@ -40,7 +40,7 @@ export class StaticSite extends Construct {
             publicReadAccess: false,
             blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
             removalPolicy: RemovalPolicy.DESTROY,
-            autoDeleteObjects: true, 
+            autoDeleteObjects: true,
         });
 
         // Grant access to cloudfront
