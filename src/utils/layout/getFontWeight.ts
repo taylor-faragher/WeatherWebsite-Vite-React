@@ -5,5 +5,6 @@ const fontWeights: Record<string, number> = {
 };
 
 export const getFontWeight = (weight: string): number => {
+    if (!weight) return 400;
     return fontWeights[weight]!;
 };

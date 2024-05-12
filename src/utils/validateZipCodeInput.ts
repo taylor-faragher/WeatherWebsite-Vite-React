@@ -1,6 +1,4 @@
-import {ChangeEvent} from 'react';
-
-export const validateZipCodeInput = (event: ChangeEvent<HTMLInputElement>) => {
+export const validateZipCodeInput = event => {
     const nondigit = /[^\d]/g;
     return event.target.value.replace(nondigit, '');
 };
