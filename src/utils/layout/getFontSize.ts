@@ -15,5 +15,5 @@ const fontSizes: Record<number, string> = {
 };
 
 export const getFontSize = (size: number): string => {
-    return fontSizes[size];
+    return fontSizes[size]!;
 };

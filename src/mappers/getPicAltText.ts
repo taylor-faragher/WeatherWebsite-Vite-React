@@ -19,5 +19,5 @@ export const getPicAltText = (pic: string): string => {
         '13n': 'snowflake',
         '50n': 'horizontal lines indicating fog',
     };
-    return map[pic];
+    return map[pic]!;
 };
