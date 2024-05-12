@@ -8,6 +8,10 @@ const fontSizes: Record<number, string> = {
     6: '2.5rem',
     7: '3rem',
     8: '3.75rem',
+    9: '4.50rem',
+    10: '6rem',
+    11: '7rem',
+    12: '10rem',
 };
 
 export const getFontSize = (size: number): string => {
