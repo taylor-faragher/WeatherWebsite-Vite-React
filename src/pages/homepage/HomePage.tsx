@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import {validateZipCodeInput} from '../../utils/validateZipCodeInput';
 import {useNavigate} from 'react-router-dom';
 import {validateZipCodeLength} from '../../utils/validateZipCodeLength';
+import {breakPoints} from '../../utils/layout/breakpoints';
+import {getFontSize} from '../../utils/layout/getFontSize';
+import {getFontWeight} from '../../utils/layout/getFontWeight';
 
 const ZipCodeColumn = styled.div`
     display: flex;
@@ -12,10 +15,31 @@ const ZipCodeColumn = styled.div`
     height: 100vh;
 `;
 
+const WelcomeTitle = styled.h1`
+    font-weight: ${getFontWeight('heavy')};
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 0;
+
+    @media screen and ${breakPoints.mobileBig} {
+        font-size: ${getFontSize(12)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(9)};
+    }
+`;
+
 const Title = styled.h1`
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
+
+    @media screen and ${breakPoints.mobileBig} {
+        font-size: ${getFontSize(11)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(7)};
+    }
 `;
 
 const ZipCodeForm = styled.form`
@@ -25,33 +49,54 @@ const ZipCodeForm = styled.form`
 `;
 
 const ZipCodeInput = styled.input`
-    max-width: 300px;
+    max-width: 400px;
     border: 0;
     border-bottom: 2px solid #9b9b9b;
     outline: 0;
-    font-size: 1.7rem;
     padding: 7px 0;
     text-align: center;
     background: transparent;
     transition: border-color 0.2s;
+
+    @media screen and ${breakPoints.mobileBig} {
+        font-size: ${getFontSize(11)};
+        max-width: 800px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(6)};
+        max-width: 450px;
+    }
 `;
 
 const StyledErrorMessage = styled.p`
-    font-size: 1.7rem;
+    @media screen and ${breakPoints.mobileBig} {
+        font-size: ${getFontSize(7)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(5)};
+    }
 `;
 
 const ZipCodeButtonSearch = styled.button`
-    min-height: 50px;
-    width: 150px;
-    margin-top: 20px;
     font: inherit;
-    font-size: 1.7rem;
     border: 0;
     outline: 0;
     border-radius: 5em;
     &:hover {
         cursor: pointer;
         border: 1px solid #9b9b9b;
+    }
+
+    @media screen and ${breakPoints.mobileBig} {
+        font-size: ${getFontSize(10)};
+        min-height: 200px;
+        width: 500px;
+        margin-top: 50px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(6)};
+        min-height: 75px;
+        width: 200px;
     }
 `;
 
@@ -74,13 +119,14 @@ const HomePage = () => {
 
     return (
         <ZipCodeColumn>
-            <Title>Welcome! Get your current weather below!</Title>
+            <WelcomeTitle>Welcome!</WelcomeTitle>
+            <Title>Get your current weather below!</Title>
             <ZipCodeForm onSubmit={e => getWeather(e)}>
                 <ZipCodeInput
                     maxLength={5}
                     value={zipCode}
                     id='zipCode'
-                    placeholder='Enter 5-Digit Zip Code'
+                    placeholder='5-Digit Zip Code'
                     onChange={event => handleChange(event)}
                 ></ZipCodeInput>
                 {displayError && (
