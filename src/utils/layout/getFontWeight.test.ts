@@ -7,10 +7,10 @@ describe('getFontWeight utility', () => {
         expect(result).toBe(300);
     });
 
-    test('returns default font weight for unknown weight', () => {
+    test('returns undefined for unknown weight', () => {
         const weight = 'unknown';
         const result = getFontWeight(weight);
-        expect(result).toBe(400);
+        expect(result).toBe(undefined);
     });
 
     test('returns default font weight for empty weight', () => {

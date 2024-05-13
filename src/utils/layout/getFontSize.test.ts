@@ -10,7 +10,7 @@ describe('getFontSize utility', () => {
     test('returns default font size for unknown size', () => {
         const size = 13;
         const result = getFontSize(size);
-        expect(result).toBe('');
+        expect(result).toBe(undefined);
     });
 
     test('returns default font size for size zero', () => {
@@ -22,7 +22,7 @@ describe('getFontSize utility', () => {
     test('returns default font size for negative size', () => {
         const size = -1;
         const result = getFontSize(size);
-        expect(result).toBe('');
+        expect(result).toBe(undefined);
     });
 
     test('returns default font size for undefined size', () => {
