@@ -43,3 +43,8 @@ export const mockData: WeatherResults = {
     name: 'TownUSA',
     cod: 200,
 };
+
+export const incompleteMockData = {
+    weather: [{icon: '01d', description: 'clear sky'}],
+    name: 'London',
+};

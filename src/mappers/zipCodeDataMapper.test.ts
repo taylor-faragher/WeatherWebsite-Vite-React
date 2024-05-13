@@ -1,6 +1,6 @@
 import {WeatherResults} from '../types/types';
-import {mockData} from './testData/testData';
-import {incompleteMockData, mapZipCodeData} from './zipCodeDataMapper';
+import {mockData, incompleteMockData} from './testData/testData';
+import {mapZipCodeData} from './zipCodeDataMapper';
 
 describe('mapZipCodeData', () => {
     test('should return undefined when data is undefined', () => {
