@@ -63,7 +63,7 @@ const ZipCodeInput = styled.input`
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(6)};
-        max-width: 450px;
+        max-width: 350px;
     }
 `;
 
