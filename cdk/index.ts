@@ -18,7 +18,7 @@ const app = new cdk.App();
 new MyStaticSiteStack(app, 'MyStaticSite', {
     env: {
         account: process.env.AWS_ACCOUNT_NUMBER,
-        region: process.env.REGION,
+        region: 'us-east-1',
     },
 });
 
