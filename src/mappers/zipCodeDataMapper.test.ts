@@ -1,5 +1,5 @@
 import {WeatherResults} from '../types/types';
-import {mockData, incompleteMockData} from './testData/testData';
+import {mockData, incompleteMockData} from '../utils/testData/testData';
 import {mapZipCodeData} from './zipCodeDataMapper';
 
 describe('mapZipCodeData', () => {
