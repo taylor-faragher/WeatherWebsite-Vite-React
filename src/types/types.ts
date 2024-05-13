@@ -30,7 +30,7 @@ type WeatherInfo = {
 type WindItem = {
     speed: number;
     deg: number;
-    gust: number;
+    gust?: number;
 };
 
 type CloudItem = {
@@ -45,8 +45,13 @@ type SystemItem = {
     sunset: number;
 };
 
+type GeoCoords = {
+    lon: number;
+    lat: number;
+};
+
 export type WeatherResults = {
-    coord: GeolocationCoordinates;
+    coord: GeoCoords;
     weather: [WeatherDescriptors];
     base: string;
     main: WeatherInfo;
