@@ -15,7 +15,7 @@ class WeatherWebsiteStack extends cdk.Stack {
 
 const app = new cdk.App();
 
-new WeatherWebsiteStack(app, 'taylorsweatherwebsite.com', {
+new WeatherWebsiteStack(app, 'taylorsweatherwebsite', {
     env: {
         account: process.env.AWS_ACCOUNT_NUMBER,
         region: 'us-east-1',
