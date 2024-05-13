@@ -11,7 +11,7 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import {Construct} from 'constructs';
 import path = require('path');
 
-export interface StaticSiteProps {
+export interface WeatherWebsiteProps {
     domainName: string;
     siteSubDomain: string;
 }
@@ -22,8 +22,8 @@ export interface StaticSiteProps {
  * The site redirects from HTTP to HTTPS, using a CloudFront distribution,
  * Route53 alias record, and ACM certificate.
  */
-export class StaticSite extends Construct {
-    constructor(parent: Stack, name: string, props: StaticSiteProps) {
+export class WeatherWebsite extends Construct {
+    constructor(parent: Stack, name: string, props: WeatherWebsiteProps) {
         super(parent, name);
 
         const zone = route53.HostedZone.fromLookup(this, 'Zone', {domainName: props.domainName});

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
-import {StaticSite} from './static-site';
+import {WeatherWebsite} from './weather-website';
 
-class MyStaticSiteStack extends cdk.Stack {
+class WeatherWebsiteStack extends cdk.Stack {
     constructor(parent: cdk.App, name: string, props: cdk.StackProps) {
         super(parent, name, props);
 
-        new StaticSite(this, 'StaticSite', {
+        new WeatherWebsite(this, 'WeatherWebsite', {
             domainName: this.node.tryGetContext('domain'),
             siteSubDomain: this.node.tryGetContext('subdomain'),
         });
@@ -15,7 +15,7 @@ class MyStaticSiteStack extends cdk.Stack {
 
 const app = new cdk.App();
 
-new MyStaticSiteStack(app, 'MyStaticSite', {
+new WeatherWebsiteStack(app, 'taylorsweatherwebsite.com', {
     env: {
         account: process.env.AWS_ACCOUNT_NUMBER,
         region: 'us-east-1',
