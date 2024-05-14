@@ -12,7 +12,9 @@
     "format": "prettier --write \"./**\"",
     "deploy": "yarn build && cd cdk && yarn cdk deploy",
     "cdk": "cdk",
-    "test": "jest"
+    "test": "jest",
+    "test:interactive": "cypress open --browser chrome --e2e",
+    "test:integration": "cypress run"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.141.0",

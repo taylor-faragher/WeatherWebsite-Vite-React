@@ -118,9 +118,9 @@ const HomePage = () => {
 
     return (
         <ZipCodeColumn>
-            <WelcomeTitle>Welcome!</WelcomeTitle>
-            <Title>Get your current weather below!</Title>
-            <ZipCodeForm onSubmit={e => getWeather(e)}>
+            <WelcomeTitle data-testid='HomePage_WelcomeTitle'>Welcome!</WelcomeTitle>
+            <Title data-testid='HomePage_Title'>Get your current weather below!</Title>
+            <ZipCodeForm data-testid='HomePage_ZipCodeForm' onSubmit={e => getWeather(e)}>
                 <ZipCodeInput
                     maxLength={5}
                     value={zipCode}

@@ -23,8 +23,10 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "types": ["cypress"]
   },
-  "include": ["src", "vite.config.js"],
+  "include": ["src", "**/*.ts", "vite.config.js"],
+  
 }
 

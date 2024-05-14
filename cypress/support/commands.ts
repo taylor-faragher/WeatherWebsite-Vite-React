@@ -35,3 +35,23 @@
 //     }
 //   }
 // }
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            tid: Cypress.Chainable['get'];
+            alttid: Cypress.Chainable['get'];
+        }
+    }
+}
+
+function attributeSelector(key: string, value: string) {
+    return `[${key}=${value}]`;
+}
+
+export const tidSelector = (testId: string): string => {
+    return attributeSelector('data-testid', testId);
+};
+
+Cypress.Commands.add('tid', (testId: string) => {
+    return cy.get(tidSelector(testId));
+});
