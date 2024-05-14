@@ -61,14 +61,18 @@ const ResultPage = () => {
     return (
         <>
             <ResultsSection>
-                <ZipCodeTitle>Weather Results for {zipCode}</ZipCodeTitle>
+                <ZipCodeTitle data-test-id='ResultPage_ZipCodeTitle'>Weather Results for {zipCode}</ZipCodeTitle>
                 {loaded && (
                     <>
                         <WeatherResultsSection>
                             <div>
-                                <WeatherPic src={weatherPic} alt={data?.image.imageAltText}></WeatherPic>
-                                <div>{currentTemp} &deg;F</div>
-                                <div>{description}</div>
+                                <WeatherPic
+                                    src={weatherPic}
+                                    alt={data?.image.imageAltText}
+                                    data-test-id='ResultPage_WeatherPic'
+                                ></WeatherPic>
+                                <div data-test-id='ResultPage_CurrentTemp'>{currentTemp} &deg;F</div>
+                                <div data-test-id='ResultPage_Description'>{description}</div>
                             </div>
                         </WeatherResultsSection>
                         <ReturnHomeButton />
