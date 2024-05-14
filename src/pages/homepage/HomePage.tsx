@@ -126,7 +126,7 @@ const HomePage = () => {
                     value={zipCode}
                     id='zipCode'
                     placeholder='5-Digit Zip Code'
-                    data-test-id='HomePage_ZipCodeForm'
+                    data-test-id='HomePage_ZipCodeInput'
                     onChange={event => handleChange(event)}
                 ></ZipCodeInput>
                 {displayError && (
@@ -136,11 +136,7 @@ const HomePage = () => {
                         </StyledErrorMessage>
                     </div>
                 )}
-                <ZipCodeButtonSearch
-                    type='submit'
-                    data-test-id='HomePage_ZipCodeButtonSearch'
-                    onClick={e => getWeather(e)}
-                >
+                <ZipCodeButtonSearch type='submit' data-test-id='HomePage_ZipCodeButtonSearch' onClick={getWeather}>
                     Search
                 </ZipCodeButtonSearch>
             </ZipCodeForm>

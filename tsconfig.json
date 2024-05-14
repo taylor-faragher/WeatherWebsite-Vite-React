@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "NodeNext",
+    "baseUrl": "./",
     "skipLibCheck": true,
     "allowJs": true,
     "esModuleInterop": true,
