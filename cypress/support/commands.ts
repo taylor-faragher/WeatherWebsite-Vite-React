@@ -39,7 +39,6 @@ declare global {
     namespace Cypress {
         interface Chainable {
             tid: Cypress.Chainable['get'];
-            alttid: Cypress.Chainable['get'];
         }
     }
 }
@@ -49,7 +48,7 @@ function attributeSelector(key: string, value: string) {
 }
 
 export const tidSelector = (testId: string): string => {
-    return attributeSelector('data-testid', testId);
+    return attributeSelector('data-test-id', testId);
 };
 
 Cypress.Commands.add('tid', (testId: string) => {
