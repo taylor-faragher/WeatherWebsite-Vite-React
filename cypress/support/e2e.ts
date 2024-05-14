@@ -15,6 +15,13 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+import {mockData} from '../../src/utils/testData/testData';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+beforeEach(() => {
+    window.sessionStorage.clear();
+    const url = Cypress.config()?.baseUrl;
+    cy.visit(url as string);
+    cy.intercept('GET', 'https://api.taylorsweatherapi.com/?zipcode=20020', {mockData}).as('getWeather');
+});
