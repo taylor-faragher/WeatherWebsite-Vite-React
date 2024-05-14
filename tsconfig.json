@@ -24,9 +24,8 @@
     "noImplicitAny": false,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
-    "types": ["cypress"]
   },
-  "include": ["src", "**/*.ts", "vite.config.js"],
-  
+  "include": ["src/**/*", "vite.config.js"],
+  "exclude": ["cypress"]
 }
 

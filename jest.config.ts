@@ -4,6 +4,7 @@ const config = {
     },
 
     preset: 'ts-jest/presets/js-with-ts-esm',
+    testMatch: ['<rootDir>/**/*.test.tsx', '<rootDir>/**/*.test.ts'],
 
     // from https://stackoverflow.com/a/57916712/15076557
     // tells jest to ignore node_modules

@@ -14,7 +14,7 @@
     "cdk": "cdk",
     "test": "jest",
     "test:interactive": "cypress open --browser chrome --e2e",
-    "test:integration": "cypress run"
+    "test:headless": "cypress run"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.141.0",
