@@ -7,7 +7,7 @@ export const mapZipCodeData = (data: WeatherResults): WeatherItem | undefined =>
         return;
     }
     const picName = data.weather[0].icon;
-    const weatherPic = {image: `${picName}.png`, imageAltText: getPicAltText(picName)};
+    const weatherPic = {image: `${picName}.svg`, imageAltText: getPicAltText(picName)};
     const description = pascalize(data.weather[0].description);
 
     return {
