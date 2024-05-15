@@ -6,8 +6,8 @@ on:
         branches: [main]
 
 jobs:
-    tests:
-        name: Run - yarn ${{ matrix.command }}, node 14
+    Build-Lint-UnitTest:
+        name: Run - yarn ${{ matrix.command }}, node 18
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -58,8 +58,8 @@ jobs:
               with:
                   browser: chrome
                   start: yarn dev
-                  wait-on: 'http://localhost:5173'
-                  wait-on-timeout: 120
+                  wait-on: 'http://127.0.0.1:5173'
+                  wait-on-timeout: 240
                   config: watchForFileChanges=false
                   env: SSL=false
 
