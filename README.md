@@ -27,3 +27,8 @@ This is a production ready frontend built using React, Typescript, Vite, and aut
 1. `cd` to the root directory of the project
 2. Run `yarn`
 3. Run `yarn test`
+
+### E2E Testing
+1. `cd` to the root directory of the project
+2. Run `yarn`
+3. Run `yarn:interactive` to see Cypress runner OR `yarn:headless` to run tests in headless mode
