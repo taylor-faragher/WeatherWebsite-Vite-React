@@ -1,5 +1,5 @@
 describe('ResultPage E2E Tests', () => {
-    it(`All Page elements should be visible`, () => {
+    it(`All Page elements should be visible and clicking return home navigates back to home page`, () => {
         cy.visit('/result?zipCode=20020');
         cy.wait('@getWeather');
         cy.tid(`ResultPage_ZipCodeTitle`).should('be.visible');
