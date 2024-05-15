@@ -28,6 +28,8 @@ const ZipCodeTitle = styled.h1`
 `;
 
 const WeatherResultsSection = styled.div`
+    display: flex;
+    flex-direction: column;
     text-align: center;
     @media screen and ${breakPoints.mobileBig} {
         font-size: ${getFontSize(12)};
@@ -38,15 +40,55 @@ const WeatherResultsSection = styled.div`
     }
 `;
 
-const WeatherPic = styled.img`
+const WeatherPicWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    alignt-items: center;
     align-self: center;
     @media screen and ${breakPoints.mobileBig} {
         width: 500px;
         height: 500px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
+`;
+
+const WeatherPic = styled.img`
+    width: 100%;
+    height: auto;
+`;
+
+const TempWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(12)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(10)};
+    }
+`;
+
+const ThermoPicture = styled.img`
+    height: 120px;
+    margin-top: -20px;
+    margin-left: -40px;
+    @media screen and ${breakPoints.mobile} {
+        height: 250px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        height: 150px;
+    }
+`;
+
+const StyledDescription = styled.div`
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(11)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(10)};
     }
 `;
 
@@ -57,6 +99,7 @@ const ResultPage = () => {
     const currentTemp = Math.round(data?.currentTemp as number);
     const description = data?.description as string;
     const weatherPic = `/assets/${data?.image.image}`;
+    const thermoPic = `/assets/thermometer-fahrenheit.svg`;
 
     return (
         <>
@@ -64,15 +107,21 @@ const ResultPage = () => {
                 <ZipCodeTitle data-test-id='ResultPage_ZipCodeTitle'>Weather Results for {zipCode}</ZipCodeTitle>
                 {loaded && (
                     <>
-                        <WeatherResultsSection>
-                            <div>
+                        <WeatherResultsSection data-test-id='ResultsPage_WeatherResultsSection'>
+                            <WeatherPicWrapper data-test-id='ResultPage_WeatherPicWrapper'>
                                 <WeatherPic
                                     src={weatherPic}
                                     alt={data?.image.imageAltText}
                                     data-test-id='ResultPage_WeatherPic'
                                 ></WeatherPic>
-                                <div data-test-id='ResultPage_CurrentTemp'>{currentTemp} &deg;F</div>
-                                <div data-test-id='ResultPage_Description'>{description}</div>
+                            </WeatherPicWrapper>
+                            <div data-test-id='ResultPage_WeatherInfoWrapper'>
+                                <TempWrapper data-test-id='ResultPage_CurrentTemp'>
+                                    {currentTemp} <ThermoPicture src={thermoPic}></ThermoPicture>
+                                </TempWrapper>
+                                <StyledDescription data-test-id='ResultPage_Description'>
+                                    {description}
+                                </StyledDescription>
                             </div>
                         </WeatherResultsSection>
                         <ReturnHomeButton />

@@ -14,16 +14,16 @@ const ReturnButton = styled.button`
         cursor: pointer;
         border: 1px solid #9b9b9b;
     }
-    @media screen and ${breakPoints.mobileBig} {
+    @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(9)};
         width: 550px;
-        min-height: 200px;
+        min-height: 175px;
     }
 
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(5)};
-        width: 300px;
-        min-height: 75px;
+        width: 250px;
+        min-height: 60px;
     }
 `;
 

@@ -21,7 +21,7 @@ const WelcomeTitle = styled.h1`
     text-align: center;
     margin-bottom: 0;
 
-    @media screen and ${breakPoints.mobileBig} {
+    @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(12)};
     }
     @media screen and ${breakPoints.tabletBig} {
@@ -34,7 +34,7 @@ const Title = styled.h1`
     line-height: 1.2;
     text-align: center;
 
-    @media screen and ${breakPoints.mobileBig} {
+    @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(11)};
     }
     @media screen and ${breakPoints.tabletBig} {
@@ -57,9 +57,10 @@ const ZipCodeInput = styled.input`
     background: transparent;
     transition: border-color 0.2s;
 
-    @media screen and ${breakPoints.mobileBig} {
+    @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(11)};
         max-width: 800px;
+        margin-bottom: 45px;
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(6)};
@@ -68,7 +69,7 @@ const ZipCodeInput = styled.input`
 `;
 
 const StyledErrorMessage = styled.p`
-    @media screen and ${breakPoints.mobileBig} {
+    @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(7)};
     }
     @media screen and ${breakPoints.tabletBig} {
@@ -86,11 +87,10 @@ const ZipCodeButtonSearch = styled.button`
         border: 1px solid #9b9b9b;
     }
 
-    @media screen and ${breakPoints.mobileBig} {
+    @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(10)};
         min-height: 200px;
         width: 500px;
-        margin-top: 50px;
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(6)};
