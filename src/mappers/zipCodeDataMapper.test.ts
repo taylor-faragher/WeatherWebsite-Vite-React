@@ -17,7 +17,7 @@ describe('mapZipCodeData', () => {
             description: 'OvercastClouds',
             majorCity: 'TownUSA',
             image: {
-                image: '04d.png',
+                image: '04d.svg',
                 imageAltText: 'white cloud with moon behind it',
             },
         });
@@ -32,7 +32,7 @@ describe('mapZipCodeData', () => {
             description: 'ClearSky',
             majorCity: 'London',
             image: {
-                image: '01d.png',
+                image: '01d.svg',
                 imageAltText: 'Orange Sun',
             },
         });
