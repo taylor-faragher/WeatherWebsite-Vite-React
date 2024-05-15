@@ -1,0 +1,66 @@
+name: Pull Request Pipeline
+on:
+    pull_request:
+        paths-ignore:
+          - '**.md'
+        branches: [main]
+
+jobs:
+    Build-Lint-UnitTest:
+        name: Run - yarn ${{ matrix.command }}, node 18
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                command: [build, lint, jest]
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+    
+          - name: Setup node
+            uses: actions/setup-node@v3
+            with:
+              node-version: '18'
+              registry-url: 'https://npm.pkg.github.com'
+              always-auth: true
+              cache: yarn
+              cache-dependency-path: '**/yarn.lock'
+
+          - name: Install dependencies
+            run: yarn install --frozen-lockfile
+
+          - name: Run yarn ${{ matrix.command }}
+            run: yarn ${{ matrix.command }}
+
+    tests-cypress:
+        name: Run - yarn cypress, node 18
+        runs-on: ubuntu-latest
+        needs: Build-Lint-UnitTest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Increase Watchers
+              run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+            - name: Setup node
+              uses: actions/setup-node@v3
+              with:
+                node-version: '18'
+                registry-url: 'https://npm.pkg.github.com'
+                always-auth: true
+                cache: yarn
+                cache-dependency-path: '**/yarn.lock'
+              
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Cypress run
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  start: yarn vite --host
+                  wait-on: 'http://127.0.0.1:5173'
+                  wait-on-timeout: 240
+                  config: watchForFileChanges=false
+                  env: SSL=false
+

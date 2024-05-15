@@ -1,8 +1,14 @@
 node_modules
 /dist
+yarn-error.log
 
 
 # CDK
 cdk/cdk.out
 cdk.out
 cdk/cdk.context.json
+
+# Cypress
+cypress/video
+cypress/screenshots
+cypress/downloads

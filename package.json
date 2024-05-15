@@ -12,7 +12,9 @@
     "format": "prettier --write \"./**\"",
     "deploy": "yarn build && cd cdk && yarn cdk deploy",
     "cdk": "cdk",
-    "test": "jest"
+    "test": "jest",
+    "test:interactive": "cypress open --browser chrome --e2e",
+    "test:headless": "cypress run"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.141.0",
@@ -24,23 +26,25 @@
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.26",
     "@types/react": "^18.2.59",
-    "@types/jest": "^29.5.12",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "cypress": "^13.9.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-cypress": "^3.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^29.7.0",
     "prettier": "^2.6.0",
-    "typescript": "^5.2.2",
-    "ts-node": "^10.9.2",
     "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.2.2",
     "vite": "^5.1.4"
   }
 }

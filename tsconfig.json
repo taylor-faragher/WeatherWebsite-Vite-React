@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "NodeNext",
+    "baseUrl": "./",
     "skipLibCheck": true,
     "allowJs": true,
     "esModuleInterop": true,
@@ -23,8 +24,9 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
   },
-  "include": ["src", "vite.config.js"],
+  "include": ["src/**/*", "vite.config.js"],
+  "exclude": ["cypress"]
 }
 

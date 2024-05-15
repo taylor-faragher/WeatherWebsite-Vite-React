@@ -5,7 +5,6 @@ const ErrorContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 `;
 
 const ErrorText = styled.h1`
@@ -16,7 +15,7 @@ const ErrorText = styled.h1`
 const ErrorPage = () => {
     return (
         <ErrorContainer>
-            <ErrorText>Oh Snap! Sorry about that!</ErrorText>
+            <ErrorText data-test-id='Error_ErrorText'>Oh Snap! Sorry about that!</ErrorText>
             <ReturnHomeButton />
         </ErrorContainer>
     );

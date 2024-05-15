@@ -35,7 +35,9 @@ const ReturnHomeButton = () => {
 
     return (
         <ReturnButtonContainer>
-            <ReturnButton onClick={returnHome}>Return Home</ReturnButton>
+            <ReturnButton data-test-id='ReturnButton' onClick={returnHome}>
+                Return Home
+            </ReturnButton>
         </ReturnButtonContainer>
     );
 };

@@ -118,22 +118,25 @@ const HomePage = () => {
 
     return (
         <ZipCodeColumn>
-            <WelcomeTitle>Welcome!</WelcomeTitle>
-            <Title>Get your current weather below!</Title>
-            <ZipCodeForm onSubmit={e => getWeather(e)}>
+            <WelcomeTitle data-test-id='HomePage_WelcomeTitle'>Welcome!</WelcomeTitle>
+            <Title data-test-id='HomePage_Title'>Get your current weather below!</Title>
+            <ZipCodeForm data-test-id='HomePage_ZipCodeForm' onSubmit={e => getWeather(e)}>
                 <ZipCodeInput
                     maxLength={5}
                     value={zipCode}
                     id='zipCode'
                     placeholder='5-Digit Zip Code'
+                    data-test-id='HomePage_ZipCodeInput'
                     onChange={event => handleChange(event)}
                 ></ZipCodeInput>
                 {displayError && (
                     <div>
-                        <StyledErrorMessage>Please Enter a Valid Zip Code.</StyledErrorMessage>
+                        <StyledErrorMessage data-test-id='HomePage_ErrorMessage'>
+                            Please Enter a Valid Zip Code.
+                        </StyledErrorMessage>
                     </div>
                 )}
-                <ZipCodeButtonSearch type='submit' onClick={e => getWeather(e)}>
+                <ZipCodeButtonSearch type='submit' data-test-id='HomePage_ZipCodeButtonSearch' onClick={getWeather}>
                     Search
                 </ZipCodeButtonSearch>
             </ZipCodeForm>
