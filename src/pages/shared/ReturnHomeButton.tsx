@@ -15,14 +15,14 @@ const ReturnButton = styled.button`
         border: 1px solid #9b9b9b;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(9)};
+        font-size: ${getFontSize(10)};
         width: 550px;
         min-height: 175px;
     }
 
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(5)};
-        width: 250px;
+        width: 200px;
         min-height: 60px;
     }
 `;
@@ -36,7 +36,7 @@ const ReturnHomeButton = () => {
     return (
         <ReturnButtonContainer>
             <ReturnButton data-test-id='ReturnButton' onClick={returnHome}>
-                Return Home
+                Home
             </ReturnButton>
         </ReturnButtonContainer>
     );
