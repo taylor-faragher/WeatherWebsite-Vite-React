@@ -28,10 +28,11 @@ describe('fetchWeather', () => {
 
     test('should fetch weather data by city lookup', async () => {
         const gatewayMockData = {mockData};
+        const mockZipCode = '12345';
 
         global.fetch = jest.fn().mockImplementation(() => mockResponse(200, gatewayMockData));
 
-        const result = await fetchWeather(WeatherMethods.cityLookup);
+        const result = await fetchWeather(WeatherMethods.cityLookup, mockZipCode);
 
         expect(fetch).toHaveBeenCalledWith('https://api.taylorsweatherapi.com/');
         expect(result).toEqual(gatewayMockData);
@@ -39,9 +40,24 @@ describe('fetchWeather', () => {
 
     test('should throw error when response is not ok', async () => {
         const mockErrorResponse = {message: 'Error message'};
+        const mockZipCode = '12345';
 
         global.fetch = jest.fn().mockImplementation(() => mockResponse(404, mockErrorResponse));
 
-        await expect(fetchWeather(WeatherMethods.cityLookup)).rejects.toThrow('Error message');
+        await expect(fetchWeather(WeatherMethods.cityLookup, mockZipCode)).rejects.toThrow('Error message');
+    });
+
+    test('should throw error when zipCode is empty', async () => {
+        const mockZipCode = '';
+
+        await expect(fetchWeather(WeatherMethods.cityLookup, mockZipCode)).rejects.toThrow('Bad Request');
+    });
+
+    test('should throw error when zipCode is undefined', async () => {
+        const mockZipCode = undefined;
+
+        await expect(fetchWeather(WeatherMethods.cityLookup, mockZipCode as unknown as string)).rejects.toThrow(
+            'Bad Request'
+        );
     });
 });

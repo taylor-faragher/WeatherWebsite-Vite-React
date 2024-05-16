@@ -1,6 +1,9 @@
 import {WeatherMethods, WeatherResults} from '../../types/types';
 
-export const fetchWeather = async (method: string, zipCode?: string): Promise<WeatherResults> => {
+export const fetchWeather = async (method: string, zipCode: string): Promise<WeatherResults> => {
+    if (!zipCode) {
+        return Promise.reject(new Error('Bad Request'));
+    }
     let url = '';
     if (method == WeatherMethods.zipCode) {
         url = `https://api.taylorsweatherapi.com/?zipcode=${zipCode}`;
