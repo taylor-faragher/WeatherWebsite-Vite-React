@@ -13,14 +13,14 @@ describe('HomePage E2E Tests', () => {
         cy.tid(`HomePage_ZipCodeInput`).type('20020', {delay: 100});
         cy.tid(`HomePage_ZipCodeInput`).trigger('event');
         cy.tid(`HomePage_ZipCodeForm`).submit();
-        cy.url().should('contain', '/result'); //cypress doesn't like checking for dynamic urls after navigation
+        cy.url().should('contain', '/result?zipCode=20020');
     });
 
     it(`Should navigate to results page when valid zip code is entered and user types Enter`, () => {
         cy.tid(`HomePage_ZipCodeForm`).should('be.visible');
         cy.tid(`HomePage_ErrorMessage`).should('not.exist');
         cy.tid(`HomePage_ZipCodeInput`).should('be.visible').type('20020{enter}');
-        cy.url().should('contain', '/result');
+        cy.url().should('contain', '/result?zipCode=20020');
     });
 
     it(`Should show Error message when ZipCode is too few characters`, () => {
@@ -50,6 +50,6 @@ describe('HomePage E2E Tests', () => {
         cy.tid(`HomePage_ZipCodeButtonSearch`).should('be.visible').click();
         cy.tid(`HomePage_ErrorMessage`).should('be.visible');
         cy.tid(`HomePage_ZipCodeInput`).should('be.visible').type('20020{enter}');
-        cy.url().should('contain', '/result');
+        cy.url().should('contain', '/result?zipCode=20020');
     });
 });
