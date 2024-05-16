@@ -100,24 +100,22 @@ export const ZipCodeForm = (props: ZipCodeFormProps) => {
     };
 
     return (
-        <ZipCodeWrapper data-test-id='HomePage_ZipCodeForm' onSubmit={e => getWeather(e)}>
+        <ZipCodeWrapper data-test-id='ZipCodeForm' onSubmit={e => getWeather(e)}>
             <ZipCodeInput
                 maxLength={5}
                 value={zipCode}
                 id='zipCode'
                 placeholder={props.placeHolderText}
-                data-test-id='HomePage_ZipCodeInput'
+                data-test-id='ZipCodeInput'
                 onChange={event => handleChange(event)}
             ></ZipCodeInput>
             {displayError && (
                 <div>
-                    <StyledErrorMessage data-test-id='HomePage_ErrorMessage'>
-                        Please Enter a Valid Zip Code.
-                    </StyledErrorMessage>
+                    <StyledErrorMessage data-test-id='ErrorMessage'>Please Enter a Valid Zip Code.</StyledErrorMessage>
                 </div>
             )}
-            <ButtonWrapper data-test-id='HomePage_ButtonWrapper'>
-                <ZipCodeButtonSearch type='submit' data-test-id='HomePage_ZipCodeButtonSearch'>
+            <ButtonWrapper data-test-id='ButtonWrapper'>
+                <ZipCodeButtonSearch type='submit' data-test-id='ZipCodeButtonSearch'>
                     Search
                 </ZipCodeButtonSearch>
                 {props.showReturnHomeButton && <ReturnHomeButton />}
