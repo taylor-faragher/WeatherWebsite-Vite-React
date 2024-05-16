@@ -2,10 +2,10 @@ import {useSearchParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {useWeatherApi} from '../../hooks/useWeatherApi';
 import {useState} from 'react';
-import ReturnHomeButton from '../shared/ReturnHomeButton';
 import {Loader} from '../shared/Loader';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
+import {ZipCodeForm} from '../shared/ZipCodeForm';
 
 const ResultsSection = styled.div`
     display: flex;
@@ -94,17 +94,26 @@ const StyledDescription = styled.div`
 
 const ResultPage = () => {
     const [searchParams] = useSearchParams();
-    const [zipCode] = useState(searchParams.get('zipCode') || '');
-    const {data, loaded} = useWeatherApi(zipCode);
+    const [zipCode] = useState(searchParams.get('zipCode'));
+    const {data, loaded} = useWeatherApi(zipCode as string);
     const currentTemp = Math.round(data?.currentTemp as number);
     const description = data?.description as string;
     const weatherPic = `/assets/${data?.image.image}`;
     const thermoPic = `/assets/thermometer-fahrenheit.svg`;
 
+    const navigateToResult = (zipCode: string): void => {
+        window.location.href = `/result?zipCode=${zipCode}`;
+    };
+
     return (
         <>
             <ResultsSection>
                 <ZipCodeTitle data-test-id='ResultPage_ZipCodeTitle'>Weather Results for {zipCode}</ZipCodeTitle>
+                {!loaded && (
+                    <div>
+                        <Loader />
+                    </div>
+                )}
                 {loaded && (
                     <>
                         <WeatherResultsSection data-test-id='ResultsPage_WeatherResultsSection'>
@@ -124,13 +133,12 @@ const ResultPage = () => {
                                 </StyledDescription>
                             </div>
                         </WeatherResultsSection>
-                        <ReturnHomeButton />
+                        <ZipCodeForm
+                            placeHolderText={'Search Again!'}
+                            showReturnHomeButton={true}
+                            pageNavigation={navigateToResult}
+                        />
                     </>
-                )}
-                {!loaded && (
-                    <div>
-                        <Loader />
-                    </div>
                 )}
             </ResultsSection>
         </>
