@@ -19,8 +19,7 @@ const ButtonWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100%;
-    max-width: 500px;
+    width: 500px;
 `;
 
 export const Header = () => {

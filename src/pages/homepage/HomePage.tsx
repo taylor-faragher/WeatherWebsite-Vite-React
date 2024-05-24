@@ -10,7 +10,6 @@ const ZipCodeColumn = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 `;
 
 const WelcomeTitle = styled.h1`
@@ -20,7 +19,7 @@ const WelcomeTitle = styled.h1`
     margin-bottom: 0;
 
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(12)};
+        font-size: ${getFontSize(9)};
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(9)};
@@ -33,9 +32,9 @@ const Title = styled.h1`
     text-align: center;
 
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(11)};
+        font-size: ${getFontSize(6)};
     }
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(7)};
     }
 `;
