@@ -22,8 +22,9 @@ const ZipCodeInput = styled.input`
     transition: border-color 0.2s;
 
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(5)};
+        font-size: ${getFontSize(6)};
         margin-bottom: 45px;
+        margin-top: 30px;
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {

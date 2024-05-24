@@ -15,9 +15,9 @@ const ReturnButton = styled.button`
         border: 1px solid #9b9b9b;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(10)};
-        width: 550px;
-        min-height: 175px;
+        font-size: ${getFontSize(6)};
+        width: 300px;
+        min-height: 100px;
     }
 
     @media screen and ${breakPoints.tabletBig} {
