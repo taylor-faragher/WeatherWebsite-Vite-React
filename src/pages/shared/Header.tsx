@@ -6,7 +6,6 @@ const HeaderWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #9b9b9b;
     position: absolute;
     top: 0;
     width: 100%;
