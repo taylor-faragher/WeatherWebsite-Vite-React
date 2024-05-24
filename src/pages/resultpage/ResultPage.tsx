@@ -41,8 +41,6 @@ const WeatherResultsSection = styled.div`
 const WeatherPicWrapper = styled.div`
     display: flex;
     justify-content: center;
-    alignt-items: center;
-    align-self: center;
     @media screen and ${breakPoints.mobileBig} {
         width: 500px;
         height: 500px;
