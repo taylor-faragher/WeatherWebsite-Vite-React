@@ -45,9 +45,13 @@ const HeaderTooltip = styled.span`
     }
 `;
 
-export const HeaderIcon = ({icon, text}) => (
-    <HeaderIconWrapper>
+const navigateToPath = (path: string): void => {
+    window.location.href = `${path}`;
+};
+
+export const HeaderIcon = ({icon, text, path}) => (
+    <HeaderIconWrapper data-test-id='HeaderIcon' onClick={() => navigateToPath(path)}>
         {icon}
-        <HeaderTooltip>{text}</HeaderTooltip>
+        <HeaderTooltip data-test-id='HeaderToolTip'>{text}</HeaderTooltip>
     </HeaderIconWrapper>
 );
