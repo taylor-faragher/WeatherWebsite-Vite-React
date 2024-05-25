@@ -5,11 +5,18 @@ import {getFontWeight} from '../../utils/layout/getFontWeight';
 import {ZipCodeForm} from '../shared/ZipCodeForm';
 import {useNavigate} from 'react-router-dom';
 
-const ZipCodeColumn = styled.div`
+const HomePageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @media screen and ${breakPoints.mobile} {
+        padding-bottom: 75px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        padding-bottom: 0px;
+        padding-top: 50px;
+    }
 `;
 
 const WelcomeTitle = styled.h1`
@@ -47,11 +54,11 @@ const HomePage = () => {
     };
 
     return (
-        <ZipCodeColumn>
+        <HomePageWrapper>
             <WelcomeTitle data-test-id='HomePage_WelcomeTitle'>Welcome!</WelcomeTitle>
             <Title data-test-id='HomePage_Title'>Get your current weather below!</Title>
             <ZipCodeForm placeHolderText={'5-Digit Zip Code'} pageNavigation={navigateToResult} />
-        </ZipCodeColumn>
+        </HomePageWrapper>
     );
 };
 
