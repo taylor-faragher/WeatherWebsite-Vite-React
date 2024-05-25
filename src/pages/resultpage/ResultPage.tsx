@@ -11,7 +11,14 @@ const ResultsSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 75px;
+    @media screen and ${breakPoints.mobile} {
+        padding-top: 0;
+        padding-bottom: 85px;
+    }
+    @media screen and ${breakPoints.tablet} {
+        padding-top: 75px;
+        padding-bottom: 0px;
+    }
 `;
 
 const ZipCodeTitle = styled.h1`
@@ -41,12 +48,12 @@ const WeatherResultsSection = styled.div`
 const WeatherPicWrapper = styled.div`
     display: flex;
     justify-content: center;
-    @media screen and ${breakPoints.mobileBig} {
-        width: 500px;
+    @media screen and ${breakPoints.mobile} {
+        width: 100%;
         height: 500px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        width: 300px;
+        width: 100%;
         height: 300px;
 `;
 
@@ -84,8 +91,9 @@ const ThermoPicture = styled.img`
 `;
 
 const StyledDescription = styled.div`
+    width: 100%;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(9)};
+        font-size: ${getFontSize(7)};
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(10)};
@@ -133,11 +141,7 @@ const ResultPage = () => {
                                 </StyledDescription>
                             </div>
                         </WeatherResultsSection>
-                        <ZipCodeForm
-                            placeHolderText={'Search Again!'}
-                            showReturnHomeButton={true}
-                            pageNavigation={navigateToResult}
-                        />
+                        <ZipCodeForm placeHolderText={'Search Again!'} pageNavigation={navigateToResult} />
                     </>
                 )}
             </ResultsSection>
