@@ -4,7 +4,6 @@ import {getFontSize} from '../../utils/layout/getFontSize';
 import {validateZipCodeInput} from '../../utils/validateZipCodeInput';
 import {validateZipCodeLength} from '../../utils/validateZipCodeLength';
 import styled from 'styled-components';
-import ReturnHomeButton from './ReturnHomeButton';
 
 const ZipCodeWrapper = styled.form`
     display: flex;
@@ -34,11 +33,12 @@ const ZipCodeInput = styled.input`
 `;
 
 const StyledErrorMessage = styled.div`
+    color: red;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(8)};
+        font-size: ${getFontSize(4)};
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(5)};
+        font-size: ${getFontSize(4)};
         margin: 20px 0 0 0;
     }
 `;
@@ -78,7 +78,6 @@ type VoidFunctionWithParam = (param: string) => void;
 
 interface ZipCodeFormProps {
     placeHolderText: string;
-    showReturnHomeButton?: boolean;
     pageNavigation: VoidFunctionWithParam;
 }
 
@@ -118,7 +117,6 @@ export const ZipCodeForm = (props: ZipCodeFormProps) => {
                 <ZipCodeButtonSearch type='submit' data-test-id='ZipCodeButtonSearch'>
                     Search
                 </ZipCodeButtonSearch>
-                {props.showReturnHomeButton && <ReturnHomeButton />}
             </ButtonWrapper>
         </ZipCodeWrapper>
     );
