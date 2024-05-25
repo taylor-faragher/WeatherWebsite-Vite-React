@@ -1,17 +1,26 @@
 import styled from 'styled-components';
 import {FaHouse, FaCircleQuestion, FaGithub} from 'react-icons/fa6';
 import {HeaderIcon} from './HeaderIcon';
+import {breakPoints} from '../../utils/layout/breakpoints';
 
 const HeaderWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 0;
     width: 100%;
     height: 75px;
     background: #202225;
     z-index: 9;
+    position: fixed;
+
+    @media screen and ${breakPoints.mobile} {
+        bottom: 0;
+        top; revert;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        bottom: revert;
+        top: 0;
+    }
 `;
 
 const ButtonWrapper = styled.div`
@@ -26,11 +35,15 @@ export const Header = () => {
     return (
         <>
             {showHeader && (
-                <HeaderWrapper>
+                <HeaderWrapper data-test-id='Header'>
                     <ButtonWrapper>
-                        <HeaderIcon icon={<FaHouse size='25' />} text='Home' />
-                        <HeaderIcon icon={<FaCircleQuestion size='25' />} text='FAQ' />
-                        <HeaderIcon icon={<FaGithub size='25' />} text='See the Code for this Site!' />
+                        <HeaderIcon icon={<FaHouse size='25' />} text='Home' path='/main' />
+                        <HeaderIcon icon={<FaCircleQuestion size='25' />} text='FAQ' path='/info' />
+                        <HeaderIcon
+                            icon={<FaGithub size='25' />}
+                            text='See the Code for this Site!'
+                            path='https://github.com/taylor-faragher/WeatherWebsite-Vite-React'
+                        />
                     </ButtonWrapper>
                 </HeaderWrapper>
             )}
