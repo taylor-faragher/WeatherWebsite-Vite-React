@@ -37,12 +37,13 @@ export const Header = () => {
             {showHeader && (
                 <HeaderWrapper data-test-id='Header'>
                     <ButtonWrapper>
-                        <HeaderIcon icon={<FaHouse size='25' />} text='Home' path='/main' />
-                        <HeaderIcon icon={<FaCircleQuestion size='25' />} text='FAQ' path='/info' />
+                        <HeaderIcon icon={<FaHouse size='25' />} toolTipText='Home' path='/main' testId='home' />
+                        <HeaderIcon icon={<FaCircleQuestion size='25' />} toolTipText='FAQ' path='/info' testId='FAQ' />
                         <HeaderIcon
                             icon={<FaGithub size='25' />}
-                            text='See the Code for this Site!'
+                            toolTipText='See the Code for this Site!'
                             path='https://github.com/taylor-faragher/WeatherWebsite-Vite-React'
+                            testId='github'
                         />
                     </ButtonWrapper>
                 </HeaderWrapper>
