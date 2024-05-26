@@ -1,6 +1,7 @@
 describe('HomePage E2E Tests', () => {
     it(`All Page elements should be visible`, () => {
         cy.tid(`HomePage_WelcomeTitle`).should('be.visible');
+        cy.tid(`Header`).should('be.visible');
         cy.tid(`HomePage_Title`).should('be.visible');
         cy.tid(`ZipCodeForm`).should('be.visible');
         cy.tid(`ZipCodeButtonSearch`).should('be.visible');

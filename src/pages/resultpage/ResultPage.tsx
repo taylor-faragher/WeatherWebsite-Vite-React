@@ -11,19 +11,24 @@ const ResultsSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    @media screen and ${breakPoints.mobile} {
+        padding-top: 0;
+        padding-bottom: 85px;
+    }
+    @media screen and ${breakPoints.tablet} {
+        padding-top: 75px;
+        padding-bottom: 0px;
+    }
 `;
 
 const ZipCodeTitle = styled.h1`
     text-align: center;
-    @media screen and ${breakPoints.mobileBig} {
-        font-size: ${getFontSize(12)};
-        width: 700px;
-        height: 400px;
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(7)};
     }
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
+        margin: 0;
         font-size: ${getFontSize(9)};
-        height: 100px;
     }
 `;
 
@@ -32,7 +37,7 @@ const WeatherResultsSection = styled.div`
     flex-direction: column;
     text-align: center;
     @media screen and ${breakPoints.mobileBig} {
-        font-size: ${getFontSize(12)};
+        font-size: ${getFontSize(7)};
     }
 
     @media screen and ${breakPoints.tabletBig} {
@@ -43,14 +48,12 @@ const WeatherResultsSection = styled.div`
 const WeatherPicWrapper = styled.div`
     display: flex;
     justify-content: center;
-    alignt-items: center;
-    align-self: center;
-    @media screen and ${breakPoints.mobileBig} {
-        width: 500px;
+    @media screen and ${breakPoints.mobile} {
+        width: 100%;
         height: 500px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        width: 300px;
+        width: 100%;
         height: 300px;
 `;
 
@@ -64,28 +67,33 @@ const TempWrapper = styled.div`
     align-items: center;
     justify-content: center;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(12)};
+        font-size: ${getFontSize(11)};
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(10)};
+        margin-bottom: -40px;
     }
 `;
 
 const ThermoPicture = styled.img`
     height: 120px;
-    margin-top: -20px;
-    margin-left: -40px;
+
     @media screen and ${breakPoints.mobile} {
+        margin-top: -20px;
+        margin-left: -80px;
+        margin-right: -50px;
         height: 250px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        height: 150px;
+        margin-top: -40px;
+        height: 250px;
     }
 `;
 
 const StyledDescription = styled.div`
+    width: 100%;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(11)};
+        font-size: ${getFontSize(7)};
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(10)};
@@ -125,7 +133,7 @@ const ResultPage = () => {
                                 ></WeatherPic>
                             </WeatherPicWrapper>
                             <div data-test-id='ResultPage_WeatherInfoWrapper'>
-                                <TempWrapper data-test-id='ResultPage_CurrentTemp'>
+                                <TempWrapper data-test-id='ResultPage_TempWrapper'>
                                     {currentTemp} <ThermoPicture src={thermoPic}></ThermoPicture>
                                 </TempWrapper>
                                 <StyledDescription data-test-id='ResultPage_Description'>
@@ -133,11 +141,7 @@ const ResultPage = () => {
                                 </StyledDescription>
                             </div>
                         </WeatherResultsSection>
-                        <ZipCodeForm
-                            placeHolderText={'Search Again!'}
-                            showReturnHomeButton={true}
-                            pageNavigation={navigateToResult}
-                        />
+                        <ZipCodeForm placeHolderText={'Search Again!'} pageNavigation={navigateToResult} />
                     </>
                 )}
             </ResultsSection>

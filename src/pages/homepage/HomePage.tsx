@@ -5,12 +5,18 @@ import {getFontWeight} from '../../utils/layout/getFontWeight';
 import {ZipCodeForm} from '../shared/ZipCodeForm';
 import {useNavigate} from 'react-router-dom';
 
-const ZipCodeColumn = styled.div`
+const HomePageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    @media screen and ${breakPoints.mobile} {
+        padding-bottom: 75px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        padding-bottom: 0px;
+        padding-top: 50px;
+    }
 `;
 
 const WelcomeTitle = styled.h1`
@@ -20,7 +26,7 @@ const WelcomeTitle = styled.h1`
     margin-bottom: 0;
 
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(12)};
+        font-size: ${getFontSize(9)};
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(9)};
@@ -33,9 +39,9 @@ const Title = styled.h1`
     text-align: center;
 
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(11)};
+        font-size: ${getFontSize(6)};
     }
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(7)};
     }
 `;
@@ -48,11 +54,11 @@ const HomePage = () => {
     };
 
     return (
-        <ZipCodeColumn>
+        <HomePageWrapper>
             <WelcomeTitle data-test-id='HomePage_WelcomeTitle'>Welcome!</WelcomeTitle>
             <Title data-test-id='HomePage_Title'>Get your current weather below!</Title>
             <ZipCodeForm placeHolderText={'5-Digit Zip Code'} pageNavigation={navigateToResult} />
-        </ZipCodeColumn>
+        </HomePageWrapper>
     );
 };
 

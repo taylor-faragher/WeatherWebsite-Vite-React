@@ -4,7 +4,6 @@ import {getFontSize} from '../../utils/layout/getFontSize';
 import {validateZipCodeInput} from '../../utils/validateZipCodeInput';
 import {validateZipCodeLength} from '../../utils/validateZipCodeLength';
 import styled from 'styled-components';
-import ReturnHomeButton from './ReturnHomeButton';
 
 const ZipCodeWrapper = styled.form`
     display: flex;
@@ -22,23 +21,24 @@ const ZipCodeInput = styled.input`
     transition: border-color 0.2s;
 
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(11)};
-        max-width: 800px;
+        font-size: ${getFontSize(6)};
         margin-bottom: 45px;
+        margin-top: 30px;
+        max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(6)};
-        max-width: 350px;
         margin-bottom: 0;
     }
 `;
 
 const StyledErrorMessage = styled.div`
+    color: red;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(8)};
+        font-size: ${getFontSize(4)};
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(5)};
+        font-size: ${getFontSize(4)};
         margin: 20px 0 0 0;
     }
 `;
@@ -53,9 +53,9 @@ const ZipCodeButtonSearch = styled.button`
         border: 1px solid #9b9b9b;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(10)};
-        width: 550px;
-        min-height: 175px;
+        font-size: ${getFontSize(6)};
+        width: 300px;
+        min-height: 100px;
     }
 
     @media screen and ${breakPoints.tabletBig} {
@@ -78,7 +78,6 @@ type VoidFunctionWithParam = (param: string) => void;
 
 interface ZipCodeFormProps {
     placeHolderText: string;
-    showReturnHomeButton?: boolean;
     pageNavigation: VoidFunctionWithParam;
 }
 
@@ -118,7 +117,6 @@ export const ZipCodeForm = (props: ZipCodeFormProps) => {
                 <ZipCodeButtonSearch type='submit' data-test-id='ZipCodeButtonSearch'>
                     Search
                 </ZipCodeButtonSearch>
-                {props.showReturnHomeButton && <ReturnHomeButton />}
             </ButtonWrapper>
         </ZipCodeWrapper>
     );
