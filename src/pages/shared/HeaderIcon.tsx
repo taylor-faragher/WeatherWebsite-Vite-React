@@ -1,3 +1,4 @@
+import {ReactElement} from 'react';
 import styled from 'styled-components';
 
 const HeaderIconWrapper = styled.div`
@@ -49,9 +50,16 @@ const navigateToPath = (path: string): void => {
     window.location.href = `${path}`;
 };
 
-export const HeaderIcon = ({icon, text, path}) => (
-    <HeaderIconWrapper data-test-id='HeaderIcon' onClick={() => navigateToPath(path)}>
-        {icon}
-        <HeaderTooltip data-test-id='HeaderToolTip'>{text}</HeaderTooltip>
+type HeaderIconProps = {
+    icon: ReactElement;
+    toolTipText: string;
+    path: string;
+    testId?: string;
+};
+
+export const HeaderIcon = (props: HeaderIconProps) => (
+    <HeaderIconWrapper data-test-id={`HeaderIcon_${props.testId}`} onClick={() => navigateToPath(props.path)}>
+        {props.icon}
+        <HeaderTooltip data-test-id='HeaderToolTip'>{props.toolTipText}</HeaderTooltip>
     </HeaderIconWrapper>
 );
