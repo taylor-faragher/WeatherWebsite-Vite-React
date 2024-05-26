@@ -4,26 +4,26 @@ describe('ResultPage E2E Tests', () => {
         cy.wait('@getWeather1');
         cy.tid(`ResultPage_ZipCodeTitle`).should('be.visible');
         cy.tid(`ResultPage_WeatherPic`).should('be.visible');
-        cy.tid(`ResultPage_CurrentTemp`).should('be.visible');
+        cy.tid(`ResultPage_TempWrapper`).should('be.visible');
         cy.tid(`ResultPage_Description`).should('be.visible');
         cy.tid(`ZipCodeForm`).should('be.visible');
         cy.tid(`ZipCodeInput`).should('be.visible');
         cy.tid(`ZipCodeButtonSearch`).should('be.visible');
-        cy.tid('ReturnButton').should('be.visible').click();
+        cy.tid('HeaderIcon_home').should('be.visible').click();
         cy.url().should('contain', '/main');
     });
 
-    it(`User can search zip Code again from result page`, () => {
+    it(`User can search zip code again from result page`, () => {
         cy.visit('/result?zipCode=20020');
         cy.wait('@getWeather1');
-        cy.tid(`ResultPage_CurrentTemp`).should('be.visible');
+        cy.tid(`ResultPage_TempWrapper`).should('be.visible');
         cy.tid(`ZipCodeForm`).should('be.visible');
         cy.tid(`ZipCodeInput`).should('be.visible');
         cy.tid(`ZipCodeInput`).type('20005', {delay: 100});
         cy.tid(`ZipCodeForm`).submit();
         cy.url().should('contain', '/result?zipCode=20005');
         cy.wait('@getWeather2');
-        cy.tid(`ResultPage_CurrentTemp`).should('be.visible');
+        cy.tid(`ResultPage_TempWrapper`).should('be.visible');
     });
 
     it(`Passing partial zip code in parameters causes a redirect to Error page`, () => {
