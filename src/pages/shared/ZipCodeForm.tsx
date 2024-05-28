@@ -13,12 +13,13 @@ const ZipCodeWrapper = styled.form`
 
 const ZipCodeInput = styled.input`
     border: 0;
-    border-bottom: 2px solid #9b9b9b;
+    border-bottom: 2px solid ${({theme}) => theme.zipCodeInputColor};
     outline: 0;
     padding: 7px 0;
     text-align: center;
     background: transparent;
     transition: border-color 0.2s;
+    color: ${({theme}) => theme.zipCodeInputColor};
 
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(6)};
@@ -48,6 +49,7 @@ const ZipCodeButtonSearch = styled.button`
     border: 0;
     outline: 0;
     border-radius: 5em;
+    background-color: lightgrey;
     &:hover {
         cursor: pointer;
         border: 1px solid #9b9b9b;
