@@ -9,14 +9,14 @@ const HeaderIconWrapper = styled.div`
     height: 3rem;
     width: 3rem;
     cursor: pointer;
-    background-color: rgb(156 163 175);
     margin-right: auto;
     margin-left: auto;
-    background-color: grey;
-    border-radius: 1.5rem;
+    background-color: ${({theme}) => theme.headerIconBackgroundColor};
+    border: 2px solid ${({theme}) => theme.toggleBorder};
+    border-radius: 2rem;
     transition-property: all;
     transition-duration: 300ms;
-    color: rgb(34 197 94);
+    color: ${({theme}) => theme.headerIconColor};
     &:hover {
         border-radius: 0.5rem;
         background-color: rgb(22 163 74);
