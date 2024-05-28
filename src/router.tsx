@@ -5,7 +5,7 @@ import './AppRoutes.css';
 import {ThemeProvider, styled} from 'styled-components';
 import {GlobalStyles} from './GlobalStyles';
 import {darkTheme, lightTheme} from './Theme';
-import {useDarkMode} from './pages/shared/useDarkMode';
+import {useDarkMode} from './hooks/useDarkMode';
 
 const AppWrapper = styled.div`
     width: 100vw;
