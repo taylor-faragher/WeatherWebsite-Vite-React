@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {FaHouse, FaCircleQuestion, FaGithub} from 'react-icons/fa6';
 import {HeaderIcon} from './HeaderIcon';
 import {breakPoints} from '../../utils/layout/breakpoints';
-import {DarkModeSwitch} from '../../hooks/DarkModeSwitch';
+import {DarkModeSwitch} from './DarkModeSwitch';
 
 const HeaderWrapper = styled.div`
     display: flex;
