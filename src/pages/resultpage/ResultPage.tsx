@@ -50,7 +50,7 @@ const WeatherPicWrapper = styled.div`
     justify-content: center;
     @media screen and ${breakPoints.mobile} {
         width: 100%;
-        height: 500px;
+        height: 250px;
     }
     @media screen and ${breakPoints.tabletBig} {
         width: 100%;
