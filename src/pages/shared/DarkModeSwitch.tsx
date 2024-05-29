@@ -52,7 +52,7 @@ export const DarkModeSwitch = ({theme, themeSwitch}) => {
         <DarkModeButtonWrapper onClick={themeSwitch}>
             {theme == 'light' ? <LuSun size='25' /> : <FaRegMoon size='25' />}
             <HeaderTooltip data-test-id='HeaderToolTip'>
-                {theme == 'light' ? 'Switch To Dark Mode' : 'Switch to Light Mode'}
+                {theme == 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             </HeaderTooltip>
         </DarkModeButtonWrapper>
     );
