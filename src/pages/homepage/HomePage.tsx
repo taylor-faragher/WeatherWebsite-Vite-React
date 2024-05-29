@@ -11,7 +11,7 @@ const HomePageWrapper = styled.div`
     align-items: center;
     justify-content: center;
     @media screen and ${breakPoints.mobile} {
-        padding-bottom: 75px;
+        padding-bottom: 175px;
     }
     @media screen and ${breakPoints.tabletBig} {
         padding-bottom: 0px;
