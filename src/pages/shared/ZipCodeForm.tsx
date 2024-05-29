@@ -48,6 +48,7 @@ const ZipCodeButtonSearch = styled.button`
     margin-top: 20px;
     border: 0;
     outline: 0;
+    color: black;
     border-radius: 5em;
     background-color: lightgrey;
     &:hover {
