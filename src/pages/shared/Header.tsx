@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {FaHouse, FaCircleQuestion, FaGithub} from 'react-icons/fa6';
 import {HeaderIcon} from './HeaderIcon';
 import {breakPoints} from '../../utils/layout/breakpoints';
+import {DarkModeSwitch} from './DarkModeSwitch';
 
 const HeaderWrapper = styled.div`
     display: flex;
@@ -9,9 +10,10 @@ const HeaderWrapper = styled.div`
     align-items: center;
     width: 100%;
     height: 75px;
-    background: #202225;
+    background: ${({theme}) => theme.headerBody};
     z-index: 9;
     position: fixed;
+    border-bottom: ${({theme}) => theme.borderBottom};;
 
     @media screen and ${breakPoints.mobile} {
         bottom: 0;
@@ -30,7 +32,7 @@ const ButtonWrapper = styled.div`
     width: 500px;
 `;
 
-export const Header = () => {
+export const Header = ({theme, themeSwitch}) => {
     const showHeader = location.pathname.toLowerCase() !== '/error'; //don't show for error page
     return (
         <>
@@ -45,6 +47,7 @@ export const Header = () => {
                             path='https://github.com/taylor-faragher/WeatherWebsite-Vite-React'
                             testId='github'
                         />
+                        <DarkModeSwitch theme={theme} themeSwitch={themeSwitch} />
                     </ButtonWrapper>
                 </HeaderWrapper>
             )}

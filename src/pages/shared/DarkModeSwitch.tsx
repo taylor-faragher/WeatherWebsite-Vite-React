@@ -1,22 +1,23 @@
-import {ReactElement} from 'react';
-import styled from 'styled-components';
+import {styled} from 'styled-components';
+import {FaRegMoon} from 'react-icons/fa';
+import {LuSun} from 'react-icons/lu';
 
-const HeaderIconWrapper = styled.div`
+const DarkModeButtonWrapper = styled.div`
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
+    background-color: ${({theme}) => theme.headerIconBackgroundColor};
+    border: 2px solid ${({theme}) => theme.toggleBorder};
+    color: ${({theme}) => theme.headerIconColor};
     height: 3rem;
     width: 3rem;
     cursor: pointer;
     margin-right: auto;
     margin-left: auto;
-    background-color: ${({theme}) => theme.headerIconBackgroundColor};
-    border: 2px solid ${({theme}) => theme.toggleBorder};
     border-radius: 2rem;
     transition-property: all;
     transition-duration: 300ms;
-    color: ${({theme}) => theme.headerIconColor};
     &:hover {
         border-radius: 0.5rem;
         background-color: rgb(22 163 74);
@@ -41,25 +42,18 @@ const HeaderTooltip = styled.span`
     transform: scale(0);
     transform-origin: top;
 
-    ${HeaderIconWrapper}:hover & {
+    ${DarkModeButtonWrapper}:hover & {
         transform: scale(1);
     }
 `;
 
-const navigateToPath = (path: string): void => {
-    window.location.href = `${path}`;
+export const DarkModeSwitch = ({theme, themeSwitch}) => {
+    return (
+        <DarkModeButtonWrapper onClick={themeSwitch}>
+            {theme == 'light' ? <LuSun size='25' /> : <FaRegMoon size='25' />}
+            <HeaderTooltip data-test-id='HeaderToolTip'>
+                {theme == 'light' ? 'Switch To Dark Mode' : 'Switch to Light Mode'}
+            </HeaderTooltip>
+        </DarkModeButtonWrapper>
+    );
 };
-
-type HeaderIconProps = {
-    icon: ReactElement;
-    toolTipText: string;
-    path: string;
-    testId?: string;
-};
-
-export const HeaderIcon = (props: HeaderIconProps) => (
-    <HeaderIconWrapper data-test-id={`HeaderIcon_${props.testId}`} onClick={() => navigateToPath(props.path)}>
-        {props.icon}
-        <HeaderTooltip data-test-id='HeaderToolTip'>{props.toolTipText}</HeaderTooltip>
-    </HeaderIconWrapper>
-);
