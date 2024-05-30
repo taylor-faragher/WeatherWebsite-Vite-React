@@ -13,14 +13,16 @@ const HeaderWrapper = styled.div`
     background: ${({theme}) => theme.headerBody};
     z-index: 9;
     position: fixed;
-    border-bottom: ${({theme}) => theme.borderBottom};;
 
     @media screen and ${breakPoints.mobile} {
         bottom: 0;
         top; revert;
+        border-top: ${({theme}) => theme.headerBorderBottom};
+
     }
     @media screen and ${breakPoints.tabletBig} {
         bottom: revert;
+        border-bottom: ${({theme}) => theme.headerBorderBottom};
         top: 0;
     }
 `;
