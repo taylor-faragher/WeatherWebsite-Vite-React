@@ -6,7 +6,7 @@ export const lightTheme = {
     background: '#363537',
     headerIconColor: '#363537',
     headerIconBackgroundColor: 'white',
-    borderBottom: '2px solid',
+    headerBorderBottom: '2px solid',
     zipCodeInputColor: 'black',
 };
 
