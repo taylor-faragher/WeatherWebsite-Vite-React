@@ -1,6 +1,8 @@
 import {useContext, useState} from 'react';
 import {styled} from 'styled-components';
 import {AccountContext} from '../../services/Account';
+import Settings from '../shared/Settings';
+import Status from '../status/Status';
 
 const LoginPageWrapper = styled.div``;
 const LoginPageForm = styled.form``;
@@ -22,13 +24,15 @@ const LoginPage = () => {
                 console.log('Logged in!', data);
             })
             .catch(err => {
-                console.error('Failed to login: ', err);
+                console.error('Failed to auth email and password: ', err);
             });
     };
 
     return (
         <LoginPageWrapper>
-            <LoginPageForm onSubmit={onSubmit}>
+            <Status />
+            <Settings />
+            <LoginPageForm onSubmit={e => onSubmit(e)}>
                 <LoginText>Username</LoginText>
                 <EmailInput value={email} onChange={event => setEmail(event.target.value)}></EmailInput>
                 <LoginText>Password</LoginText>
