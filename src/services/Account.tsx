@@ -3,28 +3,54 @@ import {createContext} from 'react';
 import {CognitoUser, AuthenticationDetails, CognitoUserSession} from 'amazon-cognito-identity-js';
 import Pool from '../UserPool';
 
-type AccountContext = {
+interface UserAttributes {
+    [key: string]: string;
+}
+
+interface SessionWithUser extends CognitoUserSession {
+    user: any;
+    email: string;
+    attributes: UserAttributes;
+}
+
+type AccountContextType = {
     authenticate: (Username: any, Password: any) => Promise<unknown>;
-    getSession: () => Promise<unknown>;
+    getSession: () => Promise<SessionWithUser>;
     logout: () => void;
 };
 
-const AccountContext = createContext<AccountContext>(null!);
+const AccountContext = createContext<AccountContextType>(null!);
 
 const Account = ({children}) => {
-    const getSession = async (): Promise<CognitoUserSession> => {
-        return await new Promise<CognitoUserSession>((resolve, reject) => {
+    const getSession = async (): Promise<SessionWithUser> => {
+        return await new Promise<SessionWithUser>((resolve, reject) => {
             const user = Pool.getCurrentUser();
             if (user) {
-                user.getSession((err, session) => {
+                user.getSession(async (err, session) => {
                     if (err) {
-                        reject();
+                        reject(new Error('Failed to find Current Session'));
                     } else {
-                        resolve(session);
+                        const attributes: UserAttributes = await new Promise((resolve, reject) => {
+                            user.getUserAttributes((err, attributes) => {
+                                if (err) {
+                                    reject(new Error('Failed to get User Attributes'));
+                                } else {
+                                    const results = {};
+                                    if (attributes) {
+                                        for (const attribute of attributes) {
+                                            const {Name, Value} = attribute;
+                                            results[Name] = Value;
+                                        }
+                                        resolve(results);
+                                    }
+                                }
+                            });
+                        });
+                        resolve({user, ...session, ...(attributes as object)});
                     }
                 });
             } else {
-                reject();
+                reject(new Error('Failed to find Current User'));
             }
         });
     };
@@ -66,7 +92,7 @@ const Account = ({children}) => {
         }
     };
 
-    return <AccountContext.Provider value={{authenticate, getSession, logout}}>{children}</AccountContext.Provider>;
+    return <AccountContext.Provider value={{getSession, authenticate, logout}}>{children}</AccountContext.Provider>;
 };
 
 export {Account, AccountContext};
