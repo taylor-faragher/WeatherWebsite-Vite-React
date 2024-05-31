@@ -2,6 +2,7 @@
 import {createContext} from 'react';
 import {CognitoUser, AuthenticationDetails, CognitoUserSession} from 'amazon-cognito-identity-js';
 import Pool from '../UserPool';
+import {useNavigate} from 'react-router-dom';
 
 interface UserAttributes {
     [key: string]: string;
@@ -22,6 +23,7 @@ type AccountContextType = {
 const AccountContext = createContext<AccountContextType>(null!);
 
 const Account = ({children}) => {
+    const navigate = useNavigate();
     const getSession = async (): Promise<SessionWithUser> => {
         return await new Promise<SessionWithUser>((resolve, reject) => {
             const user = Pool.getCurrentUser();
@@ -89,6 +91,7 @@ const Account = ({children}) => {
         if (user) {
             user.signOut();
             console.log('User was logged out');
+            navigate('/');
         }
     };
 
