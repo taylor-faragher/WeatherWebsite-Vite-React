@@ -3,10 +3,11 @@ import {FaHouse, FaCircleQuestion, FaGithub} from 'react-icons/fa6';
 import {HeaderIcon} from './HeaderIcon';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {DarkModeSwitch} from './DarkModeSwitch';
+import LoginLogoutButton from './LoginLogoutButton';
 
 const HeaderWrapper = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 75px;
@@ -27,11 +28,22 @@ const HeaderWrapper = styled.div`
     }
 `;
 
-const ButtonWrapper = styled.div`
+const LeftHeaderWrapper = styled.div``;
+
+const CenterHeaderWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 500px;
+    flex: 1;
+    max-width: 500px;
+`;
+
+const RightHeaderWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 15px;
+    margin-left: -67px;
 `;
 
 export const Header = ({theme, themeSwitch}) => {
@@ -39,8 +51,9 @@ export const Header = ({theme, themeSwitch}) => {
     return (
         <>
             {showHeader && (
-                <HeaderWrapper data-test-id='Header'>
-                    <ButtonWrapper>
+                <HeaderWrapper data-test-id='HeaderWrapper'>
+                    <LeftHeaderWrapper></LeftHeaderWrapper>
+                    <CenterHeaderWrapper>
                         <HeaderIcon icon={<FaHouse size='25' />} toolTipText='Home' path='/main' testId='home' />
                         <HeaderIcon icon={<FaCircleQuestion size='25' />} toolTipText='FAQ' path='/info' testId='FAQ' />
                         <HeaderIcon
@@ -50,7 +63,10 @@ export const Header = ({theme, themeSwitch}) => {
                             testId='github'
                         />
                         <DarkModeSwitch theme={theme} themeSwitch={themeSwitch} />
-                    </ButtonWrapper>
+                    </CenterHeaderWrapper>
+                    <RightHeaderWrapper>
+                        <LoginLogoutButton></LoginLogoutButton>
+                    </RightHeaderWrapper>
                 </HeaderWrapper>
             )}
         </>
