@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import {styled} from 'styled-components';
 import UserPool from '../../UserPool';
+import Status from '../status/Status';
+import Settings from '../shared/Settings';
 
 const LoginPageWrapper = styled.div``;
 const LoginPageForm = styled.form``;
@@ -25,6 +27,8 @@ const SignUpPage = () => {
 
     return (
         <LoginPageWrapper>
+            <Status />
+            <Settings />
             <LoginPageForm onSubmit={onSubmit}>
                 <LoginText>Username</LoginText>
                 <EmailInput value={email} onChange={event => setEmail(event.target.value)}></EmailInput>
