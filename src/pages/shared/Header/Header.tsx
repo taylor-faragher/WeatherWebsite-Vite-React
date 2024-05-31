@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {FaHouse, FaCircleQuestion, FaGithub} from 'react-icons/fa6';
 import {HeaderIcon} from './HeaderIcon';
-import {breakPoints} from '../../utils/layout/breakpoints';
+import {breakPoints} from '../../../utils/layout/breakpoints';
 import {DarkModeSwitch} from './DarkModeSwitch';
 import LoginLogoutButton from './LoginLogoutButton';
 
