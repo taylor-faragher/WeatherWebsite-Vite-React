@@ -2,7 +2,7 @@ import {useContext, useState} from 'react';
 import {styled} from 'styled-components';
 import {AccountContext} from '../../services/Account';
 import useLoginStatus from '../../hooks/useLoginStatus';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const LoginPageWrapper = styled.div``;
 const LoginPageForm = styled.form``;
@@ -35,13 +35,21 @@ const LoginPage = () => {
     return (
         <LoginPageWrapper>
             {!status && (
-                <LoginPageForm onSubmit={e => onSubmit(e)}>
-                    <LoginText>Username</LoginText>
-                    <EmailInput value={email} onChange={event => setEmail(event.target.value)}></EmailInput>
-                    <LoginText>Password</LoginText>
-                    <PasswordInput value={password} onChange={event => setPassword(event.target.value)}></PasswordInput>
-                    <SignUpButton type='submit'>Login</SignUpButton>
-                </LoginPageForm>
+                <>
+                    <LoginPageForm onSubmit={e => onSubmit(e)}>
+                        <LoginText>Username</LoginText>
+                        <EmailInput value={email} onChange={event => setEmail(event.target.value)}></EmailInput>
+                        <LoginText>Password</LoginText>
+                        <PasswordInput
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                        ></PasswordInput>
+                        <SignUpButton type='submit'>Login</SignUpButton>
+                    </LoginPageForm>
+                    <div>
+                        Don&apos;t have an account?<Link to={'/signup'}>Sign Up!</Link>
+                    </div>
+                </>
             )}
             {status && (
                 <LogoutButtonWrapper>
