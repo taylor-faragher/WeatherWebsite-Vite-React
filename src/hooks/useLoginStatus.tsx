@@ -1,10 +1,10 @@
 import {useState, useContext, useEffect} from 'react';
-import {AccountContext} from '../../services/Account';
+import {AccountContext} from '../services/Account';
 
-const Status = () => {
+const useLoginStatus = () => {
     const [status, setStatus] = useState(false);
 
-    const {getSession, logout} = useContext(AccountContext);
+    const {getSession} = useContext(AccountContext);
 
     useEffect(() => {
         getSession()
@@ -19,7 +19,7 @@ const Status = () => {
             });
     });
 
-    return <div>{status ? <button onClick={logout}>Logout</button> : 'Please Login'}</div>;
+    return status;
 };
 
-export default Status;
+export default useLoginStatus;
