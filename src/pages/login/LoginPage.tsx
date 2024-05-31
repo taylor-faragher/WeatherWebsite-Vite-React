@@ -2,7 +2,7 @@ import {useContext, useState} from 'react';
 import {styled} from 'styled-components';
 import {AccountContext} from '../../services/Account';
 import Settings from '../shared/Settings';
-import Status from '../status/Status';
+import Status from '../../hooks/useLoginStatus';
 
 const LoginPageWrapper = styled.div``;
 const LoginPageForm = styled.form``;

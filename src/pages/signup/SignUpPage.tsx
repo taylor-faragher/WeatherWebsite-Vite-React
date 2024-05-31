@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {styled} from 'styled-components';
 import UserPool from '../../UserPool';
-import Status from '../status/Status';
+import Status from '../../hooks/useLoginStatus';
 import Settings from '../shared/Settings';
 
 const LoginPageWrapper = styled.div``;
