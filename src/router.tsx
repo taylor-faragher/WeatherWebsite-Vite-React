@@ -7,7 +7,7 @@ import {GlobalStyles} from './GlobalStyles';
 import {darkTheme, lightTheme} from './Theme';
 import {useDarkMode} from './hooks/useDarkMode';
 import LoginPage from './pages/login/LoginPage';
-import {AccountPage} from './pages/account/AccountPage';
+import {Account} from './services/Account';
 import Status from './pages/status/Status';
 
 const AppWrapper = styled.div`
@@ -22,7 +22,7 @@ const AppRoutes = () => {
     return (
         <ThemeProvider theme={themeMode}>
             <GlobalStyles />
-            <AccountPage>
+            <Account>
                 <Status />
                 <AppWrapper data-test-id='AppWrapper'>
                     <Header theme={theme} themeSwitch={themeToggler}></Header>
@@ -37,7 +37,7 @@ const AppRoutes = () => {
                         <Route path='*' element={<HomePage />} />
                     </Routes>
                 </AppWrapper>
-            </AccountPage>
+            </Account>
         </ThemeProvider>
     );
 };
