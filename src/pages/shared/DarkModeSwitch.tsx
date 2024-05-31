@@ -13,8 +13,6 @@ const DarkModeButtonWrapper = styled.div`
     height: 3rem;
     width: 3rem;
     cursor: pointer;
-    margin-right: auto;
-    margin-left: auto;
     border-radius: 2rem;
     transition-property: all;
     transition-duration: 300ms;
