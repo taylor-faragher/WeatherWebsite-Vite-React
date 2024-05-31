@@ -4,6 +4,7 @@
   "version": "1.0",
   "description": "A website where Taylor can try out React stuff and frontend experiments",
   "license": "UNLICENSED",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
