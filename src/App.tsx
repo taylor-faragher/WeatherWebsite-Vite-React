@@ -2,7 +2,6 @@ import styled, {ThemeProvider} from 'styled-components';
 import AppRoutes from './router';
 import {GlobalStyles} from './GlobalStyles';
 import {Account} from './services/Account';
-import Status from './pages/status/Status';
 import {darkTheme, lightTheme} from './Theme';
 import {Header} from './pages/shared/Header';
 import {useDarkMode} from './hooks/useDarkMode';
@@ -19,7 +18,6 @@ export const App = () => {
         <ThemeProvider theme={themeMode}>
             <GlobalStyles />
             <Account>
-                <Status />
                 <AppWrapper data-test-id='AppWrapper'>
                     <Header theme={theme} themeSwitch={themeToggler}></Header>
                     <AppRoutes />
