@@ -3,7 +3,7 @@ import AppRoutes from './router';
 import {GlobalStyles} from './GlobalStyles';
 import {Account} from './services/Account';
 import {darkTheme, lightTheme} from './Theme';
-import {Header} from './pages/shared/Header';
+import {Header} from './pages/shared/Header/Header';
 import {useDarkMode} from './hooks/useDarkMode';
 
 const AppWrapper = styled.div`

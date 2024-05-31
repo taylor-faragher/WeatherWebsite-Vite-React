@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {styled} from 'styled-components';
 import UserPool from '../../UserPool';
 import Status from '../../hooks/useLoginStatus';
-import Settings from '../shared/Settings';
+import Settings from '../profile/Settings';
 
 const LoginPageWrapper = styled.div``;
 const LoginPageForm = styled.form``;
