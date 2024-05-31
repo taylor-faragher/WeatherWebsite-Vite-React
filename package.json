@@ -17,6 +17,7 @@
     "test:headless": "cypress run"
   },
   "dependencies": {
+    "amazon-cognito-identity-js": "^6.3.12",
     "aws-cdk-lib": "^2.141.0",
     "constructs": "^10.3.0",
     "react": "^18.2.0",
