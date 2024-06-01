@@ -17,7 +17,7 @@ const useLoginStatus = () => {
                     setStatus(false);
                 }
             });
-    });
+    }, [getSession]);
 
     return status;
 };
