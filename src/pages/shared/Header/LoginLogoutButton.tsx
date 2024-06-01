@@ -2,6 +2,7 @@ import {styled} from 'styled-components';
 import {GrLogin} from 'react-icons/gr';
 import {CgProfile} from 'react-icons/cg';
 import useLoginStatus from '../../../hooks/useLoginStatus';
+import {breakPoints} from '../../../utils/layout/breakpoints';
 
 const LoginLogoutButtonWrapper = styled.div`
     display: flex;
@@ -20,6 +21,17 @@ const LoginLogoutButtonWrapper = styled.div`
         border-radius: 0.5rem;
         background-color: rgb(22 163 74);
         color: rgb(255 255 255);
+    }
+    @media screen and ${breakPoints.mobile} {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        z-index: 9;
+        position: fixed;
+        top: 11.5px;
+        right: 20px;
     }
 `;
 
@@ -46,7 +58,6 @@ const LoggedInToolTipComponent = styled.span`
 `;
 
 const LoggedOutToolTipComponent = styled.span`
-    position: absolute;
     width: auto;
     margin: 0.5rem;
     border-radius: 0.375rem;
@@ -61,6 +72,7 @@ const LoggedOutToolTipComponent = styled.span`
     transition-duration: 100ms;
     transform: scale(0);
     transform-origin: top;
+    position: absolute;
 
     ${LoginLogoutButtonWrapper}:hover & {
         transform: scale(1);
@@ -80,17 +92,29 @@ const LoggedInToolTip = () => {
 };
 
 export const LoginLogoutButton = () => {
-    const status = useLoginStatus();
-
-    const loginText = status ? <LoggedInToolTip /> : <LoggedOutToolTip />;
-    const loginIcon = status ? <CgProfile size='25' /> : <GrLogin size='25' />;
-    const loginPath = status ? '/profile' : '/login';
+    const {loaded} = useLoginStatus();
 
     return (
-        <LoginLogoutButtonWrapper data-test-id={`LoginLogoutButtonWrapper`} onClick={() => navigateToPath(loginPath)}>
-            {loginIcon}
-            {loginText}
-        </LoginLogoutButtonWrapper>
+        <>
+            {loaded && (
+                <LoginLogoutButtonWrapper
+                    data-test-id={`LoginLogoutButtonWrapper`}
+                    onClick={() => navigateToPath('/profile')}
+                >
+                    <CgProfile size='25' />
+                    <LoggedInToolTip />
+                </LoginLogoutButtonWrapper>
+            )}
+            {!loaded && (
+                <LoginLogoutButtonWrapper
+                    data-test-id={`LoginLogoutButtonWrapper`}
+                    onClick={() => navigateToPath('/login')}
+                >
+                    <GrLogin size='25' />
+                    <LoggedOutToolTip />
+                </LoginLogoutButtonWrapper>
+            )}
+        </>
     );
 };
 
