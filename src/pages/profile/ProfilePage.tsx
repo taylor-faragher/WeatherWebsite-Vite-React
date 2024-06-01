@@ -11,6 +11,10 @@ const ProfileWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 100%;
+    @media screen and ${breakPoints.mobile} {
+        padding-bottom: 100px;
+    }
 `;
 
 const StyledLogoutButton = styled.div`
@@ -25,9 +29,9 @@ const StyledLogoutButton = styled.div`
         border: 1px solid #9b9b9b;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(7)};
         width: 300px;
-        min-height: 100px;
+        min-height: 75px;
     }
 
     @media screen and ${breakPoints.tabletBig} {
