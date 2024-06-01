@@ -1,47 +1,51 @@
-import {useContext, useEffect, useState} from 'react';
-import {AccountContext} from '../../services/Account';
 import {styled} from 'styled-components';
 import ChangePassword from './ChangePassword';
 import ChangeEmail from './ChangeEmail';
+import {useContext, useEffect, useState} from 'react';
+import {AccountContext} from '../../services/Account';
 import {useNavigate} from 'react-router-dom';
 
 const ProfileWrapper = styled.div``;
+const LogoutButtonWrapper = styled.div``;
 
 const ProfilePage = () => {
+    const [status, setStatus] = useState<boolean | null>(null);
     const navigate = useNavigate();
-    const {getSession} = useContext(AccountContext);
-
-    const [loggedIn, setLoggedIn] = useState(false);
+    const {getSession, logout} = useContext(AccountContext);
 
     useEffect(() => {
-        const currentSession = async () => {
-            getSession()
-                .then(() => {
-                    setLoggedIn(true);
-                })
-                .catch(err => {
-                    if (err) {
-                        setLoggedIn(false);
-                    }
-                });
-        };
-        void currentSession();
-        if (!loggedIn) {
-            navigate('/');
+        getSession()
+            .then(session => {
+                console.log('Session: ', session);
+                setStatus(true);
+            })
+            .catch(err => {
+                if (err) {
+                    setStatus(false);
+                }
+            });
+    }, [getSession]);
+
+    useEffect(() => {
+        if (status === false) {
+            navigate('/login');
         }
-    }, [getSession, loggedIn, navigate]);
+    }, [status, navigate]);
+
+    if (status === null) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <ProfileWrapper>
-            <div>
-                {loggedIn && (
-                    <>
-                        <h2>Settings</h2>
-                        <ChangePassword></ChangePassword>
-                        <ChangeEmail></ChangeEmail>
-                    </>
-                )}
-            </div>
+            <>
+                <h2>Settings</h2>
+                <ChangePassword></ChangePassword>
+                <ChangeEmail></ChangeEmail>
+                <LogoutButtonWrapper>
+                    <button onClick={logout}>Logout</button>
+                </LogoutButtonWrapper>
+            </>
         </ProfileWrapper>
     );
 };
