@@ -8,18 +8,32 @@ const ChangePasswordFormWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 25px;
     width: 100%;
     max-width: 800px;
+    @media screen and ${breakPoints.mobile} {
+        padding-top: 50px;
+    }
+    @media screen and ${breakPoints.tablet} {
+        padding-top: 25px;
+    }
 `;
 
 const ChangePasswordBorder = styled.fieldset`
-    width: 100%;
     max-width: 800px;
+    @media screen and ${breakPoints.mobile} {
+        padding-top: 50px;
+        width: 75%;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        padding-top: 0px;
+        width: 100%;
+    }
 `;
 
 const StyledLegend = styled.legend`
-    font-size: ${getFontSize(5)};
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(4)};
+    }
 `;
 
 const ChangePasswordForm = styled.form``;
@@ -31,7 +45,7 @@ const StyledText = styled.h3`
 
 const OldPasswordInput = styled.input`
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(4)};
         margin-bottom: 45px;
         margin-top: 30px;
         max-width: 350px;
@@ -44,7 +58,7 @@ const OldPasswordInput = styled.input`
 
 const NewPasswordInput = styled.input`
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(4)};
         margin-bottom: 45px;
         margin-top: 30px;
         max-width: 350px;
@@ -69,9 +83,9 @@ const NewPasswordSubmitButton = styled.button`
         border: 1px solid #9b9b9b;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(6)};
-        width: 300px;
-        min-height: 100px;
+        font-size: ${getFontSize(5)};
+        width: 250px;
+        min-height: 65px;
     }
 
     @media screen and ${breakPoints.tabletBig} {
@@ -104,7 +118,7 @@ export default () => {
     return (
         <ChangePasswordFormWrapper>
             <ChangePasswordBorder>
-                <StyledLegend>Change Email</StyledLegend>
+                <StyledLegend>Change Password</StyledLegend>
                 <ChangePasswordForm onSubmit={onSubmit}>
                     <StyledText>Current password</StyledText>
                     <OldPasswordInput
