@@ -7,7 +7,7 @@ import LoginLogoutButton from './LoginLogoutButton';
 
 const HeaderWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 75px;
@@ -28,22 +28,11 @@ const HeaderWrapper = styled.div`
     }
 `;
 
-const LeftHeaderWrapper = styled.div``;
-
-const CenterHeaderWrapper = styled.div`
+const ButtonWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    flex: 1;
-    max-width: 500px;
-`;
-
-const RightHeaderWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-right: 15px;
-    margin-left: -67px;
+    width: 500px;
 `;
 
 export const Header = ({theme, themeSwitch}) => {
@@ -51,23 +40,34 @@ export const Header = ({theme, themeSwitch}) => {
     return (
         <>
             {showHeader && (
-                <HeaderWrapper data-test-id='HeaderWrapper'>
-                    <LeftHeaderWrapper></LeftHeaderWrapper>
-                    <CenterHeaderWrapper>
-                        <HeaderIcon icon={<FaHouse size='25' />} toolTipText='Home' path='/main' testId='home' />
-                        <HeaderIcon icon={<FaCircleQuestion size='25' />} toolTipText='FAQ' path='/info' testId='FAQ' />
-                        <HeaderIcon
-                            icon={<FaGithub size='25' />}
-                            toolTipText='See the Code for this Site!'
-                            path='https://github.com/taylor-faragher/WeatherWebsite-Vite-React'
-                            testId='github'
-                        />
-                        <DarkModeSwitch theme={theme} themeSwitch={themeSwitch} />
-                    </CenterHeaderWrapper>
-                    <RightHeaderWrapper>
-                        <LoginLogoutButton></LoginLogoutButton>
-                    </RightHeaderWrapper>
-                </HeaderWrapper>
+                <>
+                    <HeaderWrapper data-test-id='HeaderWrapper'>
+                        <ButtonWrapper data-test-id='ButtonWrapper'>
+                            <HeaderIcon
+                                icon={<FaHouse size='25' />}
+                                toolTipText='Home'
+                                path='/main'
+                                testId='home'
+                                data-test-id='HeaderIcon_Home'
+                            />
+                            <HeaderIcon
+                                icon={<FaCircleQuestion size='25' />}
+                                toolTipText='FAQ'
+                                path='/info'
+                                testId='FAQ'
+                                data-test-id='HeaderIcon_FAQ'
+                            />
+                            <HeaderIcon
+                                icon={<FaGithub size='25' />}
+                                toolTipText='See the Code for this Site!'
+                                path='https://github.com/taylor-faragher/WeatherWebsite-Vite-React'
+                                testId='github'
+                            />
+                            <DarkModeSwitch theme={theme} themeSwitch={themeSwitch} />
+                        </ButtonWrapper>
+                    </HeaderWrapper>
+                    <LoginLogoutButton></LoginLogoutButton>
+                </>
             )}
         </>
     );
