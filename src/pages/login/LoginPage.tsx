@@ -34,7 +34,7 @@ const LoginPage = () => {
 
     return (
         <LoginPageWrapper>
-            {!status && (
+            {status && (
                 <>
                     <LoginPageForm onSubmit={e => onSubmit(e)}>
                         <LoginText>Username</LoginText>
@@ -51,7 +51,7 @@ const LoginPage = () => {
                     </div>
                 </>
             )}
-            {status && (
+            {!status && (
                 <LogoutButtonWrapper>
                     <button onClick={logout}>Logout</button>
                 </LogoutButtonWrapper>
