@@ -3,6 +3,7 @@ import {AccountContext} from '../services/Account';
 
 const useLoginStatus = () => {
     const [status, setStatus] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
     const {getSession} = useContext(AccountContext);
 
@@ -11,6 +12,7 @@ const useLoginStatus = () => {
             .then(session => {
                 console.log('Session: ', session);
                 setStatus(true);
+                setLoaded(true);
             })
             .catch(err => {
                 if (err) {
@@ -19,7 +21,7 @@ const useLoginStatus = () => {
             });
     }, [getSession]);
 
-    return status;
+    return {status: status, loaded: loaded};
 };
 
 export default useLoginStatus;
