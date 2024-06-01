@@ -1,7 +1,7 @@
 describe('Header E2E Tests', () => {
     it(`All Page elements should be visible on desktop`, () => {
         cy.viewport('macbook-15');
-        cy.tid(`Header`).should('be.visible');
+        cy.tid(`HeaderWrapper`).should('be.visible');
         cy.tid(`HeaderIcon_home`).should('be.visible');
         cy.tid(`HeaderIcon_FAQ`).should('be.visible');
         cy.tid(`HeaderIcon_github`).should('be.visible');
@@ -9,7 +9,7 @@ describe('Header E2E Tests', () => {
 
     it(`All Page elements should be visible on mobile`, () => {
         cy.viewport('iphone-x');
-        cy.tid(`Header`).should('be.visible');
+        cy.tid(`HeaderWrapper`).should('be.visible');
         cy.tid(`HeaderIcon_home`).should('be.visible');
         cy.tid(`HeaderIcon_FAQ`).should('be.visible');
         cy.tid(`HeaderIcon_github`).should('be.visible');
