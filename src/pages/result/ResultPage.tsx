@@ -93,7 +93,7 @@ const ThermoPicture = styled.img`
 const StyledDescription = styled.div`
     width: 100%;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(7)};
+        font-size: ${getFontSize(6)};
     }
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(10)};
