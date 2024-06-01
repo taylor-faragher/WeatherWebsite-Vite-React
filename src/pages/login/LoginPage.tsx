@@ -47,7 +47,7 @@ const LoginPage = () => {
                         <SignUpButton type='submit'>Login</SignUpButton>
                     </LoginPageForm>
                     <div>
-                        Don&apos;t have an account?<Link to={'/signup'}>Sign Up!</Link>
+                        Don&apos;t have an account? <Link to={'/signup'}> Sign Up!</Link>
                     </div>
                 </>
             )}
