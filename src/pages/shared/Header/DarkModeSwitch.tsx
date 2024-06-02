@@ -47,7 +47,7 @@ const HeaderTooltip = styled.span`
 
 export const DarkModeSwitch = ({theme, themeSwitch}) => {
     return (
-        <DarkModeButtonWrapper onClick={themeSwitch}>
+        <DarkModeButtonWrapper onClick={themeSwitch} data-test-id='DarkModeButtonWrapper'>
             {theme == 'light' ? <LuSun size='25' /> : <FaRegMoon size='25' />}
             <HeaderTooltip data-test-id='HeaderToolTip'>
                 {theme == 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}

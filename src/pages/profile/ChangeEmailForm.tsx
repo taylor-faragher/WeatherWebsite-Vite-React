@@ -120,19 +120,26 @@ export default () => {
     };
 
     return (
-        <ChangeEmailFormWrapper>
-            <ChangeEmailBorder>
+        <ChangeEmailFormWrapper data-test-id='ChangeEmailFormWrapper'>
+            <ChangeEmailBorder data-test-id='ChangeEmailBorder'>
                 <StyledLegend>Change Email</StyledLegend>
-                <ChangeEmailForm onSubmit={onSubmit}>
+                <ChangeEmailForm onSubmit={onSubmit} data-test-id='ChangeEmailForm'>
                     <StyledText>New Email</StyledText>
-                    <NewEmailInput value={newEmail} onChange={event => setNewEmail(event.target.value)}></NewEmailInput>
+                    <NewEmailInput
+                        data-test-id='NewEmailInput'
+                        value={newEmail}
+                        onChange={event => setNewEmail(event.target.value)}
+                    ></NewEmailInput>
                     <StyledText>Current Password</StyledText>
                     <NewPasswordInput
                         value={password}
                         onChange={event => setPassword(event.target.value)}
+                        data-test-id='NewPasswordInput'
                     ></NewPasswordInput>
-                    <ButtonWrapper>
-                        <NewEmailSubmitButton type='submit'>Change Email</NewEmailSubmitButton>
+                    <ButtonWrapper data-test-id='ButtonWrapper'>
+                        <NewEmailSubmitButton type='submit' data-test-id='NewEmailSubmitButton'>
+                            Change Email
+                        </NewEmailSubmitButton>
                     </ButtonWrapper>
                 </ChangeEmailForm>
             </ChangeEmailBorder>

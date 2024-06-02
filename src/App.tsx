@@ -19,7 +19,7 @@ export const App = () => {
             <GlobalStyles />
             <Account>
                 <AppWrapper data-test-id='AppWrapper'>
-                    <Header theme={theme} themeSwitch={themeToggler}></Header>
+                    <Header data-test-id='Header' theme={theme} themeSwitch={themeToggler}></Header>
                     <AppRoutes />
                 </AppWrapper>
             </Account>

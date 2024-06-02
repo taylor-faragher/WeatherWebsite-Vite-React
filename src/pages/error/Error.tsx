@@ -14,9 +14,9 @@ const ErrorText = styled.h1`
 
 const ErrorPage = () => {
     return (
-        <ErrorContainer>
+        <ErrorContainer data-test-id='ErrorContainer'>
             <ErrorText data-test-id='Error_ErrorText'>Oh Snap! Sorry about that!</ErrorText>
-            <ReturnHomeButton />
+            <ReturnHomeButton data-test-id='ReturnHomeButton' />
         </ErrorContainer>
     );
 };

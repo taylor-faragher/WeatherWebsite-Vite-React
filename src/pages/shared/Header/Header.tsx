@@ -61,7 +61,7 @@ export const Header = ({theme, themeSwitch}) => {
                                 icon={<FaGithub size='25' />}
                                 toolTipText='See the Code for this Site!'
                                 path='https://github.com/taylor-faragher/WeatherWebsite-Vite-React'
-                                testId='github'
+                                testId='HeaderIcon_github'
                             />
                             <DarkModeSwitch theme={theme} themeSwitch={themeSwitch} />
                         </ButtonWrapper>

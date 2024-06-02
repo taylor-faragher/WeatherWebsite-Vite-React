@@ -33,18 +33,25 @@ const LoginPage = () => {
     };
 
     return (
-        <LoginPageWrapper>
+        <LoginPageWrapper data-test-id='LoginPage_LoginPageWrapper'>
             {status && (
                 <>
-                    <LoginPageForm onSubmit={e => onSubmit(e)}>
-                        <LoginText>Username</LoginText>
-                        <EmailInput value={email} onChange={event => setEmail(event.target.value)}></EmailInput>
-                        <LoginText>Password</LoginText>
+                    <LoginPageForm onSubmit={e => onSubmit(e)} data-test-id='LoginPage_LoginPageForm'>
+                        <LoginText data-test-id='LoginPage_LoginText'>Username</LoginText>
+                        <EmailInput
+                            data-test-id='LoginPage_EmailInput'
+                            value={email}
+                            onChange={event => setEmail(event.target.value)}
+                        ></EmailInput>
+                        <LoginText data-test-id='LoginPage_LoginText'>Password</LoginText>
                         <PasswordInput
                             value={password}
                             onChange={event => setPassword(event.target.value)}
+                            data-test-id='LoginPage_PasswordInput'
                         ></PasswordInput>
-                        <SignUpButton type='submit'>Login</SignUpButton>
+                        <SignUpButton data-test-id='LoginPage_SignUpButton' type='submit'>
+                            Login
+                        </SignUpButton>
                     </LoginPageForm>
                     <div>
                         Don&apos;t have an account? <Link to={'/signup'}> Sign Up!</Link>
@@ -52,7 +59,7 @@ const LoginPage = () => {
                 </>
             )}
             {!status && (
-                <LogoutButtonWrapper>
+                <LogoutButtonWrapper data-test-id='LoginPage_LogoutButtonWrapper'>
                     <button onClick={logout}>Logout</button>
                 </LogoutButtonWrapper>
             )}

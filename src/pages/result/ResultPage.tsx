@@ -115,7 +115,7 @@ const ResultPage = () => {
 
     return (
         <>
-            <ResultsSection>
+            <ResultsSection data-test-id='ResultPage_ResultsSection'>
                 <ZipCodeTitle data-test-id='ResultPage_ZipCodeTitle'>Weather Results for {zipCode}</ZipCodeTitle>
                 {!loaded && (
                     <div>
@@ -141,7 +141,11 @@ const ResultPage = () => {
                                 </StyledDescription>
                             </div>
                         </WeatherResultsSection>
-                        <ZipCodeForm placeHolderText={'Search Again!'} pageNavigation={navigateToResult} />
+                        <ZipCodeForm
+                            data-test-id='ResultPage_ZipCodeForm'
+                            placeHolderText={'Search Again!'}
+                            pageNavigation={navigateToResult}
+                        />
                     </>
                 )}
             </ResultsSection>

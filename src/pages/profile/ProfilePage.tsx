@@ -74,7 +74,9 @@ const ProfilePage = () => {
             <h2>Profile Settings</h2>
             <ChangePassword></ChangePassword>
             <ChangeEmail></ChangeEmail>
-            <StyledLogoutButton onClick={logout}>Logout</StyledLogoutButton>
+            <StyledLogoutButton data-test-id='LogoutButton' onClick={logout}>
+                Logout
+            </StyledLogoutButton>
         </ProfileWrapper>
     );
 };

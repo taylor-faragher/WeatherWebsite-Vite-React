@@ -116,22 +116,26 @@ export default () => {
     };
 
     return (
-        <ChangePasswordFormWrapper>
-            <ChangePasswordBorder>
+        <ChangePasswordFormWrapper data-test-id='ChangePasswordFormWrapper'>
+            <ChangePasswordBorder data-test-id='ChangePasswordBorder'>
                 <StyledLegend>Change Password</StyledLegend>
-                <ChangePasswordForm onSubmit={onSubmit}>
+                <ChangePasswordForm onSubmit={onSubmit} data-test-id='ChangePasswordForm'>
                     <StyledText>Current password</StyledText>
                     <OldPasswordInput
                         value={password}
                         onChange={event => setPassword(event.target.value)}
+                        data-test-id='OldPasswordInput'
                     ></OldPasswordInput>
                     <StyledText>New password</StyledText>
                     <NewPasswordInput
                         value={newPassword}
                         onChange={event => setNewPassword(event.target.value)}
+                        data-test-id='NewPasswordInput'
                     ></NewPasswordInput>
-                    <ButtonWrapper>
-                        <NewPasswordSubmitButton type='submit'>Change Password</NewPasswordSubmitButton>
+                    <ButtonWrapper data-test-id='ButtonWrapper'>
+                        <NewPasswordSubmitButton type='submit' data-test-id='NewPasswordSubmitButton'>
+                            Change Password
+                        </NewPasswordSubmitButton>
                     </ButtonWrapper>
                 </ChangePasswordForm>
             </ChangePasswordBorder>
