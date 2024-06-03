@@ -1,4 +1,5 @@
 import {ReactElement} from 'react';
+import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderIconWrapper = styled.div`
@@ -44,10 +45,6 @@ const HeaderTooltip = styled.span`
     }
 `;
 
-const navigateToPath = (path: string): void => {
-    window.location.href = `${path}`;
-};
-
 type HeaderIconProps = {
     icon: ReactElement;
     toolTipText: string;
@@ -56,8 +53,9 @@ type HeaderIconProps = {
 };
 
 export const HeaderIcon = (props: HeaderIconProps) => {
+    const navigate = useNavigate();
     return (
-        <HeaderIconWrapper data-test-id={`HeaderIcon_${props.testId}`} onClick={() => navigateToPath(props.path)}>
+        <HeaderIconWrapper data-test-id={`HeaderIcon_${props.testId}`} onClick={() => navigate(props.path)}>
             {props.icon}
             <HeaderTooltip data-test-id='HeaderToolTip'>{props.toolTipText}</HeaderTooltip>
         </HeaderIconWrapper>
