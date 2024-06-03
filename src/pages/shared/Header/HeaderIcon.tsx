@@ -1,4 +1,5 @@
 import {ReactElement} from 'react';
+import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderIconWrapper = styled.div`
@@ -9,8 +10,6 @@ const HeaderIconWrapper = styled.div`
     height: 3rem;
     width: 3rem;
     cursor: pointer;
-    margin-right: auto;
-    margin-left: auto;
     background-color: ${({theme}) => theme.headerIconBackgroundColor};
     border: 2px solid ${({theme}) => theme.toggleBorder};
     border-radius: 2rem;
@@ -46,10 +45,6 @@ const HeaderTooltip = styled.span`
     }
 `;
 
-const navigateToPath = (path: string): void => {
-    window.location.href = `${path}`;
-};
-
 type HeaderIconProps = {
     icon: ReactElement;
     toolTipText: string;
@@ -57,9 +52,12 @@ type HeaderIconProps = {
     testId?: string;
 };
 
-export const HeaderIcon = (props: HeaderIconProps) => (
-    <HeaderIconWrapper data-test-id={`HeaderIcon_${props.testId}`} onClick={() => navigateToPath(props.path)}>
-        {props.icon}
-        <HeaderTooltip data-test-id='HeaderToolTip'>{props.toolTipText}</HeaderTooltip>
-    </HeaderIconWrapper>
-);
+export const HeaderIcon = (props: HeaderIconProps) => {
+    const navigate = useNavigate();
+    return (
+        <HeaderIconWrapper data-test-id={`HeaderIcon_${props.testId}`} onClick={() => navigate(props.path)}>
+            {props.icon}
+            <HeaderTooltip data-test-id='HeaderToolTip'>{props.toolTipText}</HeaderTooltip>
+        </HeaderIconWrapper>
+    );
+};

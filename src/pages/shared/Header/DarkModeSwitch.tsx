@@ -13,8 +13,6 @@ const DarkModeButtonWrapper = styled.div`
     height: 3rem;
     width: 3rem;
     cursor: pointer;
-    margin-right: auto;
-    margin-left: auto;
     border-radius: 2rem;
     transition-property: all;
     transition-duration: 300ms;
@@ -49,7 +47,7 @@ const HeaderTooltip = styled.span`
 
 export const DarkModeSwitch = ({theme, themeSwitch}) => {
     return (
-        <DarkModeButtonWrapper onClick={themeSwitch}>
+        <DarkModeButtonWrapper onClick={themeSwitch} data-test-id='DarkModeButtonWrapper'>
             {theme == 'light' ? <LuSun size='25' /> : <FaRegMoon size='25' />}
             <HeaderTooltip data-test-id='HeaderToolTip'>
                 {theme == 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}

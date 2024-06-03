@@ -34,7 +34,7 @@ const ReturnHomeButton = () => {
     };
 
     return (
-        <ReturnButtonContainer>
+        <ReturnButtonContainer data-test-id='ReturnButtonContainer'>
             <ReturnButton data-test-id='ReturnButton' onClick={returnHome}>
                 Home
             </ReturnButton>

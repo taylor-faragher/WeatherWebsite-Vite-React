@@ -54,10 +54,14 @@ const HomePage = () => {
     };
 
     return (
-        <HomePageWrapper>
+        <HomePageWrapper data-test-id='HomePage_HomePageWrapper'>
             <WelcomeTitle data-test-id='HomePage_WelcomeTitle'>Welcome!</WelcomeTitle>
             <Title data-test-id='HomePage_Title'>Get your current weather below!</Title>
-            <ZipCodeForm placeHolderText={'5-Digit Zip Code'} pageNavigation={navigateToResult} />
+            <ZipCodeForm
+                data-test-id='HomePage_ZipCodeForm'
+                placeHolderText={'5-Digit Zip Code'}
+                pageNavigation={navigateToResult}
+            />
         </HomePageWrapper>
     );
 };
