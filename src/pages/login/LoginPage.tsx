@@ -8,21 +8,69 @@ import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 
 const LoginPageWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding-bottom: 175px;
 `;
-const StyledTitle = styled.h1``;
+
+const StyledTitle = styled.h1`
+    font-weight: ${getFontWeight('heavy')};
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 20px;
+
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(7)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(9)};
+    }
+`;
+
 const LoginPageForm = styled.form``;
-const LoginText = styled.h3``;
-const EmailInput = styled.input``;
-const PasswordInput = styled.input``;
-const LoginButton = styled.button`
-    width: 100px;
-    height: 30px;
+const LoginText = styled.h3`
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(5)};
+        margin: 0;
+    }
+    @media screen and ${breakPoints.tablet} {
+        font-size: ${getFontSize(5)};
+        padding-bottom: 10px;
+        padding-top: 20px;
+    }
 `;
-const LogoutButtonWrapper = styled.div``;
+
+const EmailInput = styled.input`
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(4)};
+        margin-bottom: 25px;
+        margin-top: 15px;
+        max-width: 350px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(4)};
+        margin-bottom: 0;
+    }
+`;
+
+const PasswordInput = styled.input`
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(4)};
+        margin-bottom: 25px;
+        margin-top: 15px;
+        max-width: 350px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(4)};
+        margin-bottom: 0;
+    }
+`;
+
+const LoginButton = styled.button`
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(6)};
+        width: 200px;
+        height: 60px;
+    }
+`;
 const LoginButtonWrapper = styled.div`
     padding-top: 25px;
 `;
@@ -49,7 +97,7 @@ const LoginPage = () => {
     const [errorText, setErrorText] = useState('');
     const status = useLoginStatus();
 
-    const {authenticate, logout} = useContext(AccountContext);
+    const {authenticate} = useContext(AccountContext);
 
     const onSubmit = event => {
         event.preventDefault();
@@ -98,11 +146,6 @@ const LoginPage = () => {
                         Don&apos;t have an account? <Link to={'/signup'}> Sign Up!</Link>
                     </SignUpDiv>
                 </>
-            )}
-            {!status && (
-                <LogoutButtonWrapper data-test-id='LoginPage_LogoutButtonWrapper'>
-                    <button onClick={logout}>Logout</button>
-                </LogoutButtonWrapper>
             )}
         </LoginPageWrapper>
     );
