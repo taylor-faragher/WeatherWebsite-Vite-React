@@ -43,25 +43,18 @@ export const Header = ({theme, themeSwitch}) => {
                 <>
                     <HeaderWrapper data-test-id='HeaderWrapper'>
                         <ButtonWrapper data-test-id='ButtonWrapper'>
-                            <HeaderIcon
-                                icon={<FaHouse size='25' />}
-                                toolTipText='Home'
-                                path='/main'
-                                testId='home'
-                                data-test-id='HeaderIcon_Home'
-                            />
+                            <HeaderIcon icon={<FaHouse size='25' />} toolTipText='Home' path='/main' testId='home' />
                             <HeaderIcon
                                 icon={<FaCircleQuestion size='25' />}
                                 toolTipText='FAQ'
                                 path='/info'
                                 testId='FAQ'
-                                data-test-id='HeaderIcon_FAQ'
                             />
                             <HeaderIcon
                                 icon={<FaGithub size='25' />}
                                 toolTipText='See the Code for this Site!'
                                 path='https://github.com/taylor-faragher/WeatherWebsite-Vite-React'
-                                testId='HeaderIcon_github'
+                                testId='github'
                             />
                             <DarkModeSwitch theme={theme} themeSwitch={themeSwitch} />
                         </ButtonWrapper>
