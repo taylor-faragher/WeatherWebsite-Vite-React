@@ -2,7 +2,7 @@ import {useContext, useState} from 'react';
 import {styled} from 'styled-components';
 import {AccountContext} from '../../services/Account';
 import useLoginStatus from '../../hooks/useLoginStatus';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const LoginPageWrapper = styled.div``;
 const LoginPageForm = styled.form``;
@@ -16,7 +16,6 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const status = useLoginStatus();
-    const navigate = useNavigate();
 
     const {authenticate, logout} = useContext(AccountContext);
 
@@ -25,7 +24,7 @@ const LoginPage = () => {
         authenticate(email, password)
             .then(data => {
                 console.log('Logged in!', data);
-                navigate('/main');
+                window.location.href = `/main`;
             })
             .catch(err => {
                 console.error('Failed to auth email and password: ', err);
