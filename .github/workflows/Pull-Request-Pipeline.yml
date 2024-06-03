@@ -14,10 +14,10 @@ jobs:
                 command: [build, lint, jest]
         steps:
           - name: Checkout
-            uses: actions/checkout@v3
+            uses: actions/checkout@v4
     
           - name: Setup node
-            uses: actions/setup-node@v3
+            uses: actions/setup-node@v4
             with:
               node-version: '18'
               registry-url: 'https://npm.pkg.github.com'
@@ -37,13 +37,13 @@ jobs:
         needs: Build-Lint-UnitTest
         steps:
             - name: Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: Increase Watchers
               run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
             - name: Setup node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                 node-version: '18'
                 registry-url: 'https://npm.pkg.github.com'
