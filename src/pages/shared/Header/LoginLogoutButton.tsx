@@ -3,6 +3,7 @@ import {GrLogin} from 'react-icons/gr';
 import {CgProfile} from 'react-icons/cg';
 import useLoginStatus from '../../../hooks/useLoginStatus';
 import {breakPoints} from '../../../utils/layout/breakpoints';
+import {useNavigate} from 'react-router-dom';
 
 const LoginLogoutButtonWrapper = styled.div`
     display: flex;
@@ -79,10 +80,6 @@ const LoggedOutToolTipComponent = styled.span`
     }
 `;
 
-const navigateToPath = (path: string): void => {
-    window.location.href = `${path}`;
-};
-
 const LoggedOutToolTip = () => {
     return <LoggedOutToolTipComponent data-test-id='LoggedOutToolTip'>Login</LoggedOutToolTipComponent>;
 };
@@ -93,23 +90,21 @@ const LoggedInToolTip = () => {
 
 export const LoginLogoutButton = () => {
     const {loaded} = useLoginStatus();
+    const navigate = useNavigate();
 
     return (
         <>
             {loaded && (
                 <LoginLogoutButtonWrapper
                     data-test-id={`LoginLogoutButtonWrapper`}
-                    onClick={() => navigateToPath('/profile')}
+                    onClick={() => navigate('/profile')}
                 >
                     <CgProfile size='25' />
                     <LoggedInToolTip />
                 </LoginLogoutButtonWrapper>
             )}
             {!loaded && (
-                <LoginLogoutButtonWrapper
-                    data-test-id={`LoginLogoutButtonWrapper`}
-                    onClick={() => navigateToPath('/login')}
-                >
+                <LoginLogoutButtonWrapper data-test-id={`LoginLogoutButtonWrapper`} onClick={() => navigate('/login')}>
                     <GrLogin size='25' />
                     <LoggedOutToolTip />
                 </LoginLogoutButtonWrapper>
