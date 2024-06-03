@@ -123,11 +123,13 @@ const LoginPage = () => {
                         <EmailInput
                             data-test-id='LoginPage_EmailInput'
                             value={email}
+                            type='text'
                             onChange={event => setEmail(event.target.value)}
                         ></EmailInput>
                         <LoginText data-test-id='LoginPage_LoginText'>Password</LoginText>
                         <PasswordInput
                             value={password}
+                            type='password'
                             onChange={event => setPassword(event.target.value)}
                             data-test-id='LoginPage_PasswordInput'
                         ></PasswordInput>

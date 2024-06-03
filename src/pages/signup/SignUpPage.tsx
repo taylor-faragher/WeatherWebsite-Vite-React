@@ -116,11 +116,13 @@ const SignUpPage = () => {
                 <SignUpEmailInput
                     data-test-id='SignUpEmailInput'
                     value={email}
+                    type='text'
                     onChange={event => setEmail(event.target.value)}
                 ></SignUpEmailInput>
                 <SignUpText data-test-id='SignUpTextPassword'>Password</SignUpText>
                 <SignUpPasswordInput
                     value={password}
+                    type='password'
                     onChange={event => setPassword(event.target.value)}
                     data-test-id='SignUpPasswordInput'
                 ></SignUpPasswordInput>
