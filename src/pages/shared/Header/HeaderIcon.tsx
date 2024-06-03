@@ -1,5 +1,5 @@
 import {ReactElement} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {NavigateFunction, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderIconWrapper = styled.div`
@@ -45,6 +45,10 @@ const HeaderTooltip = styled.span`
     }
 `;
 
+const navigateToPath = (path: string, navigate: NavigateFunction) => {
+    return path.startsWith('https') ? (window.location.href = `${path}`) : navigate(path);
+};
+
 type HeaderIconProps = {
     icon: ReactElement;
     toolTipText: string;
@@ -55,7 +59,10 @@ type HeaderIconProps = {
 export const HeaderIcon = (props: HeaderIconProps) => {
     const navigate = useNavigate();
     return (
-        <HeaderIconWrapper data-test-id={`HeaderIcon_${props.testId}`} onClick={() => navigate(props.path)}>
+        <HeaderIconWrapper
+            data-test-id={`HeaderIcon_${props.testId}`}
+            onClick={() => navigateToPath(props.path, navigate)}
+        >
             {props.icon}
             <HeaderTooltip data-test-id='HeaderToolTip'>{props.toolTipText}</HeaderTooltip>
         </HeaderIconWrapper>
