@@ -92,6 +92,14 @@ export const LoginLogoutButton = () => {
     const {loaded} = useLoginStatus();
     const navigate = useNavigate();
 
+    const handleLoginNavigation = () => {
+        if (location.pathname.toLowerCase() !== '/login') {
+            navigate('/login');
+        } else {
+            navigate(0);
+        }
+    };
+
     return (
         <>
             {loaded && (
@@ -104,7 +112,10 @@ export const LoginLogoutButton = () => {
                 </LoginLogoutButtonWrapper>
             )}
             {!loaded && (
-                <LoginLogoutButtonWrapper data-test-id={`LoginLogoutButtonWrapper`} onClick={() => navigate('/login')}>
+                <LoginLogoutButtonWrapper
+                    data-test-id={`LoginLogoutButtonWrapper`}
+                    onClick={() => handleLoginNavigation()}
+                >
                     <GrLogin size='25' />
                     <LoggedOutToolTip />
                 </LoginLogoutButtonWrapper>
