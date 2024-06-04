@@ -11,14 +11,14 @@ const Button = styled.button`
         width: 200px;
         height: 60px;
     }
-    @media screen and ${breakPoints.mobile} {
+    @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(4)};
         width: 150px;
         height: 50px;
     }
 `;
 
-type FormButtonProps = {
+type FormButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     dataTestId: string;
     text: string;
 };
