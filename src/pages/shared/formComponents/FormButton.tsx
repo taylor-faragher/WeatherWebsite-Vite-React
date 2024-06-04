@@ -12,7 +12,7 @@ const Button = styled.button`
         height: 60px;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(5)};
+        font-size: ${getFontSize(4)};
         width: 150px;
         height: 50px;
     }
