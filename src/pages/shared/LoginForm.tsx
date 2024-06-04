@@ -6,6 +6,7 @@ import {styled} from 'styled-components';
 import {Link} from 'react-router-dom';
 import {getFontWeight} from '../../utils/layout/getFontWeight';
 import FormButton from './formComponents/FormButton';
+import {FaEye, FaEyeSlash} from 'react-icons/fa';
 
 const LoginPageForm = styled.form``;
 const LoginText = styled.h3`
@@ -28,22 +29,36 @@ const EmailInput = styled.input`
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
+        font-size: ${getFontSize(3)};
         margin-bottom: 0;
     }
 `;
 
+const PasswordInputWrapper = styled.div`
+    display: inline-block;
+    position: relative;
+`;
+
 const PasswordInput = styled.input`
+    paddingright: 30px;
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(4)};
         margin-bottom: 25px;
-        margin-top: 15px;
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
+        font-size: ${getFontSize(3)};
         margin-bottom: 0;
     }
+`;
+
+const ShowPasswordSpan = styled.span`
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    color: black;
+    transform: translateY(-50%);
+    cursor: pointer;
 `;
 
 const StyledErrorMessage = styled.div`
@@ -65,6 +80,7 @@ const LinkDiv = styled.div`
 const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [displayError, setDisplayError] = useState(false);
     const [errorText, setErrorText] = useState('');
 
@@ -92,15 +108,22 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                     data-test-id='LoginPage_EmailInput'
                     value={email}
                     type='text'
+                    placeholder='Email'
                     onChange={event => setEmail(event.target.value)}
                 ></EmailInput>
                 <LoginText data-test-id='LoginPage_LoginText'>Password</LoginText>
-                <PasswordInput
-                    value={password}
-                    type='password'
-                    onChange={event => setPassword(event.target.value)}
-                    data-test-id='LoginPage_PasswordInput'
-                ></PasswordInput>
+                <PasswordInputWrapper>
+                    <PasswordInput
+                        value={password}
+                        placeholder='Password'
+                        type={showPassword ? 'text' : 'password'}
+                        onChange={event => setPassword(event.target.value)}
+                        data-test-id='LoginPage_PasswordInput'
+                    ></PasswordInput>
+                    <ShowPasswordSpan onClick={() => setShowPassword(prevState => !prevState)}>
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </ShowPasswordSpan>
+                </PasswordInputWrapper>
                 <FormButton dataTestId='LoginPageFormButton' text='Login' />
                 {displayError && (
                     <div>
@@ -109,13 +132,13 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                 )}
             </LoginPageForm>
             <LinkDiv>
-                Don&apos;t have an account?
+                Don&apos;t have an account?{' '}
                 <Link to='#' onClick={signUpSwitch}>
                     Sign Up!
                 </Link>
             </LinkDiv>
             <LinkDiv>
-                Forgot Your Password?
+                Forgot Your Password?{' '}
                 <Link to='#' onClick={forgotPasswordSwitch}>
                     Click Here to reset!
                 </Link>
