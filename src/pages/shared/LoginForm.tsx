@@ -101,7 +101,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                     onChange={event => setPassword(event.target.value)}
                     data-test-id='LoginPage_PasswordInput'
                 ></PasswordInput>
-                <FormButton dataTestId='LoginPageFormButton' />
+                <FormButton dataTestId='LoginPageFormButton' text='Login' />
                 {displayError && (
                     <div>
                         <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>

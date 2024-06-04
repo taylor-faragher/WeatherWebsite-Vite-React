@@ -5,6 +5,7 @@ import {styled} from 'styled-components';
 import {Link, useNavigate} from 'react-router-dom';
 import UserPool from '../../UserPool';
 import {getFontWeight} from '../../utils/layout/getFontWeight';
+import FormButton from './formComponents/FormButton';
 
 const SignUpPageForm = styled.form``;
 
@@ -43,18 +44,6 @@ const SignUpPasswordInput = styled.input`
     @media screen and ${breakPoints.tabletBig} {
         font-size: ${getFontSize(4)};
         margin-bottom: 0;
-    }
-`;
-
-const SignUpButtonWrapper = styled.div`
-    padding-top: 25px;
-`;
-
-const SignUpButton = styled.button`
-    @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(6)};
-        width: 200px;
-        height: 60px;
     }
 `;
 
@@ -110,11 +99,7 @@ const SignUpForm = ({loginSwitch}) => {
                     onChange={event => setPassword(event.target.value)}
                     data-test-id='SignUpPasswordInput'
                 ></SignUpPasswordInput>
-                <SignUpButtonWrapper>
-                    <SignUpButton type='submit' data-test-id='SignUpButton'>
-                        Sign Up
-                    </SignUpButton>
-                </SignUpButtonWrapper>
+                <FormButton dataTestId='SignUpButton' text='Sign Up' />
                 {displayError && (
                     <div>
                         <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
