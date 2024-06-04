@@ -105,7 +105,7 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                 <SignUpEmailInput
                     data-test-id='SignUpEmailInput'
                     value={email}
-                    type='text'
+                    type='email'
                     placeholder='Email'
                     onChange={event => setEmail(event.target.value)}
                 ></SignUpEmailInput>
@@ -113,7 +113,7 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                 <PasswordInputWrapper>
                     <PasswordInput
                         value={password}
-                        placeholder='password'
+                        placeholder='Password'
                         type={showPassword ? 'text' : 'password'}
                         onChange={event => setPassword(event.target.value)}
                         data-test-id='LoginPage_PasswordInput'

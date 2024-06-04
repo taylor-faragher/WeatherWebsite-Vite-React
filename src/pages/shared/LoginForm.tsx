@@ -107,7 +107,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                 <EmailInput
                     data-test-id='LoginPage_EmailInput'
                     value={email}
-                    type='text'
+                    type='email'
                     placeholder='Email'
                     onChange={event => setEmail(event.target.value)}
                 ></EmailInput>
