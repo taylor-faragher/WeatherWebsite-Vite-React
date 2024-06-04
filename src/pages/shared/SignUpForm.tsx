@@ -2,10 +2,11 @@ import {useState} from 'react';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {styled} from 'styled-components';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import UserPool from '../../UserPool';
 import {getFontWeight} from '../../utils/layout/getFontWeight';
 import FormButton from './formComponents/FormButton';
+import {FaEye, FaEyeSlash} from 'react-icons/fa';
 
 const SignUpPageForm = styled.form``;
 
@@ -25,26 +26,40 @@ const SignUpEmailInput = styled.input`
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(4)};
         margin-bottom: 25px;
-        margin-top: 30px;
+        margin-top: 15px;
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
+        font-size: ${getFontSize(3)};
         margin-bottom: 0;
     }
 `;
 
-const SignUpPasswordInput = styled.input`
+const PasswordInputWrapper = styled.div`
+    display: inline-block;
+    position: relative;
+`;
+
+const PasswordInput = styled.input`
+    paddingright: 30px;
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(4)};
         margin-bottom: 25px;
-        margin-top: 30px;
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
+        font-size: ${getFontSize(3)};
         margin-bottom: 0;
     }
+`;
+
+const ShowPasswordSpan = styled.span`
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    color: black;
+    transform: translateY(-50%);
+    cursor: pointer;
 `;
 
 const StyledErrorMessage = styled.div`
@@ -62,12 +77,12 @@ const SignUpDiv = styled.div`
     padding-top: 35px;
     font-weight: ${getFontWeight('heavy')};
 `;
-const SignUpForm = ({loginSwitch}) => {
+const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [displayError, setDisplayError] = useState(false);
     const [errorText, setErrorText] = useState('');
-    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = event => {
         event.preventDefault();
@@ -77,7 +92,8 @@ const SignUpForm = ({loginSwitch}) => {
                 setErrorText(err.message);
                 setDisplayError(true);
             } else {
-                navigate('/login');
+                loginSwitch();
+                setSuccessMessage(true);
                 console.log(data);
             }
         });
@@ -90,15 +106,22 @@ const SignUpForm = ({loginSwitch}) => {
                     data-test-id='SignUpEmailInput'
                     value={email}
                     type='text'
+                    placeholder='Email'
                     onChange={event => setEmail(event.target.value)}
                 ></SignUpEmailInput>
                 <SignUpText data-test-id='SignUpTextPassword'>Password</SignUpText>
-                <SignUpPasswordInput
-                    value={password}
-                    type='password'
-                    onChange={event => setPassword(event.target.value)}
-                    data-test-id='SignUpPasswordInput'
-                ></SignUpPasswordInput>
+                <PasswordInputWrapper>
+                    <PasswordInput
+                        value={password}
+                        placeholder='password'
+                        type={showPassword ? 'text' : 'password'}
+                        onChange={event => setPassword(event.target.value)}
+                        data-test-id='LoginPage_PasswordInput'
+                    ></PasswordInput>
+                    <ShowPasswordSpan onClick={() => setShowPassword(prevState => !prevState)}>
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </ShowPasswordSpan>
+                </PasswordInputWrapper>
                 <FormButton dataTestId='SignUpButton' text='Sign Up' />
                 {displayError && (
                     <div>
@@ -107,7 +130,7 @@ const SignUpForm = ({loginSwitch}) => {
                 )}
             </SignUpPageForm>
             <SignUpDiv>
-                Already have an account?
+                Already have an account?{' '}
                 <Link to='#' onClick={loginSwitch}>
                     Login!
                 </Link>
