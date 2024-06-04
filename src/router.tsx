@@ -1,5 +1,5 @@
 import {Routes, Route, Navigate} from 'react-router-dom';
-import {ErrorPage, HomePage, ResultPage, SignUpPage, ProfilePage} from './pages';
+import {ErrorPage, HomePage, ResultPage, ProfilePage} from './pages';
 import './AppRoutes.css';
 import LoginPage from './pages/login/LoginPage';
 
@@ -10,7 +10,6 @@ const AppRoutes = () => {
             <Route path='main' element={<HomePage />} />
             <Route path='result' element={<ResultPage />} />
             <Route path='info' element={<Navigate to='/main' replace />} />
-            <Route path='signup' element={<SignUpPage />} />
             <Route path='login' element={<LoginPage />} />
             <Route path='profile' element={<ProfilePage />} />
             <Route path='error' element={<ErrorPage />} />
