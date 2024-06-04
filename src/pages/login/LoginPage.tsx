@@ -11,6 +11,11 @@ const LoginPageWrapper = styled.div`
     padding-bottom: 175px;
 `;
 
+const SuccessMessage = styled.h1`
+    font-size: ${getFontSize(3)};
+    color: red;
+`;
+
 const StyledTitle = styled.h1`
     font-weight: ${getFontWeight('heavy')};
     line-height: 1.2;
@@ -27,7 +32,7 @@ const StyledTitle = styled.h1`
 
 const LoginPage = () => {
     const [pageTitle, setPageTitle] = useState('Login');
-
+    const [showSuccessMessage, setSuccessSignUp] = useState(false);
     const [showForm, setShowForm] = useState('Login');
 
     const handleSignUpSwitch = () => {
@@ -47,6 +52,7 @@ const LoginPage = () => {
 
     return (
         <LoginPageWrapper data-test-id='LoginPage_LoginPageWrapper'>
+            {showSuccessMessage && <SuccessMessage>Sign up Successful! Please login below!</SuccessMessage>}
             <StyledTitle>{pageTitle}</StyledTitle>
             {showForm == 'Login' && (
                 <>
@@ -55,7 +61,7 @@ const LoginPage = () => {
             )}
             {showForm == 'SignUp' && (
                 <>
-                    <SignUpForm loginSwitch={handleLoginSwitch} />
+                    <SignUpForm loginSwitch={handleLoginSwitch} setSuccessMessage={setSuccessSignUp} />
                 </>
             )}
             {showForm == 'ForgotPassword' && (
