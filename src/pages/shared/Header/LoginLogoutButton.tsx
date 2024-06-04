@@ -93,11 +93,7 @@ export const LoginLogoutButton = () => {
     const navigate = useNavigate();
 
     const handleLoginNavigation = () => {
-        if (location.pathname.toLowerCase() !== '/login') {
-            navigate('/login');
-        } else {
-            navigate(0);
-        }
+        location.pathname.toLowerCase() !== '/login' ? navigate('/login') : navigate(0);
     };
 
     return (
