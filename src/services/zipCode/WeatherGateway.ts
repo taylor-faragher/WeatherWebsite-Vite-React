@@ -1,27 +1,21 @@
-import {WeatherMethods, WeatherResults} from '../../types/types';
+import {WeatherItem} from 'src/types/types';
+import {mapZipCodeData} from '../../mappers/zipCodeDataMapper';
 
-export const fetchWeather = async (method: string, zipCode: string): Promise<WeatherResults> => {
+export const fetchWeather = async (zipCode: string): Promise<WeatherItem> => {
     if (!zipCode) {
         return Promise.reject(new Error('Bad Request'));
-    }
-    let url = '';
-    if (method == WeatherMethods.zipCode) {
-        url = `https://api.taylorsweatherapi.com/?zipcode=${zipCode}`;
-    }
-
-    if (method == WeatherMethods.cityLookup) {
-        url = `https://api.taylorsweatherapi.com/`;
     }
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
-    const response: Response = await fetch(url);
+    const response: Response = await fetch(`https://api.taylorsweatherapi.com/?zipcode=${zipCode}`);
     const data = await response.json();
 
     if (!response.ok) {
         throw new Error(JSON.stringify(data.message));
     }
+    const mappedData = await mapZipCodeData(data);
 
-    return data;
+    return mappedData;
 };

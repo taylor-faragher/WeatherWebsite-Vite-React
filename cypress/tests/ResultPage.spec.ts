@@ -28,22 +28,23 @@ describe('ResultPage E2E Tests', () => {
 
     it(`Passing partial zip code in parameters causes a redirect to Error page`, () => {
         cy.visit('/result?zipCode=200');
-        cy.url().should('contain', '/error');
+
+        cy.url({timeout: 30000}).should('contain', '/error');
     });
 
     it(`Passing bad zip code in parameters causes a redirect to Error page`, () => {
         cy.visit('/result?zipCode=11111');
-        cy.url().should('contain', '/error');
+        cy.url({timeout: 30000}).should('contain', '/error');
     });
 
     it(`Passing empty zip code in parameters causes a redirect to Error page`, () => {
         cy.visit('/result?zipCode=');
-        cy.url().should('contain', '/error');
+        cy.url({timeout: 30000}).should('contain', '/error');
     });
 
     it(`Should navigate to error page if no parameters are passed to result page`, () => {
         cy.visit('/result');
-        cy.url().should('contain', '/error');
+        cy.url({timeout: 30000}).should('contain', '/error');
     });
 
     it(`Should show Error message when ZipCode is too few characters`, () => {

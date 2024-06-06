@@ -65,8 +65,3 @@ export type WeatherResults = {
     name: string;
     cod: number;
 };
-
-export enum WeatherMethods {
-    zipCode = 'zipCode',
-    cityLookup = 'cityLookup',
-}

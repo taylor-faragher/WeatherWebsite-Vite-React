@@ -1,11 +1,12 @@
-import {useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import styled from 'styled-components';
-import {useWeatherApi} from '../../hooks/useWeatherApi';
 import {useState} from 'react';
 import {Loader} from '../shared/Loader';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {ZipCodeForm} from '../shared/ZipCodeForm';
+import {fetchWeather} from '../../services/zipCode/WeatherGateway';
+import {useQuery} from '@tanstack/react-query';
 
 const ResultsSection = styled.div`
     display: flex;
@@ -70,14 +71,12 @@ const TempWrapper = styled.div`
         font-size: ${getFontSize(11)};
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(10)};
+        font-size: ${getFontSize(11)};
         margin-bottom: -40px;
     }
 `;
 
 const ThermoPicture = styled.img`
-    height: 120px;
-
     @media screen and ${breakPoints.mobile} {
         margin-top: -20px;
         margin-left: -80px;
@@ -86,7 +85,9 @@ const ThermoPicture = styled.img`
     }
     @media screen and ${breakPoints.tabletBig} {
         margin-top: -40px;
-        height: 250px;
+        margin-top: 0px;
+        margin-left: -50px;
+        height: 200px;
     }
 `;
 
@@ -102,27 +103,29 @@ const StyledDescription = styled.div`
 
 const ResultPage = () => {
     const [searchParams] = useSearchParams();
-    const [zipCode] = useState(searchParams.get('zipCode'));
-    const {data, loaded} = useWeatherApi(zipCode as string);
+    const [zipCode, setZipCode] = useState(searchParams.get('zipCode'));
+    const navigate = useNavigate();
+    const {data, error, isLoading} = useQuery({
+        queryKey: ['fetchWeather', zipCode],
+        queryFn: () => fetchWeather(zipCode as string),
+    });
     const currentTemp = Math.round(data?.currentTemp as number);
     const description = data?.description as string;
     const weatherPic = `/assets/${data?.image.image}`;
     const thermoPic = `/assets/thermometer-fahrenheit.svg`;
 
-    const navigateToResult = (zipCode: string): void => {
-        window.location.href = `/result?zipCode=${zipCode}`;
-    };
+    if (error) navigate('/error');
 
     return (
         <>
             <ResultsSection data-test-id='ResultPage_ResultsSection'>
                 <ZipCodeTitle data-test-id='ResultPage_ZipCodeTitle'>Weather Results for {zipCode}</ZipCodeTitle>
-                {!loaded && (
+                {isLoading && (
                     <div>
                         <Loader />
                     </div>
                 )}
-                {loaded && (
+                {!isLoading && (
                     <>
                         <WeatherResultsSection data-test-id='ResultsPage_WeatherResultsSection'>
                             <WeatherPicWrapper data-test-id='ResultPage_WeatherPicWrapper'>
@@ -144,7 +147,7 @@ const ResultPage = () => {
                         <ZipCodeForm
                             data-test-id='ResultPage_ZipCodeForm'
                             placeHolderText={'Search Again!'}
-                            pageNavigation={navigateToResult}
+                            setZipCode={setZipCode}
                         />
                     </>
                 )}

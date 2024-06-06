@@ -2,8 +2,8 @@ import {useState} from 'react';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {validateZipCodeInput} from '../../utils/validateZipCodeInput';
-import {validateZipCodeLength} from '../../utils/validateZipCodeLength';
 import styled from 'styled-components';
+import {useNavigate} from 'react-router-dom';
 
 const ZipCodeWrapper = styled.form`
     display: flex;
@@ -57,8 +57,8 @@ const ZipCodeButtonSearch = styled.button`
     }
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(6)};
-        width: 300px;
-        min-height: 100px;
+        width: 250px;
+        min-height: 80px;
     }
 
     @media screen and ${breakPoints.tabletBig} {
@@ -81,12 +81,13 @@ type VoidFunctionWithParam = (param: string) => void;
 
 interface ZipCodeFormProps {
     placeHolderText: string;
-    pageNavigation: VoidFunctionWithParam;
+    setZipCode?: VoidFunctionWithParam;
 }
 
 export const ZipCodeForm = (props: ZipCodeFormProps) => {
     const [zipCode, setZipCode] = useState('');
     const [displayError, setDisplayError] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = event => {
         setZipCode(validateZipCodeInput(event));
@@ -94,10 +95,13 @@ export const ZipCodeForm = (props: ZipCodeFormProps) => {
 
     const getWeather = event => {
         event.preventDefault();
-        if (validateZipCodeLength(zipCode)) {
-            setDisplayError(true);
+        if (zipCode && zipCode.length == 5) {
+            if (props.setZipCode) {
+                props.setZipCode(zipCode as string);
+            }
+            navigate(`/result?zipCode=${zipCode}`);
         } else {
-            props.pageNavigation(zipCode);
+            setDisplayError(true);
         }
     };
 
