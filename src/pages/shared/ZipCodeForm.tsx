@@ -99,7 +99,7 @@ export const ZipCodeForm = (props: ZipCodeFormProps) => {
             if (props.setZipCode) {
                 props.setZipCode(zipCode as string);
             }
-            navigate(`/result`);
+            navigate(`/result?zipCode=${zipCode}`);
         } else {
             setDisplayError(true);
         }
