@@ -10,7 +10,7 @@ export const getPicAltText = (pic: string): string => {
         '13d': 'snowflake',
         '50d': 'horizontal lines indicating fog',
         '01n': 'Orange Sun',
-        '02n': 'Orange Sun behind white clouds',
+        '02n': 'Light blue crescent moon behind white clouds',
         '03n': 'White Cloud',
         '04n': 'white cloud with dark cloud behind it',
         '09n': 'white cloud with dark cloud behind it and water is falling from white cloud',
