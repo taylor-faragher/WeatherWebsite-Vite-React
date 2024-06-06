@@ -1,6 +1,21 @@
 import {fetchWeather} from './WeatherGateway';
-import {WeatherMethods} from '../../types/types';
 import {mockData} from '../../utils/testData/testData';
+import {mapZipCodeData} from '../../mappers/zipCodeDataMapper';
+
+jest.mock('../../mappers/zipCodeDataMapper', () => ({
+    mapZipCodeData: jest.fn(),
+}));
+
+const finalData = {
+    currentTemp: 59.76,
+    windSpeed: 5.75,
+    description: 'OvercastClouds',
+    majorCity: 'TownUSA',
+    image: {
+        image: '04d.svg',
+        imageAltText: 'white cloud with moon behind it',
+    },
+};
 
 describe('fetchWeather', () => {
     const mockResponse = (status: number, data) => {
@@ -19,23 +34,12 @@ describe('fetchWeather', () => {
         const mockZipCode = '12345';
 
         global.fetch = jest.fn().mockImplementation(() => mockResponse(200, gatewayMockData));
+        (mapZipCodeData as jest.Mock).mockResolvedValue(finalData);
 
-        const result = await fetchWeather(WeatherMethods.zipCode, mockZipCode);
+        const result = await fetchWeather(mockZipCode);
 
         expect(fetch).toHaveBeenCalledWith(`https://api.taylorsweatherapi.com/?zipcode=${mockZipCode}`);
-        expect(result).toEqual(gatewayMockData);
-    });
-
-    test('should fetch weather data by city lookup', async () => {
-        const gatewayMockData = {mockData};
-        const mockZipCode = '12345';
-
-        global.fetch = jest.fn().mockImplementation(() => mockResponse(200, gatewayMockData));
-
-        const result = await fetchWeather(WeatherMethods.cityLookup, mockZipCode);
-
-        expect(fetch).toHaveBeenCalledWith('https://api.taylorsweatherapi.com/');
-        expect(result).toEqual(gatewayMockData);
+        expect(result).toEqual(finalData);
     });
 
     test('should throw error when response is not ok', async () => {
@@ -44,20 +48,12 @@ describe('fetchWeather', () => {
 
         global.fetch = jest.fn().mockImplementation(() => mockResponse(404, mockErrorResponse));
 
-        await expect(fetchWeather(WeatherMethods.cityLookup, mockZipCode)).rejects.toThrow('Error message');
+        await expect(fetchWeather(mockZipCode)).rejects.toThrow('Error message');
     });
 
     test('should throw error when zipCode is empty', async () => {
         const mockZipCode = '';
 
-        await expect(fetchWeather(WeatherMethods.cityLookup, mockZipCode)).rejects.toThrow('Bad Request');
-    });
-
-    test('should throw error when zipCode is undefined', async () => {
-        const mockZipCode = undefined;
-
-        await expect(fetchWeather(WeatherMethods.cityLookup, mockZipCode as unknown as string)).rejects.toThrow(
-            'Bad Request'
-        );
+        await expect(fetchWeather(mockZipCode)).rejects.toThrow('Bad Request');
     });
 });

@@ -1,6 +1,7 @@
+import {WeatherItem} from 'src/types/types';
 import {mapZipCodeData} from '../../mappers/zipCodeDataMapper';
 
-export const fetchWeather = async (zipCode: string) => {
+export const fetchWeather = async (zipCode: string): Promise<WeatherItem> => {
     if (!zipCode) {
         return Promise.reject(new Error('Bad Request'));
     }
