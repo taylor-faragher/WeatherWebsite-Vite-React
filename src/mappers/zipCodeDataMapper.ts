@@ -2,12 +2,12 @@ import {WeatherItem, WeatherResults} from '../types/types';
 import {pascalize} from '../utils/pascalize';
 import {getPicAltText} from './getPicAltText';
 
-export const mapZipCodeData = (data: WeatherResults): WeatherItem | undefined => {
+export const mapZipCodeData = async (data: WeatherResults): Promise<WeatherItem | undefined> => {
     if (!data) {
         return;
     }
     const picName = data.weather[0].icon;
-    const weatherPic = {image: `${picName}.svg`, imageAltText: getPicAltText(picName)};
+    const weatherPic = {image: `${picName}.svg`, imageAltText: await getPicAltText(picName)};
     const description = pascalize(data.weather[0].description);
 
     return {
