@@ -18,6 +18,7 @@
     "test:headless": "cypress run"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.40.1",
     "amazon-cognito-identity-js": "^6.3.12",
     "aws-cdk-lib": "^2.141.0",
     "constructs": "^10.3.0",
@@ -29,6 +30,7 @@
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.35.6",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.26",
     "@types/react": "^18.2.59",
