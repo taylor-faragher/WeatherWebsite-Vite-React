@@ -1,40 +1,40 @@
-import {WeatherResults} from '../types/types';
-import {mockData, incompleteMockData} from '../utils/testData/testData';
+import {pascalize} from '../utils/pascalize';
+import {WeatherItem} from '../types/types';
+import {mockData} from '../utils/testData/testData';
+import {getPicAltText} from './getPicAltText';
 import {mapZipCodeData} from './zipCodeDataMapper';
 
+jest.mock('./getPicAltText', () => ({
+    getPicAltText: jest.fn(),
+}));
+
+jest.mock('../utils/pascalize', () => ({
+    pascalize: jest.fn(),
+}));
+
 describe('mapZipCodeData', () => {
-    test('should return undefined when data is undefined', () => {
-        const result = mapZipCodeData(undefined as unknown as WeatherResults);
-        expect(result).toBeUndefined();
-    });
+    test('should return mapped WeatherItem when data is provided', async () => {
+        const mockAltText = 'Rainy weather';
+        const mockPascalizedDescription = 'Light Rain';
 
-    test('should return mapped WeatherItem when data is provided', () => {
-        const result = mapZipCodeData(mockData);
+        (getPicAltText as jest.Mock).mockResolvedValue(mockAltText);
+        (pascalize as jest.Mock).mockReturnValue(mockPascalizedDescription);
 
-        expect(result).toEqual({
+        const expectedResult: WeatherItem = {
             currentTemp: 59.76,
             windSpeed: 5.75,
-            description: 'OvercastClouds',
+            description: mockPascalizedDescription,
             majorCity: 'TownUSA',
             image: {
                 image: '04d.svg',
-                imageAltText: 'white cloud with moon behind it',
+                imageAltText: mockAltText,
             },
-        });
-    });
+        };
 
-    test('should return mapped WeatherItem with default values when data is incomplete', () => {
-        const result = mapZipCodeData(incompleteMockData as WeatherResults);
+        const result = await mapZipCodeData(mockData);
 
-        expect(result).toEqual({
-            currentTemp: undefined,
-            windSpeed: undefined,
-            description: 'ClearSky',
-            majorCity: 'London',
-            image: {
-                image: '01d.svg',
-                imageAltText: 'Orange Sun',
-            },
-        });
+        expect(getPicAltText).toHaveBeenCalledWith('04d');
+        expect(pascalize).toHaveBeenCalledWith('overcast clouds');
+        expect(result).toEqual(expectedResult);
     });
 });
