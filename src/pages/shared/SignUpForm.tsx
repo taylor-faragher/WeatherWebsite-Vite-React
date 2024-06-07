@@ -73,7 +73,7 @@ const StyledErrorMessage = styled.div`
     }
 `;
 
-const SignUpDiv = styled.div`
+const LoginDiv = styled.div`
     padding-top: 35px;
     font-weight: ${getFontWeight('heavy')};
 `;
@@ -116,9 +116,12 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                         placeholder='Password'
                         type={showPassword ? 'text' : 'password'}
                         onChange={event => setPassword(event.target.value)}
-                        data-test-id='LoginPage_PasswordInput'
+                        data-test-id='SignUpForm_PasswordInput'
                     ></PasswordInput>
-                    <ShowPasswordSpan onClick={() => setShowPassword(prevState => !prevState)}>
+                    <ShowPasswordSpan
+                        data-test-id='ShowPassword'
+                        onClick={() => setShowPassword(prevState => !prevState)}
+                    >
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </ShowPasswordSpan>
                 </PasswordInputWrapper>
@@ -129,12 +132,12 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                     </div>
                 )}
             </SignUpPageForm>
-            <SignUpDiv>
+            <LoginDiv data-test-id='LoginDiv'>
                 Already have an account?{' '}
-                <Link to='#' onClick={loginSwitch}>
+                <Link to='#' onClick={loginSwitch} data-test-id='LoginLink'>
                     Login!
                 </Link>
-            </SignUpDiv>
+            </LoginDiv>
         </>
     );
 };
