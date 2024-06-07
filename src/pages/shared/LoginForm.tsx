@@ -131,9 +131,9 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                     </div>
                 )}
             </LoginPageForm>
-            <LinkDiv>
+            <LinkDiv data-test-id='SignUpLinkDiv'>
                 Don&apos;t have an account?{' '}
-                <Link to='#' onClick={signUpSwitch}>
+                <Link to='#' onClick={signUpSwitch} data-test-id='SignUpLink'>
                     Sign Up!
                 </Link>
             </LinkDiv>
