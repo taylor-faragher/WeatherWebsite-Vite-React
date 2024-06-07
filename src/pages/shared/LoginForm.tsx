@@ -55,10 +55,15 @@ const PasswordInput = styled.input`
 const ShowPasswordSpan = styled.span`
     position: absolute;
     right: 10px;
-    top: 50%;
     color: black;
     transform: translateY(-50%);
     cursor: pointer;
+    @media screen and ${breakPoints.mobile} {
+        top: 35%;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        top: 55%;
+    }
 `;
 
 const StyledErrorMessage = styled.div`
