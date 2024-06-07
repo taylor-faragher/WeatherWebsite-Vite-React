@@ -1,9 +1,10 @@
 import {styled} from 'styled-components';
 import {GrLogin} from 'react-icons/gr';
 import {CgProfile} from 'react-icons/cg';
-import useLoginStatus from '../../../hooks/useLoginStatus';
 import {breakPoints} from '../../../utils/layout/breakpoints';
 import {useNavigate} from 'react-router-dom';
+import {AccountContext} from '../../../services/Account';
+import {useContext} from 'react';
 
 const LoginLogoutButtonWrapper = styled.div`
     display: flex;
@@ -89,7 +90,7 @@ const LoggedInToolTip = () => {
 };
 
 export const LoginLogoutButton = () => {
-    const {loaded} = useLoginStatus();
+    const {user} = useContext(AccountContext);
     const navigate = useNavigate();
 
     const handleLoginNavigation = () => {
@@ -98,7 +99,7 @@ export const LoginLogoutButton = () => {
 
     return (
         <>
-            {loaded && (
+            {user && (
                 <LoginLogoutButtonWrapper
                     data-test-id={`LoginLogoutButtonWrapper`}
                     onClick={() => navigate('/profile')}
@@ -107,7 +108,7 @@ export const LoginLogoutButton = () => {
                     <LoggedInToolTip />
                 </LoginLogoutButtonWrapper>
             )}
-            {!loaded && (
+            {!user && (
                 <LoginLogoutButtonWrapper
                     data-test-id={`LoginLogoutButtonWrapper`}
                     onClick={() => handleLoginNavigation()}
