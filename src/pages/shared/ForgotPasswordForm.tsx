@@ -39,8 +39,8 @@ const StyledInput = styled.input`
 
 const StyledVerificationButton = styled.button`
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(6)};
-        width: 200px;
+        font-size: ${getFontSize(4)};
+        width: 250px;
         height: 60px;
     }
     @media screen and ${breakPoints.tablet} {
