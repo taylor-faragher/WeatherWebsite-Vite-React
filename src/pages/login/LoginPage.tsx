@@ -8,7 +8,12 @@ import SignUpForm from '../shared/SignUpForm';
 import ForgotPasswordForm from '../shared/ForgotPasswordForm';
 
 const LoginPageWrapper = styled.div`
-    padding-bottom: 175px;
+    @media screen and ${breakPoints.mobile} {
+        padding-bottom: 100px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        padding-bottom: 0px;
+    }
 `;
 
 const SuccessMessage = styled.h1`
