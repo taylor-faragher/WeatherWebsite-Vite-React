@@ -110,7 +110,7 @@ const ResultPage = () => {
         queryFn: () => fetchWeather(zipCode as string),
     });
     const currentTemp = Math.round(data?.currentTemp as number);
-    const description = data?.description as string;
+    const description = data?.description;
     const weatherPic = `/assets/${data?.image.image}`;
     const thermoPic = `/assets/thermometer-fahrenheit.svg`;
 
