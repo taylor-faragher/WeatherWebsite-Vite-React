@@ -3,15 +3,18 @@ import {pascalize} from '../utils/pascalize';
 import {getPicAltText} from './getPicAltText';
 
 export const mapZipCodeData = async (data: WeatherResults): Promise<WeatherItem> => {
-    const picName = data.weather[0].icon;
+    const picName = data.weather.icon;
     const weatherPic = {image: `${picName}.svg`, imageAltText: await getPicAltText(picName)};
-    const description = pascalize(data.weather[0].description);
+    const description = await pascalize(data.weather.description);
 
     return {
-        currentTemp: data?.main?.temp,
-        windSpeed: data?.wind?.speed,
+        currentTemp: data?.weather.temperature,
+        feelsLike: data?.weather.feelsLike,
+        humidity: data?.weather.humidity,
+        windSpeed: data?.weather.windSpeed,
+        windDirection: data?.weather.windDirection,
         description: description,
-        majorCity: data.name,
+        majorCity: data?.area.majorCity,
         image: weatherPic,
     };
 };
