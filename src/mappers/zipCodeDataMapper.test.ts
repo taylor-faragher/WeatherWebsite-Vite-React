@@ -36,7 +36,7 @@ describe('mapZipCodeData', () => {
 
         const result = await mapZipCodeData(mockData);
 
-        expect(getPicAltText).toHaveBeenCalledWith('04d');
+        expect(getPicAltText).toHaveBeenCalledWith('i2d');
         expect(pascalize).toHaveBeenCalledWith('overcast clouds');
         expect(result).toEqual(expectedResult);
     });
