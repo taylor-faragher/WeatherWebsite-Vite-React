@@ -17,6 +17,10 @@ const ResultsSection = styled.div`
         padding-bottom: 85px;
     }
     @media screen and ${breakPoints.tablet} {
+        padding-top: 25px;
+        padding-bottom: 95px;
+    }
+    @media screen and ${breakPoints.tabletBig} {
         padding-top: 75px;
         padding-bottom: 0px;
     }
@@ -37,11 +41,11 @@ const WeatherResultsSection = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    @media screen and ${breakPoints.mobileBig} {
+    @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(7)};
     }
 
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(9)};
     }
 `;
@@ -51,11 +55,9 @@ const WeatherPicWrapper = styled.div`
     justify-content: center;
     @media screen and ${breakPoints.mobile} {
         width: 100%;
-        height: 250px;
     }
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
         width: 100%;
-        height: 300px;
 `;
 
 const WeatherPic = styled.img`
@@ -68,9 +70,9 @@ const TempWrapper = styled.div`
     align-items: center;
     justify-content: center;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(11)};
+        font-size: ${getFontSize(7)};
     }
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(11)};
         margin-bottom: -40px;
     }
@@ -83,7 +85,7 @@ const ThermoPicture = styled.img`
         margin-right: -50px;
         height: 250px;
     }
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
         margin-top: -40px;
         margin-top: 0px;
         margin-left: -50px;
@@ -94,9 +96,9 @@ const ThermoPicture = styled.img`
 const StyledDescription = styled.div`
     width: 100%;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(7)};
     }
-    @media screen and ${breakPoints.tabletBig} {
+    @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(10)};
     }
 `;
