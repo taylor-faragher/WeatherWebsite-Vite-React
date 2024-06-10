@@ -1,6 +1,6 @@
 import {fetchWeather} from './WeatherGateway';
-import {mockData} from '../../utils/testData/testData';
 import {mapZipCodeData} from '../../mappers/zipCodeDataMapper';
+import {mockData} from '../../utils/testData/testData';
 
 jest.mock('../../mappers/zipCodeDataMapper', () => ({
     mapZipCodeData: jest.fn(),
@@ -32,13 +32,18 @@ describe('fetchWeather', () => {
     test('should fetch weather data by zip code', async () => {
         const gatewayMockData = {mockData};
         const mockZipCode = '12345';
+        const headers = {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-api-key': 'bTK3tM6Zwj8cHACQtSRH26aEFwzeQ4ns9YInqoj5',
+        };
 
         global.fetch = jest.fn().mockImplementation(() => mockResponse(200, gatewayMockData));
         (mapZipCodeData as jest.Mock).mockResolvedValue(finalData);
 
         const result = await fetchWeather(mockZipCode);
 
-        expect(fetch).toHaveBeenCalledWith(`https://api.taylorsweatherapi.com/?zipcode=${mockZipCode}`);
+        expect(fetch).toHaveBeenCalledWith(`https://api.taylorsweatherapi.com/?zipcode=${mockZipCode}`, {headers});
         expect(result).toEqual(finalData);
     });
 
