@@ -1,6 +1,9 @@
 export type WeatherItem = {
     currentTemp: number;
+    feelsLike: number;
+    humidity: number;
     windSpeed: number;
+    windDirection: number;
     description: string;
     majorCity: string;
     image: FullImage;
@@ -11,57 +14,33 @@ export type FullImage = {
     imageAltText: string;
 };
 
-type WeatherDescriptors = {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-};
-
-type WeatherInfo = {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-};
-
-type WindItem = {
-    speed: number;
-    deg: number;
-    gust?: number;
-};
-
-type CloudItem = {
-    all: number;
-};
-
-type SystemItem = {
-    type: number;
-    id: number;
-    country: string;
-    sunrise: number;
-    sunset: number;
-};
-
 type GeoCoords = {
     lon: number;
     lat: number;
 };
 
-export type WeatherResults = {
-    coord: GeoCoords;
-    weather: [WeatherDescriptors];
-    base: string;
-    main: WeatherInfo;
+type WeatherValues = {
+    description: string;
+    icon: string;
+    temperature: number;
+    feelsLike: number;
+    pressure: number;
+    humidity: number;
     visibility: number;
-    wind: WindItem;
-    clouds: CloudItem;
-    dt: number;
-    sys: SystemItem;
+    windSpeed: number;
+    windDirection: number;
+};
+
+type AreaValues = {
+    country: string;
+    sunrise: EpochTimeStamp;
+    sunset: EpochTimeStamp;
     timezone: number;
-    id: number;
-    name: string;
-    cod: number;
+    majorCity: string;
+};
+
+export type WeatherResults = {
+    coordinates: GeoCoords;
+    weather: WeatherValues;
+    area: AreaValues;
 };
