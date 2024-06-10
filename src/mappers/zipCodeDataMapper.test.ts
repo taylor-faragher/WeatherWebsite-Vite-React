@@ -23,6 +23,9 @@ describe('mapZipCodeData', () => {
         const expectedResult: WeatherItem = {
             currentTemp: 59.76,
             windSpeed: 5.75,
+            feelsLike: 59,
+            humidity: 100,
+            windDirection: 360,
             description: mockPascalizedDescription,
             majorCity: 'TownUSA',
             image: {
