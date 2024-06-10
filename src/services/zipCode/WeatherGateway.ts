@@ -6,10 +6,12 @@ export const fetchWeather = async (zipCode: string): Promise<WeatherItem> => {
         return Promise.reject(new Error('Bad Request'));
     }
 
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    const response: Response = await fetch(`https://api.taylorsweatherapi.com/?zipcode=${zipCode}`);
+    const headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'x-api-key': 'bTK3tM6Zwj8cHACQtSRH26aEFwzeQ4ns9YInqoj5',
+    };
+    const response: Response = await fetch(`https://api.taylorsweatherapi.com/?zipcode=${zipCode}`, {headers: headers});
     const data = await response.json();
 
     if (!response.ok) {
