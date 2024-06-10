@@ -70,7 +70,7 @@ const TempWrapper = styled.div`
     align-items: center;
     justify-content: center;
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(7)};
+        font-size: ${getFontSize(10)};
     }
     @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(11)};
