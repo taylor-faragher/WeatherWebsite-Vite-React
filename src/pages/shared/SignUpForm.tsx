@@ -7,8 +7,20 @@ import UserPool from '../../UserPool';
 import {getFontWeight} from '../../utils/layout/getFontWeight';
 import FormButton from './formComponents/FormButton';
 import {FaEye, FaEyeSlash} from 'react-icons/fa';
+import PasswordChecker from './PasswordChecker';
+import {CharacterType} from 'src/types/types';
+import {
+    checkPasswordForNumber,
+    checkPasswordForSpecialCharacter,
+    checkPasswordForUpperCase,
+    checkPasswordLength,
+} from '../../utils/PasswordRequirementUtils';
 
-const SignUpPageForm = styled.form``;
+const SignUpPageForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 
 const SignUpText = styled.h3`
     @media screen and ${breakPoints.mobile} {
@@ -77,27 +89,51 @@ const LoginDiv = styled.div`
     padding-top: 35px;
     font-weight: ${getFontWeight('heavy')};
 `;
+
 const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [displayError, setDisplayError] = useState(false);
     const [errorText, setErrorText] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [passwordLength, setPasswordLength] = useState<CharacterType>('none');
+    const [passwordUpperCase, setPasswordUpperCase] = useState<CharacterType>('none');
+    const [passwordNumber, setPasswordNumber] = useState<CharacterType>('none');
+    const [passwordSpecialCharacter, setPasswordSpecialCharacter] = useState<CharacterType>('none');
 
     const onSubmit = event => {
         event.preventDefault();
-        UserPool.signUp(email, password, [], [], (err, data) => {
-            if (err) {
-                console.log('Signup error: ', err);
-                setErrorText(err.message);
-                setDisplayError(true);
-            } else {
-                loginSwitch();
-                setSuccessMessage(true);
-                console.log(data);
-            }
-        });
+        if (passwordLength || passwordNumber || passwordUpperCase || passwordSpecialCharacter == 'incorrect') {
+            setErrorText('Password does not meet requirements. Please see password criteria above');
+            setDisplayError(true);
+        } else {
+            UserPool.signUp(email, password, [], [], (err, data) => {
+                if (err) {
+                    console.log('Signup error: ', err);
+                    setErrorText(err.message);
+                    setDisplayError(true);
+                } else {
+                    loginSwitch();
+                    setSuccessMessage(true);
+                    console.log(data);
+                }
+            });
+        }
     };
+
+    const checkPasswordAndSet = async value => {
+        const checkPasswordLengthValue: CharacterType = await checkPasswordLength(value);
+        const checkPasswordForNumberValue: CharacterType = await checkPasswordForNumber(value);
+        const checkPasswordForUpperCaseValue: CharacterType = await checkPasswordForUpperCase(value);
+        const checkPasswordForSpecialCharacterValue: CharacterType = await checkPasswordForSpecialCharacter(value);
+        setPasswordLength(checkPasswordLengthValue);
+        setPasswordUpperCase(checkPasswordForUpperCaseValue);
+        setPasswordNumber(checkPasswordForNumberValue);
+        setPasswordSpecialCharacter(checkPasswordForSpecialCharacterValue);
+        setDisplayError(false);
+        setPassword(value);
+    };
+
     return (
         <>
             <SignUpPageForm onSubmit={onSubmit} data-test-id='SignUpPageForm'>
@@ -115,7 +151,7 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                         value={password}
                         placeholder='Password'
                         type={showPassword ? 'text' : 'password'}
-                        onChange={event => setPassword(event.target.value)}
+                        onChange={event => checkPasswordAndSet(event.target.value)}
                         data-test-id='SignUpForm_PasswordInput'
                     ></PasswordInput>
                     <ShowPasswordSpan
@@ -125,6 +161,12 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </ShowPasswordSpan>
                 </PasswordInputWrapper>
+                <PasswordChecker
+                    lengthType={passwordLength}
+                    upperCaseType={passwordUpperCase}
+                    numberType={passwordNumber}
+                    specialCharacterType={passwordSpecialCharacter}
+                />
                 <FormButton dataTestId='SignUpButton' text='Sign Up' />
                 {displayError && (
                     <div>
