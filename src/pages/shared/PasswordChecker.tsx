@@ -32,9 +32,9 @@ const StyledSpecialCharacterCheck = styled.li<{characterType: CharacterType}>`
 `;
 
 const unicodeMap = {
-    none: '\u2022',
+    none: '\u23FA',
     correct: '\u2705',
-    incorrect: '\u0078',
+    incorrect: '\u274C',
 };
 
 const textColorMap = {
