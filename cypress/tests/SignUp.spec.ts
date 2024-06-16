@@ -61,7 +61,7 @@ describe('SignUp E2E Tests', () => {
         });
         cy.tid('SignUpButton').click();
         cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password must have uppercase characters');
+        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
 
     });
 
@@ -74,7 +74,7 @@ describe('SignUp E2E Tests', () => {
         });
         cy.tid('SignUpButton').click();
         cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password must have numeric characters');
+        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
 
     });
 
@@ -87,7 +87,7 @@ describe('SignUp E2E Tests', () => {
         });
         cy.tid('SignUpButton').click();
         cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password must have symbol characters');
+        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
 
     });
 
@@ -100,7 +100,7 @@ describe('SignUp E2E Tests', () => {
         });
         cy.tid('SignUpButton').click();
         cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password not long enough');
+        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
 
     });
 
@@ -110,6 +110,7 @@ describe('SignUp E2E Tests', () => {
         cy.tid('SignUpEmailInput').type('test@test.com');
         cy.tid('SignUpButton').click();
         cy.tid('ErrorMessage').should('be.visible');
+        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
     });
 
     it(`Error message appears if username is empty and user clicks sign up button`, () => {
