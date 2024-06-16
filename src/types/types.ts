@@ -9,6 +9,8 @@ export type WeatherItem = {
     image: FullImage;
 };
 
+export type CharacterType = 'none' | 'correct' | 'incorrect';
+
 export type FullImage = {
     image: string;
     imageAltText: string;
