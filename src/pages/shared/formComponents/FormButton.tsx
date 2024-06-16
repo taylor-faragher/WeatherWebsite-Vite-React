@@ -8,7 +8,7 @@ const FormButtonWrapper = styled.div`
 const Button = styled.button`
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(6)};
-        width: 200px;
+        width: 220px;
         height: 60px;
     }
     @media screen and ${breakPoints.tablet} {
