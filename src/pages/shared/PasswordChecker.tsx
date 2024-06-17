@@ -5,34 +5,60 @@ const PasswordCheckerWrapper = styled.div`
     text-align: left;
 `;
 
-const PasswordUnorderedList = styled.ul``;
+const PasswordUnorderedList = styled.ul`
+    padding-left: 0;
+`;
 
 const StyledPasswordLengthCheck = styled.li<{characterType: CharacterType}>`
-    list-style-type: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
     color: ${({characterType}) => `${getTextColor(characterType)}`};
-    padding-left: 5px;
+    list-style-type: none;
+
+    &::before {
+        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        font-size: 0.75em;
+        line-height: 1;
+        padding-right: 5px;
+    }
 `;
 
 const StyledUpperCaseCheck = styled.li<{characterType: CharacterType}>`
-    list-style-type: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+    list-style-type: none;
     color: ${({characterType}) => `${getTextColor(characterType)}`};
-    padding-left: 5px;
+
+    &::before {
+        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        font-size: 0.75em;
+        line-height: 1;
+        padding-right: 5px;
+    }
 `;
 
 const StyledNumberCheck = styled.li<{characterType: CharacterType}>`
-    list-style-type: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+    list-style-type: none;
     color: ${({characterType}) => `${getTextColor(characterType)}`};
-    padding-left: 5px;
+
+    &::before {
+        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        font-size: 0.75em;
+        line-height: 1;
+        padding-right: 5px;
+    }
 `;
 
 const StyledSpecialCharacterCheck = styled.li<{characterType: CharacterType}>`
-    list-style-type: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+    list-style-type: none;
     color: ${({characterType}) => `${getTextColor(characterType)}`};
-    padding-left: 5px;
+
+    &::before {
+        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        font-size: 0.75em;
+        line-height: 1;
+        padding-right: 5px;
+    }
 `;
 
 const unicodeMap = {
-    none: '\u23FA',
+    none: '\u25CF',
     correct: '\u2705',
     incorrect: '\u274C',
 };
