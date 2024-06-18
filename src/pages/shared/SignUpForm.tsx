@@ -108,7 +108,11 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
 
     const onSubmit = event => {
         event.preventDefault();
-        console.log(passwordLength, passwordNumber, passwordUpperCase, passwordSpecialCharacter);
+        if (!password) {
+            setErrorText('You Need to Enter a Password');
+            setDisplayError(true);
+            return;
+        }
         if (
             passwordLength == 'incorrect' ||
             passwordNumber == 'incorrect' ||
