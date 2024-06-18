@@ -9,48 +9,48 @@ const PasswordUnorderedList = styled.ul`
     padding-left: 0;
 `;
 
-const StyledPasswordLengthCheck = styled.li<{characterType: CharacterType}>`
-    color: ${({characterType}) => `${getTextColor(characterType)}`};
+const StyledPasswordLengthCheck = styled.li<{$characterType: CharacterType}>`
+    color: ${({$characterType}) => `${getTextColor($characterType)}`};
     list-style-type: none;
 
     &::before {
-        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        content: ${({$characterType}) => `"${getUnicodeCharacter($characterType)}"`};
         font-size: 0.75em;
         line-height: 1;
         padding-right: 5px;
     }
 `;
 
-const StyledUpperCaseCheck = styled.li<{characterType: CharacterType}>`
+const StyledUpperCaseCheck = styled.li<{$characterType: CharacterType}>`
     list-style-type: none;
-    color: ${({characterType}) => `${getTextColor(characterType)}`};
+    color: ${({$characterType}) => `${getTextColor($characterType)}`};
 
     &::before {
-        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        content: ${({$characterType}) => `"${getUnicodeCharacter($characterType)}"`};
         font-size: 0.75em;
         line-height: 1;
         padding-right: 5px;
     }
 `;
 
-const StyledNumberCheck = styled.li<{characterType: CharacterType}>`
+const StyledNumberCheck = styled.li<{$characterType: CharacterType}>`
     list-style-type: none;
-    color: ${({characterType}) => `${getTextColor(characterType)}`};
+    color: ${({$characterType}) => `${getTextColor($characterType)}`};
 
     &::before {
-        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        content: ${({$characterType}) => `"${getUnicodeCharacter($characterType)}"`};
         font-size: 0.75em;
         line-height: 1;
         padding-right: 5px;
     }
 `;
 
-const StyledSpecialCharacterCheck = styled.li<{characterType: CharacterType}>`
+const StyledSpecialCharacterCheck = styled.li<{$characterType: CharacterType}>`
     list-style-type: none;
-    color: ${({characterType}) => `${getTextColor(characterType)}`};
+    color: ${({$characterType}) => `${getTextColor($characterType)}`};
 
     &::before {
-        content: ${({characterType}) => `"${getUnicodeCharacter(characterType)}"`};
+        content: ${({$characterType}) => `"${getUnicodeCharacter($characterType)}"`};
         font-size: 0.75em;
         line-height: 1;
         padding-right: 5px;
@@ -89,12 +89,12 @@ const PasswordChecker = (props: PasswordCheckerProps) => {
         <PasswordCheckerWrapper data-test-id='PasswordCheckerWrapper'>
             <p>Password must contain: </p>
             <PasswordUnorderedList>
-                <StyledPasswordLengthCheck characterType={props.lengthType}>
+                <StyledPasswordLengthCheck $characterType={props.lengthType}>
                     Eight or more Characters
                 </StyledPasswordLengthCheck>
-                <StyledUpperCaseCheck characterType={props.upperCaseType}>One Uppercase Letter</StyledUpperCaseCheck>
-                <StyledNumberCheck characterType={props.numberType}>A number</StyledNumberCheck>
-                <StyledSpecialCharacterCheck characterType={props.specialCharacterType}>
+                <StyledUpperCaseCheck $characterType={props.upperCaseType}>One Uppercase Letter</StyledUpperCaseCheck>
+                <StyledNumberCheck $characterType={props.numberType}>A number</StyledNumberCheck>
+                <StyledSpecialCharacterCheck $characterType={props.specialCharacterType}>
                     A Special Character
                 </StyledSpecialCharacterCheck>
             </PasswordUnorderedList>
