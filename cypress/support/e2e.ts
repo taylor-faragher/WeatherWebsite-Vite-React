@@ -22,6 +22,4 @@ import {mockData} from '../../src/utils/testData/testData';
 beforeEach(() => {
     window.sessionStorage.clear();
     cy.visit(Cypress.config().baseUrl as string);
-    cy.intercept('GET', 'https://api.taylorsweatherapi.com/?zipcode=20020', {...mockData}).as('getWeather1');
-    cy.intercept('GET', 'https://api.taylorsweatherapi.com/?zipcode=20005', {...mockData}).as('getWeather2');
 });
