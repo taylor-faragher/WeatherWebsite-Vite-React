@@ -110,7 +110,7 @@ describe('SignUp E2E Tests', () => {
         cy.tid('SignUpEmailInput').type('test@test.com');
         cy.tid('SignUpButton').click();
         cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
+        cy.tid('ErrorMessage').contains('You Need to Enter a Password');
     });
 
     it(`Error message appears if username is empty and user clicks sign up button`, () => {
