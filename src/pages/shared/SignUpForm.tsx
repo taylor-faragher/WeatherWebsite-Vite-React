@@ -108,7 +108,13 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
 
     const onSubmit = event => {
         event.preventDefault();
-        if (passwordLength || passwordNumber || passwordUpperCase || passwordSpecialCharacter == 'incorrect') {
+        console.log(passwordLength, passwordNumber, passwordUpperCase, passwordSpecialCharacter);
+        if (
+            passwordLength == 'incorrect' ||
+            passwordNumber == 'incorrect' ||
+            passwordUpperCase == 'incorrect' ||
+            passwordSpecialCharacter == 'incorrect'
+        ) {
             setErrorText('Password does not meet requirements. Please see password criteria above');
             setDisplayError(true);
         } else {
