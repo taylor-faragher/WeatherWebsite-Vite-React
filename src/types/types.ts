@@ -1,11 +1,9 @@
 export type WeatherItem = {
     currentTemp: number;
-    feelsLike: number;
     humidity: number;
     windSpeed: number;
     windDirection: number;
     description: string;
-    majorCity: string;
     image: FullImage;
 };
 
@@ -21,11 +19,15 @@ type GeoCoords = {
     lat: number;
 };
 
-type WeatherValues = {
+type CurrentWeather = {
     description: string;
     icon: string;
     temperature: number;
-    feelsLike: number;
+    minTemperature: number;
+    maxTemperature: number;
+    summary: string;
+    sunrise: string;
+    sunset: string;
     pressure: number;
     humidity: number;
     visibility: number;
@@ -33,16 +35,31 @@ type WeatherValues = {
     windDirection: number;
 };
 
-type AreaValues = {
-    country: string;
-    sunrise: EpochTimeStamp;
-    sunset: EpochTimeStamp;
-    timezone: number;
-    majorCity: string;
+type HourlyData = {
+    time: string;
+    temp: number;
+    icon: string;
+    description: string;
+};
+
+type DailyData = {
+    day: string;
+    avgTemp: number;
+    minTemp: number;
+    maxTemp: number;
+    icon: string;
+    description: string;
+    summary: string;
+    sunrise: string;
+    sunset: string;
 };
 
 export type WeatherResults = {
     coordinates: GeoCoords;
-    weather: WeatherValues;
-    area: AreaValues;
+    current: CurrentWeather;
+    hourly: HourlyData[];
+    daily: DailyData[];
+    area: {
+        timezone: string;
+    };
 };

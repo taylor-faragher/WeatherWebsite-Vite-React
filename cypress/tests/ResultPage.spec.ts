@@ -1,7 +1,6 @@
 describe('ResultPage E2E Tests', () => {
     it(`All Page elements should be visible and clicking return home navigates back to home page`, () => {
         cy.visit('/result?zipCode=20020');
-        cy.wait('@getWeather1');
         cy.tid(`ResultPage_ZipCodeTitle`).should('be.visible');
         cy.tid(`ResultPage_WeatherPic`).should('be.visible');
         cy.tid(`ResultPage_TempWrapper`).should('be.visible');
@@ -15,14 +14,12 @@ describe('ResultPage E2E Tests', () => {
 
     it(`User can search zip code again from result page`, () => {
         cy.visit('/result?zipCode=20020');
-        cy.wait('@getWeather1');
         cy.tid(`ResultPage_TempWrapper`).should('be.visible');
         cy.tid(`ZipCodeForm`).should('be.visible');
         cy.tid(`ZipCodeInput`).should('be.visible');
         cy.tid(`ZipCodeInput`).type('20005', {delay: 100});
         cy.tid(`ZipCodeForm`).submit();
         cy.url().should('contain', '/result?zipCode=20005');
-        cy.wait('@getWeather2');
         cy.tid(`ResultPage_TempWrapper`).should('be.visible');
     });
 
