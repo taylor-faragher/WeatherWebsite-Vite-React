@@ -21,23 +21,21 @@ describe('mapZipCodeData', () => {
         (pascalize as jest.Mock).mockReturnValue(mockPascalizedDescription);
 
         const expectedResult: WeatherItem = {
-            currentTemp: 59,
-            windSpeed: 10,
-            feelsLike: 59,
-            humidity: 100,
-            windDirection: 360,
+            currentTemp: 88,
+            windSpeed: 10.36,
+            humidity: 63,
+            windDirection: 130,
             description: mockPascalizedDescription,
-            majorCity: 'Smyrna',
             image: {
-                image: 'i2d.svg',
+                image: '01d.svg',
                 imageAltText: mockAltText,
             },
         };
 
         const result = await mapZipCodeData(mockData);
 
-        expect(getPicAltText).toHaveBeenCalledWith('i2d');
-        expect(pascalize).toHaveBeenCalledWith('windy');
+        expect(getPicAltText).toHaveBeenCalledWith('01d');
+        expect(pascalize).toHaveBeenCalledWith('clear sky');
         expect(result).toEqual(expectedResult);
     });
 });
