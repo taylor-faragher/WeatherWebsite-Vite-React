@@ -43,6 +43,7 @@ export const mockData: WeatherResults = {
     ],
     area: {
         timezone: 'Central',
+        majorCity: 'SomeCity',
     },
 };
 
