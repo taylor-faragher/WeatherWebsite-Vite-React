@@ -4,7 +4,9 @@ export type WeatherItem = {
     windSpeed: number;
     windDirection: number;
     description: string;
+    hourlyData: HourlyData[];
     image: FullImage;
+    majorCity: string;
 };
 
 export type CharacterType = 'none' | 'correct' | 'incorrect';
@@ -35,7 +37,7 @@ type CurrentWeather = {
     windDirection: number;
 };
 
-type HourlyData = {
+export type HourlyData = {
     time: string;
     temp: number;
     icon: string;
@@ -61,5 +63,6 @@ export type WeatherResults = {
     daily: DailyData[];
     area: {
         timezone: string;
+        majorCity: string;
     };
 };
