@@ -6,6 +6,13 @@ const FormButtonWrapper = styled.div`
     padding-top: 25px;
 `;
 const Button = styled.button`
+    background-color: lightgrey;
+    color: black;
+    border-radius: 5em;
+    &:hover {
+        cursor: pointer;
+        border: 1px solid #9b9b9b;
+    }
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(5)};
         width: 220px;
