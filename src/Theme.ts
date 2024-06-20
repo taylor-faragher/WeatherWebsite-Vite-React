@@ -8,6 +8,7 @@ export const lightTheme = {
     headerIconBackgroundColor: 'white',
     headerBorderBottom: '2px solid',
     zipCodeInputColor: 'black',
+    thermoPic: '/assets/thermometer-fahrenheit-light.svg',
 };
 
 export const darkTheme = {
@@ -20,4 +21,5 @@ export const darkTheme = {
     headerIconBackgroundColor: 'grey',
     borderBottom: 'revert',
     zipCodeInputColor: 'white',
+    thermoPic: '/assets/thermometer-fahrenheit-dark.svg',
 };
