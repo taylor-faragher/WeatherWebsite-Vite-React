@@ -66,7 +66,7 @@ const LoginPage = () => {
                     <LoginForm signUpSwitch={handleSignUpSwitch} forgotPasswordSwitch={handleForgotPasswordSwitch} />
                 </>
             )}
-            {pageTitle == 'SignUp' && (
+            {pageTitle == 'Sign Up' && (
                 <>
                     <SignUpForm loginSwitch={handleLoginSwitch} setSuccessMessage={setSuccessSignUp} />
                 </>
