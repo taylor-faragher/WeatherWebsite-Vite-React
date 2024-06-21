@@ -98,8 +98,7 @@ const LoginDiv = styled.div`
 const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [displayError, setDisplayError] = useState(false);
-    const [errorText, setErrorText] = useState('');
+    const [errorText, setErrorText] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
     const [passwordLength, setPasswordLength] = useState<CharacterType>('none');
     const [passwordUpperCase, setPasswordUpperCase] = useState<CharacterType>('none');
@@ -110,7 +109,6 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
         event.preventDefault();
         if (!password) {
             setErrorText('You Need to Enter a Password');
-            setDisplayError(true);
             return;
         }
         if (
@@ -120,13 +118,11 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
             passwordSpecialCharacter == 'incorrect'
         ) {
             setErrorText('Password does not meet requirements. Please see password criteria above');
-            setDisplayError(true);
         } else {
             UserPool.signUp(email, password, [], [], (err, data) => {
                 if (err) {
                     console.log('Signup error: ', err);
                     setErrorText(err.message);
-                    setDisplayError(true);
                 } else {
                     loginSwitch();
                     setSuccessMessage(true);
@@ -145,7 +141,7 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
         setPasswordUpperCase(checkPasswordForUpperCaseValue);
         setPasswordNumber(checkPasswordForNumberValue);
         setPasswordSpecialCharacter(checkPasswordForSpecialCharacterValue);
-        setDisplayError(false);
+        setErrorText(null);
         setPassword(value);
     };
 
@@ -183,7 +179,7 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                     specialCharacterType={passwordSpecialCharacter}
                 />
                 <FormButton dataTestId='SignUpButton' text='Sign Up' />
-                {displayError && (
+                {errorText && (
                     <div>
                         <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
                     </div>
