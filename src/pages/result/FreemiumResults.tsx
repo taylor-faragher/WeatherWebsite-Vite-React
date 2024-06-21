@@ -53,8 +53,6 @@ const ThermoPicture = styled.img.attrs(props => ({src: props.theme.thermoPic}))`
     }
     @media screen and ${breakPoints.tablet} {
         margin-top: -40px;
-        margin-top: 0px;
-        margin-left: -50px;
         height: 200px;
     }
 `;
@@ -66,6 +64,7 @@ const StyledDescription = styled.div`
     }
     @media screen and ${breakPoints.tablet} {
         font-size: ${getFontSize(10)};
+        margin-top: 20px;
     }
 `;
 const FreemiumResults = ({data}: {data: WeatherItem}) => {
