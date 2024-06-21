@@ -5,8 +5,9 @@ const navigateToSignup = () => {
 }
 
 describe('SignUp E2E Tests', () => {
-    it(`All elements visible`, () => {
+    it(`All elements visible and user can signup for account`, () => {
         navigateToSignup();
+        cy.intercept('POST', 'https://cognito-idp.us-east-1.amazonaws.com/', {}).as('mockedSignUp');
 
         cy.tid('SignUpTextUsername').should('be.visible');
         cy.tid('SignUpEmailInput').should('be.visible');
@@ -18,9 +19,17 @@ describe('SignUp E2E Tests', () => {
         cy.tid('LoginDiv').should('be.visible');
         cy.tid('LoginLink').should('be.visible');
         cy.tid('SignUpEmailInput').type('test@test.com');
-        cy.tid('SignUpForm_PasswordInput').type('123!secret', {
+        cy.tid('SignUpForm_PasswordInput').type('123!Password', {
             log: false,
         });
+        cy.tid('SignUpButton').click();
+        cy.wait('@mockedSignUp');
+        cy.url().should('contain', '/login');
+        cy.tid('LoginPage_LoginPageForm').should('be.visible');
+        cy.tid('SuccesSignUpMessage').should('be.visible');
+        cy.tid(`SignUpLink`).should('be.visible').click();
+        cy.tid('SuccesSignUpMessage').should('not.exist');
+        cy.tid('SignUpPageForm').should('be.visible');
     });
 
     it(`Entering a bad email does not allow the user to sign up`, () => {
