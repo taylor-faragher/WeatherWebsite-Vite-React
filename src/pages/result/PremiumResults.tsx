@@ -9,72 +9,68 @@ const PremiumResultsWrapper = styled.div`
     border: 1px;
     outline: 1px;
     @media screen and ${breakPoints.mobile} {
-        min-width: 320px;
+        max-width: 100vw;
     }
     @media screen and ${breakPoints.tablet} {
-        min-width: 600px;
+        max-width: 700px;
     }
+`;
+const CurrentInfoWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-bottom: 10px;
 `;
 
 const CurrentResults = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 85px;
-    padding-bottom: 20px;
+    flex-direction: column;
 `;
 
 const CurrentIcon = styled.img`
     @media screen and ${breakPoints.mobile} {
         height: 85px;
     }
+    @media screen and ${breakPoints.tablet} {
+        height: 140px;
+    }
 `;
 
-const DiscriptionWrapper = styled.div`
+const DescriptionWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     @media screen and ${breakPoints.mobile} {
-        width: 225px;
     }
     @media screen and ${breakPoints.tablet} {
-        width: 380px;
     }
 `;
 
 const CurrentDescription = styled.h1`
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(5)};
+        font-size: 1.75rem;
+        width: 250px;
         text-align: left;
         margin: 0;
     }
-`;
-
-const CurrentCity = styled.h1`
-    @media screen and ${breakPoints.mobile} {
-        width: 200px;
-        font-size: ${getFontSize(2)};
+    @media screen and ${breakPoints.tablet} {
+        font-size: ${getFontSize(6)};
+        width: 400px;
         text-align: left;
         margin: 0;
     }
-`;
-
-const TemperatureInfoWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
 `;
 
 const TempWrapper = styled.div`
     display: flex;
     align-items: baseline;
-    justify-content: center;
+    justify-content: end;
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(6)};
-        margin-right: 10px;
     }
     @media screen and ${breakPoints.tablet} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(8)};
+        width: 150px;
     }
 `;
 
@@ -86,15 +82,31 @@ const ThermoPicture = styled.img.attrs(props => ({src: props.theme.thermoPic}))`
         vertical-align: bottom;
     }
     @media screen and ${breakPoints.tablet} {
-        height: 35px;
+        height: 45px;
     }
 `;
 
 const WindSpeedWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
     @media screen and ${breakPoints.mobile} {
         font-size: 0.75rem;
+    }
+`;
+
+const CurrentCity = styled.h1`
+    @media screen and ${breakPoints.mobile} {
+        width: 200px;
+        font-size: ${getFontSize(2)};
+        text-align: left;
+        margin: 0;
+    }
+    @media screen and ${breakPoints.tablet} {
+        width: 400px;
+        font-size: ${getFontSize(3)};
+        text-align: left;
+        margin: 0;
     }
 `;
 
@@ -103,7 +115,13 @@ const WindSpeedIcon = styled.img`
 `;
 
 const WindSpeed = styled.h3`
-    margin: 0 5px 0 -4px;
+    @media screen and ${breakPoints.mobile} {
+        margin: 0 5px 0 -4px;
+    }
+    @media screen and ${breakPoints.tablet} {
+        margin: 0 5px 0 0;
+        font-size: ${getFontSize(3)};
+    }
 `;
 
 const PremiumResults = ({data}: {data: WeatherItem}) => {
@@ -121,24 +139,24 @@ const PremiumResults = ({data}: {data: WeatherItem}) => {
 
     return (
         <PremiumResultsWrapper data-test-id='PremiumResultsWrapper'>
-            <CurrentResults>
+            <CurrentInfoWrapper data-test-id='CurrentInfoWrapper'>
                 <CurrentIcon src={weatherPic}></CurrentIcon>
-                <DiscriptionWrapper>
-                    <CurrentDescription>{description}</CurrentDescription>
-                    <CurrentCity>{majorCity}</CurrentCity>
-                </DiscriptionWrapper>
-                <TemperatureInfoWrapper data-test-id='TemperatureInfoWrapper'>
-                    <TempWrapper data-test-id='TempWrapper'>
-                        {currentTemp} <ThermoPicture></ThermoPicture>
-                    </TempWrapper>
+                <CurrentResults data-test-id='CurrentResults'>
+                    <DescriptionWrapper data-test-id='DescriptionWrapper'>
+                        <CurrentDescription data-test-id='CurrentDescription'>{description}</CurrentDescription>
+                        <TempWrapper data-test-id='TempWrapper'>
+                            {currentTemp} <ThermoPicture></ThermoPicture>
+                        </TempWrapper>
+                    </DescriptionWrapper>
                     <WindSpeedWrapper data-test-id='WindSpeedWrapper'>
+                        <CurrentCity data-test-id='CurrentCity'>{majorCity}</CurrentCity>
                         <WindSpeedIcon src={windIcon}></WindSpeedIcon>
                         <WindSpeed>
                             {windSpeed} mph {getWindDirection(data.windDirection)}
                         </WindSpeed>
                     </WindSpeedWrapper>
-                </TemperatureInfoWrapper>
-            </CurrentResults>
+                </CurrentResults>
+            </CurrentInfoWrapper>
             <HourlyResults hourlyData={hourlyData}></HourlyResults>
         </PremiumResultsWrapper>
     );
