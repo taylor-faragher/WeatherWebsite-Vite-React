@@ -38,38 +38,40 @@ const StyledTitle = styled.h1`
 const LoginPage = () => {
     const [pageTitle, setPageTitle] = useState('Login');
     const [showSuccessMessage, setSuccessSignUp] = useState(false);
-    const [showForm, setShowForm] = useState('Login');
 
     const handleSignUpSwitch = () => {
-        setShowForm('SignUp');
+        setSuccessSignUp(false);
         setPageTitle('Sign Up');
     };
 
     const handleLoginSwitch = () => {
-        setShowForm('Login');
+        setSuccessSignUp(false);
         setPageTitle('Login');
     };
 
     const handleForgotPasswordSwitch = () => {
-        setShowForm('ForgotPassword');
         setPageTitle('Password Recovery');
     };
 
     return (
         <LoginPageWrapper data-test-id='LoginPage_LoginPageWrapper'>
-            {showSuccessMessage && <SuccessMessage>Sign up Successful! Please login below!</SuccessMessage>}
+            {showSuccessMessage && (
+                <SuccessMessage data-test-id='SuccesSignUpMessage'>
+                    Sign up Successful! Please login below!
+                </SuccessMessage>
+            )}
             <StyledTitle>{pageTitle}</StyledTitle>
-            {showForm == 'Login' && (
+            {pageTitle == 'Login' && (
                 <>
                     <LoginForm signUpSwitch={handleSignUpSwitch} forgotPasswordSwitch={handleForgotPasswordSwitch} />
                 </>
             )}
-            {showForm == 'SignUp' && (
+            {pageTitle == 'SignUp' && (
                 <>
                     <SignUpForm loginSwitch={handleLoginSwitch} setSuccessMessage={setSuccessSignUp} />
                 </>
             )}
-            {showForm == 'ForgotPassword' && (
+            {pageTitle == 'Password Recovery' && (
                 <>
                     <ForgotPasswordForm loginSwitch={handleLoginSwitch} />
                 </>
