@@ -35,7 +35,7 @@ const DiscriptionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     @media screen and ${breakPoints.mobile} {
-        width: 217px;
+        width: 225px;
     }
     @media screen and ${breakPoints.tablet} {
         width: 380px;
@@ -103,7 +103,7 @@ const WindSpeedIcon = styled.img`
 `;
 
 const WindSpeed = styled.h3`
-    margin: 0;
+    margin: 0 5px 0 -4px;
 `;
 
 const PremiumResults = ({data}: {data: WeatherItem}) => {
