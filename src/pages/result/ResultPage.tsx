@@ -11,6 +11,7 @@ import PremiumResults from './PremiumResults';
 import {WeatherItem} from 'src/types/types';
 import FreemiumResults from './FreemiumResults';
 import {AccountContext} from '../../services/Account';
+import {useScrollToTop} from '../../hooks/useScrollToTop';
 
 const ResultsSection = styled.div`
     display: flex;
@@ -52,6 +53,7 @@ const ResultPage = () => {
     const {user} = useContext(AccountContext);
 
     if (error) navigate('/error');
+    useScrollToTop();
 
     return (
         <>
