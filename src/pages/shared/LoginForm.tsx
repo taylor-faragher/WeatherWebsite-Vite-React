@@ -86,8 +86,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [displayError, setDisplayError] = useState(false);
-    const [errorText, setErrorText] = useState('');
+    const [errorText, setErrorText] = useState(null);
 
     const {authenticate} = useContext(AccountContext);
 
@@ -100,7 +99,6 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
             })
             .catch(err => {
                 setErrorText(err.message);
-                setDisplayError(true);
                 console.error('Failed to auth email and password: ', err);
             });
     };
@@ -108,7 +106,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     return (
         <>
             <LoginPageForm onSubmit={e => onSubmit(e)} data-test-id='LoginPage_LoginPageForm'>
-                <LoginText data-test-id='LoginPage_LoginText'>Username</LoginText>
+                <LoginText data-test-id='LoginPage_EmailLoginText'>Username</LoginText>
                 <EmailInput
                     data-test-id='LoginPage_EmailInput'
                     value={email}
@@ -116,7 +114,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                     placeholder='Email'
                     onChange={event => setEmail(event.target.value)}
                 ></EmailInput>
-                <LoginText data-test-id='LoginPage_LoginText'>Password</LoginText>
+                <LoginText data-test-id='LoginPage_PasswordLoginText'>Password</LoginText>
                 <PasswordInputWrapper>
                     <PasswordInput
                         value={password}
@@ -125,12 +123,15 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                         onChange={event => setPassword(event.target.value)}
                         data-test-id='LoginPage_PasswordInput'
                     ></PasswordInput>
-                    <ShowPasswordSpan onClick={() => setShowPassword(prevState => !prevState)}>
+                    <ShowPasswordSpan
+                        onClick={() => setShowPassword(prevState => !prevState)}
+                        data-test-id='ShowPasswordToggle'
+                    >
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </ShowPasswordSpan>
                 </PasswordInputWrapper>
                 <FormButton dataTestId='LoginPageFormButton' text='Login' />
-                {displayError && (
+                {errorText && (
                     <div>
                         <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
                     </div>
@@ -142,9 +143,9 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                     Sign Up!
                 </Link>
             </LinkDiv>
-            <LinkDiv>
+            <LinkDiv data-test-id='ForgotPasswordWrapper'>
                 Forgot Your Password?{' '}
-                <Link to='#' onClick={forgotPasswordSwitch}>
+                <Link to='#' onClick={forgotPasswordSwitch} data-test-id='ForgotPasswordLink'>
                     Click Here to reset!
                 </Link>
             </LinkDiv>
