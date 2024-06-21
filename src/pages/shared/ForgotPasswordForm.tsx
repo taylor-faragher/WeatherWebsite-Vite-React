@@ -148,9 +148,9 @@ const ForgotPasswordForm = ({loginSwitch}) => {
                 )}
             </ForgotPasswordPageForm>
             {step !== 3 && (
-                <LinkDiv>
+                <LinkDiv data-test-id='LoginLinkWrapper'>
                     Remebered your login?{' '}
-                    <Link to='#' onClick={loginSwitch}>
+                    <Link to='#' onClick={loginSwitch} data-test-id='LoginLink'>
                         Login Here!
                     </Link>
                 </LinkDiv>
