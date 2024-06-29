@@ -1,4 +1,4 @@
-export type WeatherItem = {
+export type PremiumWeatherItem = {
     currentTemp: number;
     humidity: number;
     windSpeed: number;
@@ -7,6 +7,12 @@ export type WeatherItem = {
     hourlyData: HourlyData[];
     image: FullImage;
     majorCity: string;
+};
+
+export type FreemiumWeatherItem = {
+    currentTemp: number;
+    description: string;
+    image: FullImage;
 };
 
 export type CharacterType = 'none' | 'correct' | 'incorrect';
@@ -21,7 +27,7 @@ type GeoCoords = {
     lat: number;
 };
 
-type CurrentWeather = {
+type PremiumCurrentWeather = {
     description: string;
     icon: string;
     temperature: number;
@@ -35,6 +41,12 @@ type CurrentWeather = {
     visibility: number;
     windSpeed: number;
     windDirection: number;
+};
+
+type FreemiumCurrentWeather = {
+    temperature: number;
+    icon: string;
+    description: string;
 };
 
 export type HourlyData = {
@@ -56,11 +68,20 @@ type DailyData = {
     sunset: string;
 };
 
-export type WeatherResults = {
+export type PremiumWeatherResults = {
     coordinates: GeoCoords;
-    current: CurrentWeather;
+    current: PremiumCurrentWeather;
     hourly: HourlyData[];
     daily: DailyData[];
+    area: {
+        timezone: string;
+        majorCity: string;
+    };
+};
+
+export type FreemiumWeatherResults = {
+    coordinates: GeoCoords;
+    current: FreemiumCurrentWeather;
     area: {
         timezone: string;
         majorCity: string;
