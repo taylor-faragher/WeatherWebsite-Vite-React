@@ -91,15 +91,16 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     const {authenticate} = useContext(AccountContext);
 
     const onSubmit = event => {
+        console.log('Someone knocks at the door.');
         event.preventDefault();
         authenticate(email, password)
-            .then(data => {
-                console.log('Logged in!', data);
+            .then(() => {
+                console.log('We let them in');
                 window.location.href = `/main`;
             })
             .catch(err => {
                 setErrorText(err.message);
-                console.error('Failed to auth email and password: ', err);
+                console.error('We turn them away: ', err);
             });
     };
 

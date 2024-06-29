@@ -119,14 +119,12 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
         ) {
             setErrorText('Password does not meet requirements. Please see password criteria above');
         } else {
-            UserPool.signUp(email, password, [], [], (err, data) => {
+            UserPool.signUp(email, password, [], [], err => {
                 if (err) {
-                    console.log('Signup error: ', err);
                     setErrorText(err.message);
                 } else {
                     loginSwitch();
                     setSuccessMessage(true);
-                    console.log(data);
                 }
             });
         }

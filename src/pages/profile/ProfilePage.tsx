@@ -48,8 +48,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         getSession()
-            .then(session => {
-                console.log('Session: ', session);
+            .then(() => {
                 setStatus(true);
             })
             .catch(err => {

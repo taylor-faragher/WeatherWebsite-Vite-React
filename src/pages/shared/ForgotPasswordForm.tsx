@@ -67,8 +67,7 @@ const ForgotPasswordForm = ({loginSwitch}) => {
         const cognitoUser = new CognitoUser(userData);
 
         cognitoUser.forgotPassword({
-            onSuccess: data => {
-                console.log('Code sent: ', data);
+            onSuccess: () => {
                 setStep(2);
             },
             onFailure: err => {
