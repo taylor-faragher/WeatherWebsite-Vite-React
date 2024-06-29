@@ -1,4 +1,4 @@
-import {WeatherItem} from 'src/types/types';
+import {FreemiumWeatherItem} from 'src/types/types';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {styled} from 'styled-components';
@@ -67,10 +67,10 @@ const StyledDescription = styled.div`
         margin-top: 20px;
     }
 `;
-const FreemiumResults = ({data}: {data: WeatherItem}) => {
-    const currentTemp = Math.round(data?.currentTemp as number);
+const FreemiumResults = ({data}: {data: FreemiumWeatherItem}) => {
+    const currentTemp = data?.currentTemp;
     const description = data?.description;
-    const weatherPic = `/assets/${data?.image.image}`;
+    const weatherPic = data?.image.image;
     return (
         <WeatherResultsSection data-test-id='ResultsPage_WeatherResultsSection'>
             <WeatherPicWrapper data-test-id='ResultPage_WeatherPicWrapper'>
