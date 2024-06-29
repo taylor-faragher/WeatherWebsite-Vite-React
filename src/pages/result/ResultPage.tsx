@@ -5,13 +5,12 @@ import {Loader} from '../shared/Loader';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {ZipCodeForm} from '../shared/ZipCodeForm';
-import {fetchWeather} from '../../services/zipCode/WeatherGateway';
-import {useQuery} from '@tanstack/react-query';
 import PremiumResults from './PremiumResults';
-import {WeatherItem} from 'src/types/types';
+import {FreemiumWeatherItem, PremiumWeatherItem} from 'src/types/types';
 import FreemiumResults from './FreemiumResults';
-import {AccountContext} from '../../services/Account';
 import {useScrollToTop} from '../../hooks/useScrollToTop';
+import useWeather from '../../services/getWeather';
+import {AccountContext} from '../../services/Account';
 
 const ResultsSection = styled.div`
     display: flex;
@@ -44,15 +43,13 @@ const ZipCodeTitle = styled.h1`
 
 const ResultPage = () => {
     const [searchParams] = useSearchParams();
-    const [zipCode, setZipCode] = useState(searchParams.get('zipCode'));
     const navigate = useNavigate();
-    const {data, error, isLoading} = useQuery({
-        queryKey: ['fetchWeather', zipCode],
-        queryFn: () => fetchWeather(zipCode as string),
-    });
+    const [zipCode, setZipCode] = useState(searchParams.get('zipCode'));
     const {user} = useContext(AccountContext);
+    const {data, error, isLoading} = useWeather(zipCode as string);
 
     if (error) navigate('/error');
+
     useScrollToTop();
 
     return (
@@ -66,8 +63,8 @@ const ResultPage = () => {
                 )}
                 {!isLoading && (
                     <>
-                        {user && <PremiumResults data={data as WeatherItem} />}
-                        {!user && <FreemiumResults data={data as WeatherItem} />}
+                        {user && <PremiumResults data={data as PremiumWeatherItem} />}
+                        {!user && <FreemiumResults data={data as FreemiumWeatherItem} />}
 
                         <ZipCodeForm
                             data-test-id='ResultPage_ZipCodeForm'
