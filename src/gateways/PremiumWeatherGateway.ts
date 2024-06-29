@@ -13,11 +13,11 @@ export const fetchPremiumWeather = async (zipCode: string, user): Promise<Premiu
         const headers = {
             'Content-Type': 'application/json',
             Accept: 'application/json',
-            'x-api-key': 'uFaywcvpQj94HeeNC8ESd3w5eSS8NcxKaILjvkVq',
+            'x-api-key': 'bTK3tM6Zwj8cHACQtSRH26aEFwzeQ4ns9YInqoj5',
             authorization: `Bearer ${tokenKey}`,
         };
 
-        const response: Response = await fetch(`https://dev.taylorsweatherapi.com/premium/?zipcode=${zipCode}`, {
+        const response: Response = await fetch(`https://api.taylorsweatherapi.com/premium/?zipcode=${zipCode}`, {
             headers: headers,
         });
         const data = await response.json();
