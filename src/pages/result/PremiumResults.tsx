@@ -1,7 +1,7 @@
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {styled} from 'styled-components';
-import {WeatherItem} from 'src/types/types';
+import {PremiumWeatherItem} from 'src/types/types';
 import HourlyResults from './HourlyResults';
 import getWindDirection from '../../utils/getWindDirection';
 
@@ -103,7 +103,7 @@ const CurrentCity = styled.h1`
         margin: 0;
     }
     @media screen and ${breakPoints.tablet} {
-        width: 400px;
+        width: 375px;
         font-size: ${getFontSize(3)};
         text-align: left;
         margin: 0;
@@ -124,9 +124,9 @@ const WindSpeed = styled.h3`
     }
 `;
 
-const PremiumResults = ({data}: {data: WeatherItem}) => {
+const PremiumResults = ({data}: {data: PremiumWeatherItem}) => {
     const currentTemp = data?.currentTemp;
-    const weatherPic = `/assets/${data?.image.image}`;
+    const weatherPic = data?.image.image;
     const windSpeed = data?.windSpeed;
     const windIcon = '/assets/wind.svg';
     const description = data?.description;
