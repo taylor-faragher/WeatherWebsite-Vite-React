@@ -104,6 +104,7 @@ const Account = ({children}) => {
         const user = Pool.getCurrentUser();
         if (user) {
             user.signOut();
+            setUser(null);
             console.log('User was logged out');
             window.location.href = `/`;
         }
