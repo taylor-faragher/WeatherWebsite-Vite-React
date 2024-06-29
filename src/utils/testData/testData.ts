@@ -1,6 +1,6 @@
-import {WeatherResults} from '../../types/types';
+import {PremiumWeatherResults} from '../../types/types';
 
-export const mockData: WeatherResults = {
+export const mockData: PremiumWeatherResults = {
     coordinates: {
         lon: -12.345,
         lat: 98.765,
