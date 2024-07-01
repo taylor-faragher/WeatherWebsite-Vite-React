@@ -36,8 +36,6 @@ const StyledLegend = styled.legend`
     }
 `;
 
-const ChangePasswordForm = styled.form``;
-
 const StyledText = styled.h3`
     margin: 0;
     padding-top: 25px;
@@ -95,7 +93,7 @@ const NewPasswordSubmitButton = styled.button`
     }
 `;
 
-export default () => {
+const ChangePasswordForm = () => {
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
 
@@ -119,7 +117,7 @@ export default () => {
         <ChangePasswordFormWrapper data-test-id='ChangePasswordFormWrapper'>
             <ChangePasswordBorder data-test-id='ChangePasswordBorder'>
                 <StyledLegend>Change Password</StyledLegend>
-                <ChangePasswordForm onSubmit={onSubmit} data-test-id='ChangePasswordForm'>
+                <form onSubmit={onSubmit} data-test-id='ChangePasswordForm'>
                     <StyledText>Current password</StyledText>
                     <OldPasswordInput
                         value={password}
@@ -137,8 +135,10 @@ export default () => {
                             Change Password
                         </NewPasswordSubmitButton>
                     </ButtonWrapper>
-                </ChangePasswordForm>
+                </form>
             </ChangePasswordBorder>
         </ChangePasswordFormWrapper>
     );
 };
+
+export default ChangePasswordForm;
