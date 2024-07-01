@@ -2,8 +2,8 @@ import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {styled} from 'styled-components';
 import {PremiumWeatherItem} from 'src/types/types';
-import HourlyResults from './HourlyResults';
 import getWindDirection from '../../utils/getWindDirection';
+import ResultCard from './ResultCard';
 
 const PremiumResultsWrapper = styled.div`
     border: 1px;
@@ -125,13 +125,7 @@ const WindSpeed = styled.h3`
 `;
 
 const PremiumResults = ({data}: {data: PremiumWeatherItem}) => {
-    const currentTemp = data?.currentTemp;
-    const weatherPic = data?.image.image;
-    const windSpeed = data?.windSpeed;
     const windIcon = '/assets/wind.svg';
-    const description = data?.description;
-    const hourlyData = data?.hourlyData;
-    const majorCity = data?.majorCity;
 
     if (!data) {
         return <div>No data available</div>;
@@ -140,24 +134,24 @@ const PremiumResults = ({data}: {data: PremiumWeatherItem}) => {
     return (
         <PremiumResultsWrapper data-test-id='PremiumResultsWrapper'>
             <CurrentInfoWrapper data-test-id='CurrentInfoWrapper'>
-                <CurrentIcon src={weatherPic}></CurrentIcon>
+                <CurrentIcon src={data?.image.image}></CurrentIcon>
                 <CurrentResults data-test-id='CurrentResults'>
                     <DescriptionWrapper data-test-id='DescriptionWrapper'>
-                        <CurrentDescription data-test-id='CurrentDescription'>{description}</CurrentDescription>
+                        <CurrentDescription data-test-id='CurrentDescription'>{data.description}</CurrentDescription>
                         <TempWrapper data-test-id='TempWrapper'>
-                            {currentTemp} <ThermoPicture></ThermoPicture>
+                            {data.currentTemp} <ThermoPicture></ThermoPicture>
                         </TempWrapper>
                     </DescriptionWrapper>
                     <WindSpeedWrapper data-test-id='WindSpeedWrapper'>
-                        <CurrentCity data-test-id='CurrentCity'>{majorCity}</CurrentCity>
+                        <CurrentCity data-test-id='CurrentCity'>{data.majorCity}</CurrentCity>
                         <WindSpeedIcon src={windIcon}></WindSpeedIcon>
                         <WindSpeed>
-                            {windSpeed} mph {getWindDirection(data.windDirection)}
+                            {data.windSpeed} mph {getWindDirection(data.windDirection)}
                         </WindSpeed>
                     </WindSpeedWrapper>
                 </CurrentResults>
             </CurrentInfoWrapper>
-            <HourlyResults hourlyData={hourlyData}></HourlyResults>
+            <ResultCard hourlyData={data.hourlyData} dailyData={data.dailyData}></ResultCard>
         </PremiumResultsWrapper>
     );
 };
