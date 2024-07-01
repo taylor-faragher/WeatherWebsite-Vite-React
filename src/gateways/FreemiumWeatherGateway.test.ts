@@ -11,7 +11,7 @@ describe('fetchFreemiumWeather', () => {
     const mockHeaders = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        'x-api-key': 'uFaywcvpQj94HeeNC8ESd3w5eSS8NcxKaILjvkVq',
+        'x-api-key': 'bTK3tM6Zwj8cHACQtSRH26aEFwzeQ4ns9YInqoj5',
     };
 
     const mockResponseData = {
@@ -42,7 +42,7 @@ describe('fetchFreemiumWeather', () => {
 
         const result = await fetchFreemiumWeather(mockZipCode);
 
-        expect(global.fetch).toHaveBeenCalledWith(`https://dev.taylorsweatherapi.com/?zipcode=${mockZipCode}`, {
+        expect(global.fetch).toHaveBeenCalledWith(`https://api.taylorsweatherapi.com/?zipcode=${mockZipCode}`, {
             headers: mockHeaders,
         });
         expect(freemiumDataMapper).toHaveBeenCalledWith(mockResponseData);
