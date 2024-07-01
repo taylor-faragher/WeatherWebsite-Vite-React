@@ -9,6 +9,9 @@ export const lightTheme = {
     headerBorderBottom: '2px solid',
     zipCodeInputColor: 'black',
     thermoPic: '/assets/thermometer-fahrenheit-light.svg',
+    resultCardButtonBackground: {true: 'black', false: 'white'},
+    resultCardButtonColor: {true: 'white', false: 'black'},
+    resultCardBorder: '1px solid black',
 };
 
 export const darkTheme = {
@@ -22,4 +25,7 @@ export const darkTheme = {
     borderBottom: 'revert',
     zipCodeInputColor: 'white',
     thermoPic: '/assets/thermometer-fahrenheit-dark.svg',
+    resultCardButtonBackground: {true: 'black', false: 'white'},
+    resultCardButtonColor: {true: 'white', false: 'black'},
+    resultCardBorder: '1px solid white',
 };
