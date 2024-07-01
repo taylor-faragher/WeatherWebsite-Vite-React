@@ -76,6 +76,19 @@ describe('premiumDataMapper', () => {
                 {time: '10:00', temp: 20, icon: '10d', description: 'someWeather'},
                 {time: '11:00', temp: 22, icon: '11d', description: 'newWeather'},
             ],
+            dailyData: [
+                {
+                    day: 'Tuesday',
+                    avgTemp: 25,
+                    minTemp: 20,
+                    maxTemp: 30,
+                    icon: '9d',
+                    description: 'moreWeather',
+                    summary: 'thats some weather',
+                    sunrise: '3:00am',
+                    sunset: '5:00 pm',
+                },
+            ],
             image: {
                 image: '/assets/01d.svg',
                 imageAltText: 'Orange Sun',
@@ -149,6 +162,19 @@ describe('premiumDataMapper', () => {
             hourlyData: [
                 {time: '10:00', temp: 20, icon: '10d', description: 'someWeather'},
                 {time: '11:00', temp: 22, icon: '11d', description: 'newWeather'},
+            ],
+            dailyData: [
+                {
+                    day: 'Tuesday',
+                    avgTemp: 25,
+                    minTemp: 20,
+                    maxTemp: 30,
+                    icon: '9d',
+                    description: 'moreWeather',
+                    summary: 'thats some weather',
+                    sunrise: '3:00am',
+                    sunset: '5:00 pm',
+                },
             ],
             image: {
                 image: '/assets/01d.svg',
