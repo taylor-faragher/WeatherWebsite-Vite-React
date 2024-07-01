@@ -6,6 +6,7 @@ export const premiumDataMapper = async (data: PremiumWeatherResults): Promise<Pr
     const weatherPic = await formPictureObject(data.current.icon);
     const description = await capitalizeWords(data.current.description);
     const hourlyData = data.hourly;
+    const dailyData = data.daily;
 
     return {
         currentTemp: data?.current.temperature,
@@ -14,6 +15,7 @@ export const premiumDataMapper = async (data: PremiumWeatherResults): Promise<Pr
         windDirection: data?.current.windDirection,
         description: description,
         hourlyData: hourlyData,
+        dailyData: dailyData,
         image: weatherPic,
         majorCity: data.area.majorCity,
     };
