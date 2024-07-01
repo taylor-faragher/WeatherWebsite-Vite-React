@@ -45,8 +45,8 @@ const HourlyResults = ({hourlyData}) => {
     }
 
     return (
-        <HourlyResultsWrapper>
-            <HourlyFieldSet data-test-id='ChangeEmailBorder'>
+        <HourlyResultsWrapper data-test-id='HourlyResultsWrapper'>
+            <HourlyFieldSet data-test-id='HourlyFieldSet'>
                 <StyledLegend>Hourly Weather</StyledLegend>
                 {hourlyData.slice(0, 5).map((hour, index) => (
                     <HourWrapper key={index}>
