@@ -5,6 +5,7 @@ export type PremiumWeatherItem = {
     windDirection: number;
     description: string;
     hourlyData: HourlyData[];
+    dailyData: DailyData[];
     image: FullImage;
     majorCity: string;
 };
