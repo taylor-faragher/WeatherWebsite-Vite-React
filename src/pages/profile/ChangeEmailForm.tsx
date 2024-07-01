@@ -41,8 +41,6 @@ const StyledText = styled.h3`
     padding-top: 25px;
 `;
 
-const ChangeEmailForm = styled.form``;
-
 const NewEmailInput = styled.input`
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(4)};
@@ -95,7 +93,7 @@ const NewEmailSubmitButton = styled.button`
     }
 `;
 
-export default () => {
+const ChangeEmailForm = () => {
     const [password, setPassword] = useState('');
     const [newEmail, setNewEmail] = useState('');
 
@@ -123,7 +121,7 @@ export default () => {
         <ChangeEmailFormWrapper data-test-id='ChangeEmailFormWrapper'>
             <ChangeEmailBorder data-test-id='ChangeEmailBorder'>
                 <StyledLegend>Change Email</StyledLegend>
-                <ChangeEmailForm onSubmit={onSubmit} data-test-id='ChangeEmailForm'>
+                <form onSubmit={onSubmit} data-test-id='ChangeEmailForm'>
                     <StyledText>New Email</StyledText>
                     <NewEmailInput
                         data-test-id='NewEmailInput'
@@ -141,8 +139,10 @@ export default () => {
                             Change Email
                         </NewEmailSubmitButton>
                     </ButtonWrapper>
-                </ChangeEmailForm>
+                </form>
             </ChangeEmailBorder>
         </ChangeEmailFormWrapper>
     );
 };
+
+export default ChangeEmailForm;
