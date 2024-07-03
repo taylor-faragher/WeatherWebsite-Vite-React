@@ -3,6 +3,7 @@ import {styled} from 'styled-components';
 import HourlyResults from './HourlyResults';
 import DailyResults from './DailyResults';
 import {getFontSize} from '../../utils/layout/getFontSize';
+import {breakPoints} from '../../utils/layout/breakpoints';
 
 const ResultCardWrapper = styled.div`
     padding-top: 25px;
@@ -14,6 +15,10 @@ const FlipCard = styled.div<{$toBeFlipped}>`
     border: 0;
     perspective: 1000px;
     transform: ${({$toBeFlipped}) => ($toBeFlipped ? 'rotateY(180deg)' : 'none')};
+
+    @media screen and ${breakPoints.mobile} {
+        padding-top: 25px;
+    }
 `;
 
 const HourlyButton = styled.button<{$activeButton}>`
@@ -36,7 +41,6 @@ const DailyButton = styled.button<{$activeButton}>`
     color: ${({$activeButton, theme}) => theme.resultCardButtonColor[$activeButton]};
 `;
 
-/* This container is needed to position the front and back side */
 const FlipCardInner = styled.div<{$toBeFlipped}>`
     position: relative;
     width: 100%;
@@ -47,13 +51,10 @@ const FlipCardInner = styled.div<{$toBeFlipped}>`
     transform: ${({$toBeFlipped}) => ($toBeFlipped ? 'rotateY(180deg)' : 'none')};
 `;
 
-/* Position the front and back side */
 const FlipCardFront = styled.div<{$toBeFlipped}>`
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     display: ${({$toBeFlipped}) => ($toBeFlipped ? 'none' : 'inherit')};
 `;
 
@@ -61,8 +62,7 @@ const FlipCardBack = styled.div<{$toBeFlipped}>`
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    backface-visibility: ${({$toBeFlipped}) => ($toBeFlipped ? 'initial' : 'hidden')};
     transform: ${({$toBeFlipped}) => ($toBeFlipped ? 'none' : 'rotateY(180deg)')};
 `;
 
@@ -85,10 +85,10 @@ const ResultCard = ({hourlyData, dailyData}) => {
             </DailyButton>
             <FlipCard $toBeFlipped={flipValue}>
                 <FlipCardInner $toBeFlipped={flipValue}>
-                    <FlipCardFront $toBeFlipped={flipValue}>
+                    <FlipCardFront $toBeFlipped={flipValue} data-test-id='FlipCardFront'>
                         <HourlyResults hourlyData={hourlyData}></HourlyResults>
                     </FlipCardFront>
-                    <FlipCardBack $toBeFlipped={flipValue}>
+                    <FlipCardBack $toBeFlipped={flipValue} data-test-id='FlipCardBack'>
                         <DailyResults dailyData={dailyData}></DailyResults>
                     </FlipCardBack>
                 </FlipCardInner>
