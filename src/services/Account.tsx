@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {createContext, useEffect, useState} from 'react';
+import {createContext} from 'react';
 import {CognitoUser, AuthenticationDetails, CognitoUserSession} from 'amazon-cognito-identity-js';
 import Pool from '../UserPool';
 
@@ -17,27 +17,11 @@ type AccountContextType = {
     authenticate: (Username: any, Password: any) => Promise<unknown>;
     getSession: () => Promise<SessionWithUser>;
     logout: () => void;
-    user: CognitoUser | null;
 };
 
 const AccountContext = createContext<AccountContextType>(null!);
 
 const Account = ({children}) => {
-    const [user, setUser] = useState<CognitoUser | null>(null);
-
-    useEffect(() => {
-        const checkUser = async () => {
-            try {
-                const currentUser = await Pool.getCurrentUser();
-                setUser(currentUser);
-            } catch (error) {
-                setUser(null);
-            }
-        };
-
-        checkUser();
-    }, []);
-
     const getSession = async (): Promise<SessionWithUser> => {
         return await new Promise<SessionWithUser>((resolve, reject) => {
             const user = Pool.getCurrentUser();
@@ -104,15 +88,12 @@ const Account = ({children}) => {
         const user = Pool.getCurrentUser();
         if (user) {
             user.signOut();
-            setUser(null);
             console.log('User was logged out');
             window.location.href = `/`;
         }
     };
 
-    return (
-        <AccountContext.Provider value={{getSession, authenticate, logout, user}}>{children}</AccountContext.Provider>
-    );
+    return <AccountContext.Provider value={{getSession, authenticate, logout}}>{children}</AccountContext.Provider>;
 };
 
 export {Account, AccountContext};
