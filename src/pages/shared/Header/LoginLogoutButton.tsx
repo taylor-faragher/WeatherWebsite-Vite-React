@@ -4,7 +4,7 @@ import {CgProfile} from 'react-icons/cg';
 import {breakPoints} from '../../../utils/layout/breakpoints';
 import {useNavigate} from 'react-router-dom';
 import {AccountContext} from '../../../services/Account';
-import {useContext} from 'react';
+import {useContext, useEffect, useState} from 'react';
 
 const LoginLogoutButtonWrapper = styled.div`
     display: flex;
@@ -90,8 +90,23 @@ const LoggedInToolTip = () => {
 };
 
 export const LoginLogoutButton = () => {
-    const {user} = useContext(AccountContext);
+    const [user, setUser] = useState(false);
     const navigate = useNavigate();
+    const {getSession} = useContext(AccountContext);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const {user} = await getSession();
+                if (user) {
+                    setUser(true);
+                }
+            } catch {
+                setUser(false);
+            }
+        };
+        fetchUser();
+    }, [getSession]);
 
     const handleLoginNavigation = () => {
         location.pathname.toLowerCase() !== '/login' ? navigate('/login') : navigate(0);
