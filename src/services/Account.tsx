@@ -88,7 +88,7 @@ const Account = ({children}) => {
         const user = Pool.getCurrentUser();
         if (user) {
             user.signOut();
-            console.log('User was logged out');
+            console.log('Our guest has left. They will be missed.');
             window.location.href = `/`;
         }
     };
