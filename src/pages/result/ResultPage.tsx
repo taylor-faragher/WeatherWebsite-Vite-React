@@ -90,12 +90,13 @@ const ResultPage = () => {
     if (error || freemiumError) navigate('/error');
 
     useScrollToTop();
+    const combinedLoaderFlags = isLoading || freemiumIsLoading;
 
     return (
         <>
             <ResultsSection data-test-id='ResultPage_ResultsSection'>
                 <ZipCodeTitle data-test-id='ResultPage_ZipCodeTitle'>Weather Results for {zipCode}</ZipCodeTitle>
-                {isLoading && (
+                {combinedLoaderFlags && (
                     <div>
                         <Loader />
                     </div>
