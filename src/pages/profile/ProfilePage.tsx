@@ -18,7 +18,7 @@ const ProfileWrapper = styled.div`
 `;
 
 const StyledLogoutButton = styled.div`
-    margin-top: 40px;
+    margin-top: 10px;
     border: 0;
     outline: 0;
     color: black;
@@ -30,7 +30,7 @@ const StyledLogoutButton = styled.div`
     }
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(7)};
-        width: 300px;
+        width: 250px;
         min-height: 75px;
     }
 
@@ -71,11 +71,11 @@ const ProfilePage = () => {
     return (
         <ProfileWrapper data-test-id='ProfileWrapper'>
             <h2>Profile Settings</h2>
-            <ChangePassword></ChangePassword>
-            <ChangeEmail></ChangeEmail>
             <StyledLogoutButton data-test-id='LogoutButton' onClick={logout}>
                 Logout
             </StyledLogoutButton>
+            <ChangePassword></ChangePassword>
+            <ChangeEmail></ChangeEmail>
         </ProfileWrapper>
     );
 };
