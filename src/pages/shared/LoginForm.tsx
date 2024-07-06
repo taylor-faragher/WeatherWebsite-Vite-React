@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import {getFontWeight} from '../../utils/layout/getFontWeight';
 import FormButton from './formComponents/FormButton';
 import {FaEye, FaEyeSlash} from 'react-icons/fa';
+import {Loader} from '../shared/Loader';
 
 const LoginPageForm = styled.form``;
 const LoginText = styled.h3`
@@ -85,6 +86,7 @@ const LinkDiv = styled.div`
 const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [errorText, setErrorText] = useState(null);
 
@@ -93,6 +95,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     const onSubmit = event => {
         console.log('Someone knocks at the door.');
         event.preventDefault();
+        setIsLoggingIn(true);
         authenticate(email, password)
             .then(() => {
                 console.log('We let them in');
@@ -106,50 +109,59 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
 
     return (
         <>
-            <LoginPageForm onSubmit={e => onSubmit(e)} data-test-id='LoginPage_LoginPageForm'>
-                <LoginText data-test-id='LoginPage_EmailLoginText'>Username</LoginText>
-                <EmailInput
-                    data-test-id='LoginPage_EmailInput'
-                    value={email}
-                    type='email'
-                    placeholder='Email'
-                    onChange={event => setEmail(event.target.value)}
-                ></EmailInput>
-                <LoginText data-test-id='LoginPage_PasswordLoginText'>Password</LoginText>
-                <PasswordInputWrapper>
-                    <PasswordInput
-                        value={password}
-                        placeholder='Password'
-                        type={showPassword ? 'text' : 'password'}
-                        onChange={event => setPassword(event.target.value)}
-                        data-test-id='LoginPage_PasswordInput'
-                    ></PasswordInput>
-                    <ShowPasswordSpan
-                        onClick={() => setShowPassword(prevState => !prevState)}
-                        data-test-id='ShowPasswordToggle'
-                    >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </ShowPasswordSpan>
-                </PasswordInputWrapper>
-                <FormButton dataTestId='LoginPageFormButton' text='Login' />
-                {errorText && (
-                    <div>
-                        <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
-                    </div>
-                )}
-            </LoginPageForm>
-            <LinkDiv data-test-id='SignUpLinkDiv'>
-                Don&apos;t have an account?{' '}
-                <Link to='#' onClick={signUpSwitch} data-test-id='SignUpLink'>
-                    Sign Up!
-                </Link>
-            </LinkDiv>
-            <LinkDiv data-test-id='ForgotPasswordWrapper'>
-                Forgot Your Password?{' '}
-                <Link to='#' onClick={forgotPasswordSwitch} data-test-id='ForgotPasswordLink'>
-                    Click Here to reset!
-                </Link>
-            </LinkDiv>
+            {isLoggingIn && (
+                <div>
+                    <Loader />
+                </div>
+            )}
+            {!isLoggingIn && (
+                <>
+                    <LoginPageForm onSubmit={e => onSubmit(e)} data-test-id='LoginPage_LoginPageForm'>
+                        <LoginText data-test-id='LoginPage_EmailLoginText'>Username</LoginText>
+                        <EmailInput
+                            data-test-id='LoginPage_EmailInput'
+                            value={email}
+                            type='email'
+                            placeholder='Email'
+                            onChange={event => setEmail(event.target.value)}
+                        ></EmailInput>
+                        <LoginText data-test-id='LoginPage_PasswordLoginText'>Password</LoginText>
+                        <PasswordInputWrapper>
+                            <PasswordInput
+                                value={password}
+                                placeholder='Password'
+                                type={showPassword ? 'text' : 'password'}
+                                onChange={event => setPassword(event.target.value)}
+                                data-test-id='LoginPage_PasswordInput'
+                            ></PasswordInput>
+                            <ShowPasswordSpan
+                                onClick={() => setShowPassword(prevState => !prevState)}
+                                data-test-id='ShowPasswordToggle'
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </ShowPasswordSpan>
+                        </PasswordInputWrapper>
+                        <FormButton dataTestId='LoginPageFormButton' text='Login' />
+                        {errorText && (
+                            <div>
+                                <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
+                            </div>
+                        )}
+                    </LoginPageForm>
+                    <LinkDiv data-test-id='SignUpLinkDiv'>
+                        Don&apos;t have an account?{' '}
+                        <Link to='#' onClick={signUpSwitch} data-test-id='SignUpLink'>
+                            Sign Up!
+                        </Link>
+                    </LinkDiv>
+                    <LinkDiv data-test-id='ForgotPasswordWrapper'>
+                        Forgot Your Password?{' '}
+                        <Link to='#' onClick={forgotPasswordSwitch} data-test-id='ForgotPasswordLink'>
+                            Click Here to reset!
+                        </Link>
+                    </LinkDiv>
+                </>
+            )}
         </>
     );
 };
