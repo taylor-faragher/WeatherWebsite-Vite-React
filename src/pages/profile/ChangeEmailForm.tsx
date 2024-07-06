@@ -4,6 +4,7 @@ import {CognitoUserAttribute} from 'amazon-cognito-identity-js';
 import {styled} from 'styled-components';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {breakPoints} from '../../utils/layout/breakpoints';
+import {FaEye, FaEyeSlash} from 'react-icons/fa';
 
 const ChangeEmailFormWrapper = styled.div`
     display: flex;
@@ -49,8 +50,27 @@ const NewEmailInput = styled.input`
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(5)};
         margin-bottom: 0;
+    }
+`;
+
+const NewPasswordInputWrapper = styled.div`
+    display: inline-block;
+    position: relative;
+`;
+
+const ShowPasswordSpan = styled.span`
+    position: absolute;
+    right: 10px;
+    color: black;
+    transform: translateY(-50%);
+    cursor: pointer;
+    @media screen and ${breakPoints.mobile} {
+        top: 35%;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        top: 70%;
     }
 `;
 
@@ -67,7 +87,16 @@ const NewPasswordInput = styled.input`
     }
 `;
 
-const ButtonWrapper = styled.div``;
+const StyledErrorMessage = styled.div`
+    color: red;
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(4)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(4)};
+        margin: 20px 0 0 0;
+    }
+`;
 
 const NewEmailSubmitButton = styled.button`
     margin-top: 20px;
@@ -96,24 +125,32 @@ const NewEmailSubmitButton = styled.button`
 const ChangeEmailForm = () => {
     const [password, setPassword] = useState('');
     const [newEmail, setNewEmail] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [errorText, setErrorText] = useState<string | null>(null);
 
-    const {getSession, authenticate} = useContext(AccountContext);
+    const {getSession, authenticate, logout} = useContext(AccountContext);
 
-    const onSubmit = event => {
+    const onSubmit = async event => {
         event.preventDefault();
 
         getSession().then(({user, email}) => {
-            authenticate(email, password).then(() => {
-                const attributes = [new CognitoUserAttribute({Name: 'email', Value: newEmail})];
+            authenticate(email, password)
+                .then(() => {
+                    const attributes = [new CognitoUserAttribute({Name: 'email', Value: newEmail})];
 
-                user.updateAttributes(attributes, (err, results) => {
-                    if (err) {
-                        console.error(err);
-                    } else {
-                        console.log(results);
-                    }
+                    user.updateAttributes(attributes, err => {
+                        if (err) {
+                            setErrorText(err.message);
+                            console.error(err);
+                        } else {
+                            console.log('Our guest has a new identity');
+                            logout();
+                        }
+                    });
+                })
+                .catch(e => {
+                    setErrorText(e.message); //displays error for wrong password or email
                 });
-            });
         });
     };
 
@@ -126,19 +163,34 @@ const ChangeEmailForm = () => {
                     <NewEmailInput
                         data-test-id='NewEmailInput'
                         value={newEmail}
+                        type='email'
                         onChange={event => setNewEmail(event.target.value)}
                     ></NewEmailInput>
                     <StyledText>Current Password</StyledText>
-                    <NewPasswordInput
-                        value={password}
-                        onChange={event => setPassword(event.target.value)}
-                        data-test-id='NewPasswordInput'
-                    ></NewPasswordInput>
-                    <ButtonWrapper data-test-id='ButtonWrapper'>
+                    <NewPasswordInputWrapper>
+                        <NewPasswordInput
+                            value={password}
+                            type={showPassword ? 'text' : 'password'}
+                            onChange={event => setPassword(event.target.value)}
+                            data-test-id='NewPasswordInput'
+                        ></NewPasswordInput>
+                        <ShowPasswordSpan
+                            onClick={() => setShowPassword(prevState => !prevState)}
+                            data-test-id='ShowPasswordToggle'
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </ShowPasswordSpan>
+                    </NewPasswordInputWrapper>
+                    {errorText && (
+                        <div>
+                            <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
+                        </div>
+                    )}
+                    <div data-test-id='ButtonWrapper'>
                         <NewEmailSubmitButton type='submit' data-test-id='NewEmailSubmitButton'>
                             Change Email
                         </NewEmailSubmitButton>
-                    </ButtonWrapper>
+                    </div>
                 </form>
             </ChangeEmailBorder>
         </ChangeEmailFormWrapper>
