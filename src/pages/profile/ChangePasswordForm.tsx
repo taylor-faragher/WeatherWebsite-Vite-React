@@ -39,7 +39,6 @@ const StyledLegend = styled.legend`
 
 const StyledText = styled.h3`
     margin: 0;
-    padding-top: 25px;
 `;
 
 const OldPasswordInputWrapper = styled.div`
@@ -55,8 +54,10 @@ const OldPasswordInput = styled.input`
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(3)};
         margin-bottom: 0;
+        width: 350px;
+        height: 45px;
     }
 `;
 
@@ -73,8 +74,10 @@ const NewPasswordInput = styled.input`
         max-width: 350px;
     }
     @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(6)};
+        font-size: ${getFontSize(5)};
         margin-bottom: 0;
+        width: 350px;
+        height: 45px;
     }
 `;
 
@@ -85,7 +88,7 @@ const ShowNewPasswordSpan = styled.span`
     transform: translateY(-50%);
     cursor: pointer;
     @media screen and ${breakPoints.mobile} {
-        top: 35%;
+        top: 45%;
     }
     @media screen and ${breakPoints.tabletBig} {
         top: 70%;
@@ -115,7 +118,7 @@ const NewPasswordSubmitButton = styled.button`
         border: 1px solid #9b9b9b;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(5)};
+        font-size: ${getFontSize(4)};
         width: 250px;
         min-height: 65px;
     }
