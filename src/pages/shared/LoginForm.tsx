@@ -102,6 +102,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                 window.location.href = `/main`;
             })
             .catch(err => {
+                setIsLoggingIn(false);
                 setErrorText(err.message);
                 console.error('We turn them away: ', err);
             });
