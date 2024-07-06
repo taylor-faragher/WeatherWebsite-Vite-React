@@ -39,7 +39,6 @@ const StyledLegend = styled.legend`
 
 const StyledText = styled.h3`
     margin: 0;
-    padding-top: 25px;
 `;
 
 const NewEmailInput = styled.input`
@@ -67,7 +66,7 @@ const ShowPasswordSpan = styled.span`
     transform: translateY(-50%);
     cursor: pointer;
     @media screen and ${breakPoints.mobile} {
-        top: 35%;
+        top: 45%;
     }
     @media screen and ${breakPoints.tabletBig} {
         top: 70%;
@@ -110,7 +109,7 @@ const NewEmailSubmitButton = styled.button`
         border: 1px solid #9b9b9b;
     }
     @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(5)};
+        font-size: ${getFontSize(4)};
         width: 250px;
         min-height: 65px;
     }
