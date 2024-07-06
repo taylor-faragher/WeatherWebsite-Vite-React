@@ -3,6 +3,7 @@ import {AccountContext} from '../../services/Account';
 import {styled} from 'styled-components';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {breakPoints} from '../../utils/layout/breakpoints';
+import {FaEye, FaEyeSlash} from 'react-icons/fa';
 
 const ChangePasswordFormWrapper = styled.div`
     display: flex;
@@ -41,6 +42,11 @@ const StyledText = styled.h3`
     padding-top: 25px;
 `;
 
+const OldPasswordInputWrapper = styled.div`
+    display: inline-block;
+    position: relative;
+`;
+
 const OldPasswordInput = styled.input`
     @media screen and ${breakPoints.mobile} {
         font-size: ${getFontSize(4)};
@@ -52,6 +58,11 @@ const OldPasswordInput = styled.input`
         font-size: ${getFontSize(6)};
         margin-bottom: 0;
     }
+`;
+
+const NewPasswordInputWrapper = styled.div`
+    display: inline-block;
+    position: relative;
 `;
 
 const NewPasswordInput = styled.input`
@@ -67,7 +78,30 @@ const NewPasswordInput = styled.input`
     }
 `;
 
-const ButtonWrapper = styled.div``;
+const ShowNewPasswordSpan = styled.span`
+    position: absolute;
+    right: 10px;
+    color: black;
+    transform: translateY(-50%);
+    cursor: pointer;
+    @media screen and ${breakPoints.mobile} {
+        top: 35%;
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        top: 70%;
+    }
+`;
+
+const StyledErrorMessage = styled.div`
+    color: red;
+    @media screen and ${breakPoints.mobile} {
+        font-size: ${getFontSize(4)};
+    }
+    @media screen and ${breakPoints.tabletBig} {
+        font-size: ${getFontSize(4)};
+        margin: 20px 0 0 0;
+    }
+`;
 
 const NewPasswordSubmitButton = styled.button`
     margin-top: 20px;
@@ -96,6 +130,10 @@ const NewPasswordSubmitButton = styled.button`
 const ChangePasswordForm = () => {
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const {logout} = useContext(AccountContext);
+    const [errorText, setErrorText] = useState(null);
 
     const {getSession} = useContext(AccountContext);
 
@@ -103,11 +141,12 @@ const ChangePasswordForm = () => {
         event.preventDefault();
 
         getSession().then(({user}) => {
-            user.changePassword(password, newPassword, (err, result) => {
+            user.changePassword(password, newPassword, err => {
                 if (err) {
+                    setErrorText(err.message);
                     console.error(err);
                 } else {
-                    console.log(result);
+                    logout();
                 }
             });
         });
@@ -119,22 +158,45 @@ const ChangePasswordForm = () => {
                 <StyledLegend>Change Password</StyledLegend>
                 <form onSubmit={onSubmit} data-test-id='ChangePasswordForm'>
                     <StyledText>Current password</StyledText>
-                    <OldPasswordInput
-                        value={password}
-                        onChange={event => setPassword(event.target.value)}
-                        data-test-id='OldPasswordInput'
-                    ></OldPasswordInput>
+                    <OldPasswordInputWrapper>
+                        <OldPasswordInput
+                            value={password}
+                            type={showOldPassword ? 'text' : 'password'}
+                            onChange={event => setPassword(event.target.value)}
+                            data-test-id='OldPasswordInput'
+                        ></OldPasswordInput>
+                        <ShowNewPasswordSpan
+                            onClick={() => setShowOldPassword(prevState => !prevState)}
+                            data-test-id='ShowPasswordToggle'
+                        >
+                            {showOldPassword ? <FaEyeSlash /> : <FaEye />}
+                        </ShowNewPasswordSpan>
+                    </OldPasswordInputWrapper>
                     <StyledText>New password</StyledText>
-                    <NewPasswordInput
-                        value={newPassword}
-                        onChange={event => setNewPassword(event.target.value)}
-                        data-test-id='NewPasswordInput'
-                    ></NewPasswordInput>
-                    <ButtonWrapper data-test-id='ButtonWrapper'>
+                    <NewPasswordInputWrapper>
+                        <NewPasswordInput
+                            value={newPassword}
+                            type={showNewPassword ? 'text' : 'password'}
+                            onChange={event => setNewPassword(event.target.value)}
+                            data-test-id='NewPasswordInput'
+                        ></NewPasswordInput>
+                        <ShowNewPasswordSpan
+                            onClick={() => setShowNewPassword(prevState => !prevState)}
+                            data-test-id='ShowPasswordToggle'
+                        >
+                            {showNewPassword ? <FaEyeSlash /> : <FaEye />}
+                        </ShowNewPasswordSpan>
+                    </NewPasswordInputWrapper>
+                    {errorText && (
+                        <div>
+                            <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
+                        </div>
+                    )}
+                    <div data-test-id='ButtonWrapper'>
                         <NewPasswordSubmitButton type='submit' data-test-id='NewPasswordSubmitButton'>
                             Change Password
                         </NewPasswordSubmitButton>
-                    </ButtonWrapper>
+                    </div>
                 </form>
             </ChangePasswordBorder>
         </ChangePasswordFormWrapper>
