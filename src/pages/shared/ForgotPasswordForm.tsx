@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import UserPool from '../../UserPool';
+import UserPool from '../../services/UserPool';
 import {CognitoUser} from 'amazon-cognito-identity-js';
 import {Link, useNavigate} from 'react-router-dom';
 import {styled} from 'styled-components';
