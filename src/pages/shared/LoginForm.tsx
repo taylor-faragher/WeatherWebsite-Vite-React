@@ -1,13 +1,14 @@
 import {useContext, useState} from 'react';
-import {AccountContext} from '../../services/Account';
+import {AccountContext} from '../../services/AccountProvider';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {styled} from 'styled-components';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {getFontWeight} from '../../utils/layout/getFontWeight';
 import FormButton from './formComponents/FormButton';
 import {FaEye, FaEyeSlash} from 'react-icons/fa';
 import {Loader} from '../shared/Loader';
+import {NotificationContext} from '../../services/NotificationProvider';
 
 const LoginPageForm = styled.form``;
 const LoginText = styled.h3`
@@ -85,10 +86,12 @@ const LinkDiv = styled.div`
 
 const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     const [email, setEmail] = useState('');
+    const navigate = useNavigate();
     const [password, setPassword] = useState('');
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [errorText, setErrorText] = useState(null);
+    const {popNotification} = useContext(NotificationContext);
 
     const {authenticate} = useContext(AccountContext);
 
@@ -99,7 +102,9 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
         authenticate(email, password)
             .then(() => {
                 console.log('We let them in');
-                window.location.href = `/main`;
+                popNotification('Logged In!', 'positive');
+
+                navigate('main');
             })
             .catch(err => {
                 setIsLoggingIn(false);
