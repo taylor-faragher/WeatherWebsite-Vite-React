@@ -1,10 +1,11 @@
 import {useContext, useState} from 'react';
-import {AccountContext} from '../../services/Account';
+import {AccountContext} from '../../services/AccountProvider';
 import {CognitoUserAttribute} from 'amazon-cognito-identity-js';
 import {styled} from 'styled-components';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {FaEye, FaEyeSlash} from 'react-icons/fa';
+import {NotificationContext} from '../../services/NotificationProvider';
 
 const ChangeEmailFormWrapper = styled.div`
     display: flex;
@@ -128,6 +129,7 @@ const ChangeEmailForm = () => {
     const [errorText, setErrorText] = useState<string | null>(null);
 
     const {getSession, authenticate, logout} = useContext(AccountContext);
+    const {popNotification} = useContext(NotificationContext);
 
     const onSubmit = async event => {
         event.preventDefault();
@@ -143,6 +145,7 @@ const ChangeEmailForm = () => {
                             console.error(err);
                         } else {
                             console.log('Our guest has a new identity');
+                            popNotification('Please login again', 'positive');
                             logout();
                         }
                     });
