@@ -1,5 +1,5 @@
 import {useContext, useState} from 'react';
-import {AccountContext} from '../../services/Account';
+import {AccountContext} from '../../services/AccountProvider';
 import {styled} from 'styled-components';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {breakPoints} from '../../utils/layout/breakpoints';
