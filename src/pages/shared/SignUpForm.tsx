@@ -3,7 +3,7 @@ import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {styled} from 'styled-components';
 import {Link} from 'react-router-dom';
-import UserPool from '../../UserPool';
+import UserPool from '../../services/UserPool';
 import {getFontWeight} from '../../utils/layout/getFontWeight';
 import FormButton from './formComponents/FormButton';
 import {FaEye, FaEyeSlash} from 'react-icons/fa';
