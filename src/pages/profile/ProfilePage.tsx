@@ -2,7 +2,7 @@ import {styled} from 'styled-components';
 import ChangePassword from './ChangePasswordForm';
 import ChangeEmail from './ChangeEmailForm';
 import {useContext, useEffect, useState} from 'react';
-import {AccountContext} from '../../services/Account';
+import {AccountContext} from '../../services/AccountProvider';
 import {useNavigate} from 'react-router-dom';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
@@ -14,6 +14,9 @@ const ProfileWrapper = styled.div`
     max-width: 100%;
     @media screen and ${breakPoints.mobile} {
         padding-bottom: 100px;
+    }
+    @media screen and ${breakPoints.tablet} {
+        padding-top: 75px;
     }
 `;
 
