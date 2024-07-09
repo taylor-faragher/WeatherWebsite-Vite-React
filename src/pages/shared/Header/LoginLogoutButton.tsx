@@ -3,7 +3,7 @@ import {GrLogin} from 'react-icons/gr';
 import {CgProfile} from 'react-icons/cg';
 import {breakPoints} from '../../../utils/layout/breakpoints';
 import {useNavigate} from 'react-router-dom';
-import {AccountContext} from '../../../services/Account';
+import {AccountContext} from '../../../services/AccountProvider';
 import {useContext, useEffect, useState} from 'react';
 
 const LoginLogoutButtonWrapper = styled.div`
@@ -106,7 +106,7 @@ export const LoginLogoutButton = () => {
             }
         };
         fetchUser();
-    }, [getSession]);
+    });
 
     const handleLoginNavigation = () => {
         location.pathname.toLowerCase() !== '/login' ? navigate('/login') : navigate(0);
