@@ -9,7 +9,7 @@ import PremiumResults from './PremiumResults';
 import {FreemiumWeatherItem, PremiumWeatherItem} from 'src/types/types';
 import FreemiumResults from './FreemiumResults';
 import {useScrollToTop} from '../../hooks/useScrollToTop';
-import {AccountContext} from '../../services/Account';
+import {AccountContext} from '../../services/AccountProvider';
 import {fetchPremiumWeather} from '../../gateways/PremiumWeatherGateway';
 import {useQuery} from '@tanstack/react-query';
 import {fetchFreemiumWeather} from '../../gateways/FreemiumWeatherGateway';
