@@ -87,17 +87,6 @@ const NewPasswordInput = styled.input`
     }
 `;
 
-const StyledErrorMessage = styled.div`
-    color: red;
-    @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(4)};
-    }
-    @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
-        margin: 20px 0 0 0;
-    }
-`;
-
 const NewEmailSubmitButton = styled.button`
     margin-top: 20px;
     border: 0;
@@ -126,8 +115,6 @@ const ChangeEmailForm = () => {
     const [password, setPassword] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [errorText, setErrorText] = useState<string | null>(null);
-
     const {getSession, authenticate, logout} = useContext(AccountContext);
     const {popNotification} = useContext(NotificationContext);
 
@@ -141,17 +128,17 @@ const ChangeEmailForm = () => {
 
                     user.updateAttributes(attributes, err => {
                         if (err) {
-                            setErrorText(err.message);
+                            popNotification(err.message, 'negative');
                             console.error(err);
                         } else {
                             console.log('Our guest has a new identity');
-                            popNotification('Please login again', 'positive');
+                            popNotification('Email Updated! Please login again', 'positive');
                             logout();
                         }
                     });
                 })
                 .catch(e => {
-                    setErrorText(e.message); //displays error for wrong password or email
+                    popNotification(e.message, 'negative'); //displays error for wrong password or email
                 });
         });
     };
@@ -183,11 +170,6 @@ const ChangeEmailForm = () => {
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </ShowPasswordSpan>
                     </NewPasswordInputWrapper>
-                    {errorText && (
-                        <div>
-                            <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
-                        </div>
-                    )}
                     <div data-test-id='ButtonWrapper'>
                         <NewEmailSubmitButton type='submit' data-test-id='NewEmailSubmitButton'>
                             Change Email
