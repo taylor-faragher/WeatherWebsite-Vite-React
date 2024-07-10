@@ -12,6 +12,7 @@ export const lightTheme = {
     resultCardButtonBackground: {true: 'black', false: 'white'},
     resultCardButtonColor: {true: 'white', false: 'black'},
     resultCardBorder: '1px solid black',
+    notificationTextColor: {positive: '#FAFAFA', warning: '#363537', negative: '#FAFAFA'},
 };
 
 export const darkTheme = {
@@ -28,4 +29,5 @@ export const darkTheme = {
     resultCardButtonBackground: {true: 'black', false: 'white'},
     resultCardButtonColor: {true: 'white', false: 'black'},
     resultCardBorder: '1px solid white',
+    notificationTextColor: {positive: '#FAFAFA', warning: '#363537', negative: '#FAFAFA'},
 };
