@@ -68,17 +68,6 @@ const ShowPasswordSpan = styled.span`
     }
 `;
 
-const StyledErrorMessage = styled.div`
-    color: red;
-    @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(4)};
-    }
-    @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
-        margin: 20px 0 0 0;
-    }
-`;
-
 const LinkDiv = styled.div`
     padding-top: 25px;
     font-weight: ${getFontWeight('heavy')};
@@ -90,9 +79,7 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
     const [password, setPassword] = useState('');
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [errorText, setErrorText] = useState(null);
     const {popNotification} = useContext(NotificationContext);
-
     const {authenticate} = useContext(AccountContext);
 
     const onSubmit = event => {
@@ -101,15 +88,14 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
         setIsLoggingIn(true);
         authenticate(email, password)
             .then(() => {
-                console.log('We let them in');
+                console.log('We recognise our guest and let them in');
                 popNotification('Logged In!', 'positive');
-
                 navigate('main');
             })
             .catch(err => {
                 setIsLoggingIn(false);
-                setErrorText(err.message);
-                console.error('We turn them away: ', err);
+                popNotification('Please check your email and confirm account first.', 'warning');
+                console.error('We do not know them and turn them away: ', err.message);
             });
     };
 
@@ -148,11 +134,6 @@ const LoginForm = ({signUpSwitch, forgotPasswordSwitch}) => {
                             </ShowPasswordSpan>
                         </PasswordInputWrapper>
                         <FormButton dataTestId='LoginPageFormButton' text='Login' />
-                        {errorText && (
-                            <div>
-                                <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
-                            </div>
-                        )}
                     </LoginPageForm>
                     <LinkDiv data-test-id='SignUpLinkDiv'>
                         Don&apos;t have an account?{' '}
