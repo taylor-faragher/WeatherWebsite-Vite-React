@@ -7,14 +7,11 @@ import {ZipCodeForm} from '../shared/ZipCodeForm';
 const HomePageWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     @media screen and ${breakPoints.mobile} {
         padding-bottom: 175px;
     }
     @media screen and ${breakPoints.tabletBig} {
         padding-bottom: 0px;
-        padding-top: 50px;
     }
 `;
 
