@@ -4,6 +4,7 @@ import {styled} from 'styled-components';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {FaEye, FaEyeSlash} from 'react-icons/fa';
+import {NotificationContext} from '../../services/NotificationProvider';
 
 const ChangePasswordFormWrapper = styled.div`
     display: flex;
@@ -95,17 +96,6 @@ const ShowNewPasswordSpan = styled.span`
     }
 `;
 
-const StyledErrorMessage = styled.div`
-    color: red;
-    @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(4)};
-    }
-    @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
-        margin: 20px 0 0 0;
-    }
-`;
-
 const NewPasswordSubmitButton = styled.button`
     margin-top: 20px;
     border: 0;
@@ -135,10 +125,8 @@ const ChangePasswordForm = () => {
     const [newPassword, setNewPassword] = useState('');
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showOldPassword, setShowOldPassword] = useState(false);
-    const {logout} = useContext(AccountContext);
-    const [errorText, setErrorText] = useState(null);
-
-    const {getSession} = useContext(AccountContext);
+    const {logout, getSession} = useContext(AccountContext);
+    const {popNotification} = useContext(NotificationContext);
 
     const onSubmit = event => {
         event.preventDefault();
@@ -146,7 +134,7 @@ const ChangePasswordForm = () => {
         getSession().then(({user}) => {
             user.changePassword(password, newPassword, err => {
                 if (err) {
-                    setErrorText(err.message);
+                    popNotification(err.message, 'negative');
                     console.error(err);
                 } else {
                     logout();
@@ -190,11 +178,6 @@ const ChangePasswordForm = () => {
                             {showNewPassword ? <FaEyeSlash /> : <FaEye />}
                         </ShowNewPasswordSpan>
                     </NewPasswordInputWrapper>
-                    {errorText && (
-                        <div>
-                            <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
-                        </div>
-                    )}
                     <div data-test-id='ButtonWrapper'>
                         <NewPasswordSubmitButton type='submit' data-test-id='NewPasswordSubmitButton'>
                             Change Password
