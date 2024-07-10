@@ -74,11 +74,9 @@ const AccountProvider = ({children}) => {
 
             user.authenticateUser(authDetails, {
                 onSuccess: data => {
-                    console.log('onSuccess: ', data);
                     resolve(data);
                 },
                 onFailure: err => {
-                    console.error('onFailure: ', err);
                     reject(err);
                 },
                 newPasswordRequired: data => {
