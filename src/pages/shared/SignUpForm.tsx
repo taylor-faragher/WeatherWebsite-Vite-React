@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {breakPoints} from '../../utils/layout/breakpoints';
 import {getFontSize} from '../../utils/layout/getFontSize';
 import {styled} from 'styled-components';
@@ -15,6 +15,7 @@ import {
     checkPasswordForUpperCase,
     checkPasswordLength,
 } from '../../utils/PasswordRequirementUtils';
+import {NotificationContext} from '../../services/NotificationProvider';
 
 const SignUpPageForm = styled.form`
     display: flex;
@@ -79,36 +80,25 @@ const ShowPasswordSpan = styled.span`
     }
 `;
 
-const StyledErrorMessage = styled.div`
-    color: red;
-    @media screen and ${breakPoints.mobile} {
-        font-size: ${getFontSize(4)};
-    }
-    @media screen and ${breakPoints.tabletBig} {
-        font-size: ${getFontSize(4)};
-        margin: 20px 0 0 0;
-    }
-`;
-
 const LoginDiv = styled.div`
     padding-top: 35px;
     font-weight: ${getFontWeight('heavy')};
 `;
 
-const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
+const SignUpForm = ({loginSwitch}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorText, setErrorText] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
     const [passwordLength, setPasswordLength] = useState<CharacterType>('none');
     const [passwordUpperCase, setPasswordUpperCase] = useState<CharacterType>('none');
     const [passwordNumber, setPasswordNumber] = useState<CharacterType>('none');
     const [passwordSpecialCharacter, setPasswordSpecialCharacter] = useState<CharacterType>('none');
+    const {popNotification} = useContext(NotificationContext);
 
     const onSubmit = event => {
         event.preventDefault();
         if (!password) {
-            setErrorText('You Need to Enter a Password');
+            popNotification('You Need to Enter a Password', 'warning');
             return;
         }
         if (
@@ -117,14 +107,17 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
             passwordUpperCase == 'incorrect' ||
             passwordSpecialCharacter == 'incorrect'
         ) {
-            setErrorText('Password does not meet requirements. Please see password criteria above');
+            popNotification('Password does not meet requirements. Please see password criteria below. ', 'negative');
         } else {
             UserPool.signUp(email, password, [], [], err => {
                 if (err) {
-                    setErrorText(err.message);
+                    popNotification(err.message, 'negative');
                 } else {
                     loginSwitch();
-                    setSuccessMessage(true);
+                    popNotification(
+                        'Sign up Successful! Please check your email for confirmation instructions ',
+                        'positive'
+                    );
                 }
             });
         }
@@ -139,7 +132,6 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
         setPasswordUpperCase(checkPasswordForUpperCaseValue);
         setPasswordNumber(checkPasswordForNumberValue);
         setPasswordSpecialCharacter(checkPasswordForSpecialCharacterValue);
-        setErrorText(null);
         setPassword(value);
     };
 
@@ -177,11 +169,6 @@ const SignUpForm = ({loginSwitch, setSuccessMessage}) => {
                     specialCharacterType={passwordSpecialCharacter}
                 />
                 <FormButton dataTestId='SignUpButton' text='Sign Up' />
-                {errorText && (
-                    <div>
-                        <StyledErrorMessage data-test-id='ErrorMessage'>{errorText}</StyledErrorMessage>
-                    </div>
-                )}
             </SignUpPageForm>
             <LoginDiv data-test-id='LoginDiv'>
                 Already have an account?{' '}
