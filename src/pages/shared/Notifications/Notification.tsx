@@ -67,9 +67,11 @@ const Notification = () => {
 
     if (type && text) {
         return (
-            <Alert $toBeDisplayed={display} $notificationType={type}>
+            <Alert $toBeDisplayed={display} $notificationType={type} data-test-id='GlobalNotification'>
                 {text}
-                <AlertClose onClick={() => setDisplay(false)}>&times;</AlertClose>
+                <AlertClose data-test-id='CloseGlobalNotification' onClick={() => setDisplay(false)}>
+                    &times;
+                </AlertClose>
             </Alert>
         );
     } else {
