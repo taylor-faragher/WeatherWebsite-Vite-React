@@ -26,9 +26,8 @@ describe('SignUp E2E Tests', () => {
         cy.wait('@mockedSignUp');
         cy.url().should('contain', '/login');
         cy.tid('LoginPage_LoginPageForm').should('be.visible');
-        cy.tid('SuccesSignUpMessage').should('be.visible');
+        cy.tid('GlobalNotification').should('be.visible');
         cy.tid(`SignUpLink`).should('be.visible').click();
-        cy.tid('SuccesSignUpMessage').should('not.exist');
         cy.tid('SignUpPageForm').should('be.visible');
     });
 
@@ -63,73 +62,73 @@ describe('SignUp E2E Tests', () => {
 
     it(`Error message appears if password does not contain a capital letter`, () => {
         navigateToSignup();
-        cy.tid('ErrorMessage').should('not.exist');
+        cy.tid('GlobalNotification').should('not.exist');
         cy.tid('SignUpEmailInput').type('test@test.com');
         cy.tid('SignUpForm_PasswordInput').type('123!secret', {
             log: false,
         });
         cy.tid('SignUpButton').click();
-        cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
+        cy.tid('GlobalNotification').should('be.visible');
+        cy.tid('GlobalNotification').contains('Password does not meet requirements. Please see password criteria below');
 
     });
 
     it(`Error message appears if password does not contain a number`, () => {
         navigateToSignup();
-        cy.tid('ErrorMessage').should('not.exist');
+        cy.tid('GlobalNotification').should('not.exist');
         cy.tid('SignUpEmailInput').type('test@test.com');
         cy.tid('SignUpForm_PasswordInput').type('!SecretPassword', {
             log: false,
         });
         cy.tid('SignUpButton').click();
-        cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
+        cy.tid('GlobalNotification').should('be.visible');
+        cy.tid('GlobalNotification').contains('Password does not meet requirements. Please see password criteria below');
 
     });
 
     it(`Error message appears if password does not contain a special character`, () => {
         navigateToSignup();
-        cy.tid('ErrorMessage').should('not.exist');
+        cy.tid('GlobalNotification').should('not.exist');
         cy.tid('SignUpEmailInput').type('test@test.com');
         cy.tid('SignUpForm_PasswordInput').type('123SecretPassword', {
             log: false,
         });
         cy.tid('SignUpButton').click();
-        cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
+        cy.tid('GlobalNotification').should('be.visible');
+        cy.tid('GlobalNotification').contains('Password does not meet requirements. Please see password criteria below');
 
     });
 
     it(`Error message appears if password is not long enough`, () => {
         navigateToSignup();
-        cy.tid('ErrorMessage').should('not.exist');
+        cy.tid('GlobalNotification').should('not.exist');
         cy.tid('SignUpEmailInput').type('test@test.com');
         cy.tid('SignUpForm_PasswordInput').type('!Secret', {
             log: false,
         });
         cy.tid('SignUpButton').click();
-        cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('Password does not meet requirements. Please see password criteria above');
+        cy.tid('GlobalNotification').should('be.visible');
+        cy.tid('GlobalNotification').contains('Password does not meet requirements. Please see password criteria below');
 
     });
 
     it(`Error message appears if password is empty and user clicks sign up button`, () => {
         navigateToSignup();
-        cy.tid('ErrorMessage').should('not.exist');
+        cy.tid('GlobalNotification').should('not.exist');
         cy.tid('SignUpEmailInput').type('test@test.com');
         cy.tid('SignUpButton').click();
-        cy.tid('ErrorMessage').should('be.visible');
-        cy.tid('ErrorMessage').contains('You Need to Enter a Password');
+        cy.tid('GlobalNotification').should('be.visible');
+        cy.tid('GlobalNotification').contains('You Need to Enter a Password');
     });
 
     it(`Error message appears if username is empty and user clicks sign up button`, () => {
         navigateToSignup();
-        cy.tid('ErrorMessage').should('not.exist');
+        cy.tid('GlobalNotification').should('not.exist');
         cy.tid('SignUpForm_PasswordInput').type('!Secret', {
             log: false,
         });        
         cy.tid('SignUpButton').click();
-        cy.tid('ErrorMessage').should('be.visible');
+        cy.tid('GlobalNotification').should('be.visible');
     });
 
     it(`User can navigate to login page from sign up page`, () => {
