@@ -27,6 +27,25 @@ const AccountProvider = ({children}) => {
     const {popNotification} = useContext(NotificationContext);
     const navigate = useNavigate();
 
+    const getCurrentUser = async () => {
+        try {
+            const user = Pool.getCurrentUser();
+            if (user) {
+                setIsLoggedIn(true);
+                setUser(user);
+            } else {
+                setIsLoggedIn(false);
+                setUser(null);
+            }
+        } catch (error) {
+            throw new Error();
+        }
+    };
+
+    useEffect(() => {
+        getCurrentUser();
+    }, []);
+
     const getSession = async (): Promise<SessionWithUser> => {
         return await new Promise<SessionWithUser>((resolve, reject) => {
             const user = Pool.getCurrentUser();
