@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {createContext, useContext} from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 import {CognitoUser, AuthenticationDetails, CognitoUserSession} from 'amazon-cognito-identity-js';
 import Pool from './UserPool';
 import {NotificationContext} from './NotificationProvider';
@@ -16,14 +16,18 @@ interface SessionWithUser extends CognitoUserSession {
 }
 
 type AccountContextType = {
-    authenticate: (Username: any, Password: any) => Promise<unknown>;
+    authenticate: (Username: string, Password: any) => Promise<unknown>;
     getSession: () => Promise<SessionWithUser>;
     logout: () => void;
+    user: any;
+    isLoggedIn: boolean;
 };
 
 const AccountContext = createContext<AccountContextType>(null!);
 
 const AccountProvider = ({children}) => {
+    const [user, setUser] = useState<any | null>(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const {popNotification} = useContext(NotificationContext);
     const navigate = useNavigate();
 
@@ -93,9 +97,12 @@ const AccountProvider = ({children}) => {
 
             user.authenticateUser(authDetails, {
                 onSuccess: data => {
+                    getCurrentUser();
                     resolve(data);
                 },
                 onFailure: err => {
+                    setIsLoggedIn(false);
+                    setUser(null);
                     reject(err);
                 },
                 newPasswordRequired: data => {
@@ -110,13 +117,19 @@ const AccountProvider = ({children}) => {
         const user = Pool.getCurrentUser();
         if (user) {
             user.signOut();
+            setIsLoggedIn(false);
+            setUser(null);
             console.log('Our guest has left. They will be missed.');
             popNotification('Logged out!', 'positive');
             navigate('/');
         }
     };
 
-    return <AccountContext.Provider value={{getSession, authenticate, logout}}>{children}</AccountContext.Provider>;
+    return (
+        <AccountContext.Provider value={{getSession, authenticate, logout, user, isLoggedIn}}>
+            {children}
+        </AccountContext.Provider>
+    );
 };
 
 export {AccountProvider, AccountContext};
