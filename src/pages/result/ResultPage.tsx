@@ -48,24 +48,18 @@ const ResultPage = () => {
     const navigate = useNavigate();
     const [showPremium, setShowPremium] = useState(false);
     const [showFreemium, setShowFreemium] = useState(false);
-    const [user, setUser] = useState(null);
     const [zipCode, setZipCode] = useState(searchParams.get('zipCode'));
-    const {getSession} = useContext(AccountContext);
+    const {isLoggedIn, user} = useContext(AccountContext);
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const {user} = await getSession();
-                if (user) {
-                    setUser(user);
-                    setShowPremium(true);
-                }
-            } catch {
-                setShowFreemium(true);
-            }
-        };
-        fetchUser();
-    }, [getSession]);
+        if (isLoggedIn) {
+            setShowPremium(true);
+            setShowFreemium(false);
+        } else {
+            setShowPremium(false);
+            setShowFreemium(true);
+        }
+    }, [isLoggedIn]);
 
     const {
         data: premiumData,
